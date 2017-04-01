@@ -1,2 +1,2 @@
 # linkspotter
-Tools for comprehensive dataset correlations analysis and visualization
+Tool set for comprehensive dataset correlations analysis and visualization
