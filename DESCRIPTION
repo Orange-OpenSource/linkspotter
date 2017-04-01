@@ -1,0 +1,14 @@
+Package: linkspotter
+Type: Package
+Title: Comprehensive Dataset Bivariate Correlations Computation and Visualization Using Graphs.
+Version: 0.1.0
+Author: Alassane Samba
+Maintainer: Alassane Samba <samba.alassane@gmail.com>
+Description: Compute and visualize using the visNetwork package all the bivariate correlations of a dataframe.
+Several and different types of correlation coefficients (Pearson's r, Spearman's rho, Kendall's tau,
+distance correlation, Maximal Information Coefficient and 
+Equal-Freq Discretization-based Maximal Normalized Mutual Information) are used according to 
+the variable couple type (continuous vs categorial, continuous vs continous, categorial vs categorial).
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
