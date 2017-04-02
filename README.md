@@ -1,4 +1,8 @@
 # linkspotter
 Toolkit for a comprehensive dataset correlations analysis and visualization
 # Example
-[Here](http://linkspotter.sigmant.net)
+```
+ls_iris=linkspotterComplete(iris)
+ls_iris$run_it
+```
+and get this [result](http://linkspotter.sigmant.net)
