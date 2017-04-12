@@ -1,3 +1,9 @@
+# --------------------------------------------------------------------------------
+# title: Linkspotter/linkspotterUI
+# description: run the linkSpotter user interface
+# author: Alassane Samba (alassane.samba@orange.com)
+# Copyright (c) 2017 Orange
+# ---------------------------------------------------------------------------------
 # LinkSpotterUI function
 linkspotterUI<-function(dataset, multiBivariateCorrelationDataFrame, variablesClustering, clusteringCorMethod=NULL, defaultMinCor=0.3, defaultCorMethod="MaxNormMutInfo", appTitle="Linkspotter"){
 

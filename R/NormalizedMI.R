@@ -1,4 +1,9 @@
-## normalized mutual information
+# --------------------------------------------------------------------------------
+# title: Linkspotter/NormalizedMI
+# description: calculate the normalized mutual information between 2 categorical variables
+# author: Alassane Samba (alassane.samba@orange.com)
+# Copyright (c) 2017 Orange
+# ---------------------------------------------------------------------------------
 NormalizedMI<-function(x,y, includeNA=T){#GOOD! -> ratio d'incertitude/entropie expliquee
 
   #rule NA problems

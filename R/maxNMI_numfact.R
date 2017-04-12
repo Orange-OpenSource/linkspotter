@@ -1,6 +1,9 @@
-## Max Normalized Mutal Information between a
-# discrete variable and a continuous variable
-# according to the binning of the latter
+# --------------------------------------------------------------------------------
+# title: Linkspotter/maxNMI_numfact
+# description: compute MaxNMI (Max Normalized Mutal Information) correlation coefficient between a discrete variable and a continuous variable according to the binning of the latter
+# author: Alassane Samba (alassane.samba@orange.com)
+# Copyright (c) 2017 Orange
+# ---------------------------------------------------------------------------------
 maxNMI_numfact<-function(continuousY,factorX, includeNA=T){
 
   #if includeNA

@@ -1,4 +1,9 @@
-## function to compute several type of correlation coefficients
+# --------------------------------------------------------------------------------
+# title: Linkspotter/multiBivariateCorrelation
+# description: function to compute several type of correlation coefficients on all couples of a dataframe
+# author: Alassane Samba (alassane.samba@orange.com)
+# Copyright (c) 2017 Orange
+# ---------------------------------------------------------------------------------
 multiBivariateCorrelation<-function(mixedData, corMethods=c("pearson","spearman","kendall","mic","MaxNormMutInfo")){
 
   # small formats

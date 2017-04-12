@@ -1,5 +1,9 @@
-####
-# under estimates MIC
+# --------------------------------------------------------------------------------
+# title: Linkspotter/maxNMI_numnum
+# description: compute MaxNMI (Max Normalized Mutal Information) correlation coefficient between the 2 continuous variables using the best equal-freq-based discretization of both variables (underestimates MIC)
+# author: Alassane Samba (alassane.samba@orange.com)
+# Copyright (c) 2017 Orange
+# ---------------------------------------------------------------------------------
 maxNMI_numnum<-function(continuousX,continuousY,maxNbBins=NA){
 
   # Only on complete obs

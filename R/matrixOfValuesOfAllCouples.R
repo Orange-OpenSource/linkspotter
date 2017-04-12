@@ -1,4 +1,10 @@
-# 2 column dataframe to correlation matrix
+# --------------------------------------------------------------------------------
+# title: Linkspotter/matrixOfValuesOfAllCouples
+# description: transform a 2 column correlation dataframe into a correlation matrix
+# author: Alassane Samba (alassane.samba@orange.com)
+# Copyright (c) 2017 Orange
+# ---------------------------------------------------------------------------------
+# transform a 2 column correlation dataframe into a correlation matrix
 matrixOfValuesOfAllCouples<-function(x1_x2_val){
   #conforme uniquement aux tableaux de couples complets
   #quelques conditions a ajouter

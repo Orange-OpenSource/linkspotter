@@ -1,3 +1,9 @@
+# --------------------------------------------------------------------------------
+# title: Linkspotter/boostedBoxplot
+# description: Boosted Boxplot : add useful features to R boxplot function
+# author: Alassane Samba (alassane.samba@orange.com)
+# Copyright (c) 2017 Orange
+# ---------------------------------------------------------------------------------
 ## Boosted Boxplot : add useful features to R boxplot function
 boostedBoxplot<-function(y,x, main="", labx=NULL,laby=NULL, plot.mean=T, text.freq=T, las=1, ylim=c(0,0), limitVisibleModalities=30, decreasing=NULL, dynamic=F){
 

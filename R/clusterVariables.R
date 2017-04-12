@@ -1,3 +1,9 @@
+# --------------------------------------------------------------------------------
+# title: Linkspotter/clusterVariables
+# description: clustering variables (using Normal Mixture Modeling for Model-Based Clustering : mclust)
+# author: Alassane Samba (alassane.samba@orange.com)
+# Copyright (c) 2017 Orange
+# ---------------------------------------------------------------------------------
 # clustering variables (using Normal Mixture Modeling for Model-Based Clustering : mclust)
 clusterVariables<-function(correlation_matrix, nbCluster=1:9){
 

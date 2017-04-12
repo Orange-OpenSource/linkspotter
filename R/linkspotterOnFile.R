@@ -1,3 +1,9 @@
+# --------------------------------------------------------------------------------
+# title: Linkspotter/linkspotterOnFile
+# description: function to load and properly proccess a file
+# author: Alassane Samba (alassane.samba@orange.com)
+# Copyright (c) 2017 Orange
+# ---------------------------------------------------------------------------------
 # function to load and properly proccess the file
 linkspotterOnFile<-function(file1, header, sep, quote, corMethods, clusteringCorMethod, defaultCorMethod="MaxNormMutInfo"){
   # commodity

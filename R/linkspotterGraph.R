@@ -1,6 +1,10 @@
-###################
-## Only compute the graph
-#############
+# --------------------------------------------------------------------------------
+# title: Linkspotter/linkspotterGraph
+# description: compute the linkspotter graph
+# author: Alassane Samba (alassane.samba@orange.com)
+# Copyright (c) 2017 Orange
+# ---------------------------------------------------------------------------------
+# Only compute the linkspotter graph
 linkspotterGraph<-function(multiBivariateCorrelationDataFrame, variablesClustering, minCor=0.3, corMethod="MaxNormMutInfo", smoothEdges=T, dynamicNodes=T, colorEdgesByCorDirection=T){
   # format edges
   edges_raw=multiBivariateCorrelationDataFrame

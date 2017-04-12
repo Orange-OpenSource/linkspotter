@@ -1,3 +1,9 @@
+# --------------------------------------------------------------------------------
+# title: Linkspotter/linkspotterComplete
+# description: global function combining all others : compute data and generate UI
+# author: Alassane Samba (alassane.samba@orange.com)
+# Copyright (c) 2017 Orange
+# ---------------------------------------------------------------------------------
 # global function combining all others : compute data and generate UI
 linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendall","mic","MaxNormMutInfo"), defaultMinCor=0.3, defaultCorMethod="MaxNormMutInfo", clusteringCorMethod=NULL, nbCluster=1:9, printInfo=T){# clusteringCorMethod default with preference order
   startTime<-Sys.time()

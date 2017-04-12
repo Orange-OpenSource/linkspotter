@@ -1,3 +1,9 @@
+# --------------------------------------------------------------------------------
+# title: Linkspotter/linkspotterDurationEstimator
+# description: estimate the duration of the computation
+# author: Alassane Samba (alassane.samba@orange.com)
+# Copyright (c) 2017 Orange
+# ---------------------------------------------------------------------------------
 linkspotterDurationEstimator<-function(dataset){
   p=ncol(dataset)
   nbCouples=((p*p)-p)/2
