@@ -1,5 +1,5 @@
 # linkspotter
-Toolkit for a comprehensive dataset correlations analysis and visualization
+Machine Learning/Data mining toolkit for a comprehensive dataset correlations analysis and visualization
 # Example
 ```
 ls_iris=linkspotterComplete(iris)
