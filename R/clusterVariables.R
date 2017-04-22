@@ -13,7 +13,7 @@ clusterVariables<-function(correlation_matrix, nbCluster=1:9){
   correlation_matrix=correlation_matrix[!withNa,!withNa]
 
   #clustering
-  groups=Mclust(abs(correlation_matrix), G = nbCluster)$classification # choice: Gaussian Mixture Modelling for Model-Based Clustering
+  groups=mclust::Mclust(abs(correlation_matrix), G = nbCluster)$classification # choice: Gaussian Mixture Modelling for Model-Based Clustering
 
   #format result
   res=data.frame(var=names(groups),group=groups,row.names = NULL)

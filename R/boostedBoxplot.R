@@ -15,7 +15,6 @@ boostedBoxplot<-function(y,x, main="", labx=NULL,laby=NULL, plot.mean=T, text.fr
   }else{
     xlab=labx
   }
-
   x=droplevels(as.factor(x))
   p=length(levels(as.factor(x)))
   if(!is.null(decreasing)){
@@ -36,14 +35,12 @@ boostedBoxplot<-function(y,x, main="", labx=NULL,laby=NULL, plot.mean=T, text.fr
     x=factor(x,levels = names(sort(tapply(y,x,median), decreasing = decreasing)), ordered = F)
   }
   #
-
   #dynamicity
   if(dynamic){
     dataf=data.frame(Y=y,X=x)
     require(rAmCharts)
     amBoxplot(Y~X,data=dataf,labelRotation = (las==2)*90, ylab = laby, main = main)
   }else{
-
     if(sum(ylim)==0){
       rb<-boxplot(y~x, main=main, xlab=xlab, ylab=laby, las=las)
       grid()
