@@ -4,7 +4,6 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
-#
 #' Linspotter
 #'
 #' Computation of correlation matrices, variable clustering and the customizable user inferface to visualize them using a graph and visualize variables distributions and cross plots.
@@ -18,19 +17,18 @@
 #' @param printInfo a boolean indicating whether to print on the console some information about the dataset and the estimated computation time.
 #' @return a list containing all the material enabling to analyze correlations:
 #' \itemize{
-#'   \item \code{computationTime}: a string
-#'   \item \code{run_it}: a shiny.appobj object enable to deploy instantly the user interface for a customizable visualization.
-#'   \item \code{dataset}: the initial dataset
-#'   \item \code{corDF}: a the correlation data.frame including values for all coefficients
-#'   \item \code{corMatrices}: a list of correlation matrices
-#'   \item \code{corGroups}: data.frame a data.frame list
-#'   \item \code{clusteringCorMethod}: a character
-#'   \item \code{defaultMinCor}: a numeric
-#'   \item \code{defaultCorMethod}: a string
-#'   \item \code{corMethods}: vector of strings
+#'   \item{\code{computationTime}: a string}
+#'   \item{\code{run_it}: a shiny.appobj object enable to deploy instantly the user interface for a customizable visualization.}
+#'   \item{\code{dataset}: the initial dataset}
+#'   \item{\code{corDF}: a the correlation data.frame including values for all coefficients}
+#'   \item{\code{corMatrices}: a list of correlation matrices}
+#'   \item{\code{corGroups}: data.frame a data.frame list}
+#'   \item{\code{clusteringCorMethod}: a character}
+#'   \item{\code{defaultMinCor}: a numeric}
+#'   \item{\code{defaultCorMethod}: a string}
+#'   \item{\code{corMethods}: vector of strings}
 #' }
 #' @examples
-#'
 #' \dontrun{
 #' # run linkspotter on iris example data
 #' data(iris)
