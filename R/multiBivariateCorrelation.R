@@ -4,8 +4,8 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
-#' @importFrom minerva mine
-#' @importFrom energy dcor
+#' @import minerva
+#' @import energy
 multiBivariateCorrelation<-function(mixedData, corMethods=c("pearson","spearman","kendall","mic","MaxNormMutInfo")){
 
   # small formats
