@@ -5,7 +5,7 @@
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
 #' @title Linspotter
-#' @description  Computation of correlation matrices, variable clustering and the customizable user inferface to visualize them using a graph and visualize variables distributions and cross plots.
+#' @description  Computation of correlation matrices, variable clustering and the customizable user inferface to visualize them using a graph together with variables distributions and cross plots.
 #'
 #' @param dataset the dataframe which variables bivariate correlations are to be analyzed.
 #' @param corMethods a vector of correlation coefficients to compute. The available coefficient are the following : \code{c("pearson","spearman","kendall","mic","distCor","MaxNormMutInfo")}. It is not case sensitive and still work if only the beginning of the word is put (e.g. \code{pears}).
@@ -31,11 +31,14 @@
 #'
 #' @examples
 #' \dontrun{
+#'
 #' # run linkspotter on iris example data
 #' data(iris)
 #' lsOutputIris<-linkspotterComplete(iris)
+#'
 #' # launch the UI
 #' lsOutputIris$run_it
+#'
 #' }
 #'
 #' @export
