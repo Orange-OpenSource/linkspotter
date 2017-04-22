@@ -1,7 +1,7 @@
 Package: linkspotter
 Type: Package
 Title: Comprehensive Dataset Bivariate Correlations Computation and Visualization Using Graphs
-Version: 0.1.0
+Version: 1.1.1
 Author: Alassane Samba
 Maintainer: Alassane Samba <alassane.samba@orange.com>
 Description: Compute and visualize using the visNetwork package all the bivariate correlations of a dataframe.
@@ -12,6 +12,8 @@ Description: Compute and visualize using the visNetwork package all the bivariat
 License: GPL (>= 2)
 Encoding: UTF-8
 LazyData: true
+Depends:
+    R (>= 3.2.0)
 Imports:
     shiny,
     visNetwork,
