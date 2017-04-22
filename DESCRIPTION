@@ -1,6 +1,6 @@
 Package: linkspotter
 Type: Package
-Title: Comprehensive Dataset Bivariate Correlations Computation and Visualization Using Graphs.
+Title: Comprehensive Dataset Bivariate Correlations Computation and Visualization Using Graphs
 Version: 0.1.0
 Author: Alassane Samba
 Maintainer: Alassane Samba <alassane.samba@orange.com>

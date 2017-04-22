@@ -4,9 +4,8 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
-#' Linspotter
-#'
-#' Computation of correlation matrices, variable clustering and the customizable user inferface to visualize them using a graph and visualize variables distributions and cross plots.
+#' @title Linspotter
+#' @description  Computation of correlation matrices, variable clustering and the customizable user inferface to visualize them using a graph and visualize variables distributions and cross plots.
 #'
 #' @param dataset the dataframe which variables bivariate correlations are to be analyzed.
 #' @param corMethods a vector of correlation coefficients to compute. The available coefficient are the following : \code{c("pearson","spearman","kendall","mic","distCor","MaxNormMutInfo")}. It is not case sensitive and still work if only the beginning of the word is put (e.g. \code{pears}).
@@ -15,6 +14,7 @@
 #' @param clusteringCorMethod a string. One of "pearson","spearman","kendall","mic", "distCor" or "MaxNormMutInfo". It is the correlation coefficient to consider for the variables clustering.
 #' @param nbCluster an integer. It is the number of clusters to compute.
 #' @param printInfo a boolean indicating whether to print on the console some information about the dataset and the estimated computation time.
+#'
 #' @return a list containing all the material enabling to analyze correlations:
 #' \itemize{
 #'   \item{\code{computationTime}: a string}
@@ -28,6 +28,7 @@
 #'   \item{\code{defaultCorMethod}: a string}
 #'   \item{\code{corMethods}: vector of strings}
 #' }
+#'
 #' @examples
 #' \dontrun{
 #' # run linkspotter on iris example data
@@ -36,6 +37,7 @@
 #' # launch the UI
 #' lsOutputIris$run_it
 #' }
+#'
 #' @export
 linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendall","mic","MaxNormMutInfo"), defaultMinCor=0.3, defaultCorMethod="MaxNormMutInfo", clusteringCorMethod=NULL, nbCluster=1:9, printInfo=T){# clusteringCorMethod default with preference order
   startTime<-Sys.time()

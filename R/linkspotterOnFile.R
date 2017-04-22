@@ -5,7 +5,8 @@
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
 # function to load and properly proccess the file
-linkspotterOnFile<-function(file1, header, sep, quote, corMethods, clusteringCorMethod, defaultCorMethod="MaxNormMutInfo"){
+#' @import utils
+linkspotterOnFile<-function(file1, header, sep, quote, corMethods, clusteringCorMethod, defaultCorMethod="MaxNormMutInfo", defaultMinCor=0.5){
   # commodity
   if (is.null(file1))
     return(NULL)
@@ -19,7 +20,7 @@ linkspotterOnFile<-function(file1, header, sep, quote, corMethods, clusteringCor
     }
   }
   # linskpotter complete
-  lsc=linkspotterComplete(data, corMethods=corMethods, defaultMinCor=0.5, defaultCorMethod=defaultCorMethod, clusteringCorMethod=clusteringCorMethod, nbCluster=1:9, printInfo=F)
+  lsc=linkspotterComplete(data, corMethods=corMethods, defaultMinCor=defaultMinCor, defaultCorMethod=defaultCorMethod, clusteringCorMethod=clusteringCorMethod, nbCluster=1:9, printInfo=F)
   corMatrix=lsc$corMatrixes[names(lsc$corMatrixes)%in%defaultCorMethod]
   return(list(dataset=data,corDF=lsc$corDF, corMatrix=corMatrix, corGroups=lsc$corGroups,clusteringCorMethod=clusteringCorMethod,defaultMinCor=defaultMinCor,defaultCorMethod=defaultCorMethod,corMethods=corMethods))
 }

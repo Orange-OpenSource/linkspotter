@@ -7,6 +7,7 @@
 #' @import shiny
 #' @import visNetwork
 #' @import rAmCharts
+#' @import utils
 linkspotterUI<-function(dataset, multiBivariateCorrelationDataFrame, variablesClustering, clusteringCorMethod=NULL, defaultMinCor=0.3, defaultCorMethod="MaxNormMutInfo", appTitle="Linkspotter"){
 
   # small formats and checks

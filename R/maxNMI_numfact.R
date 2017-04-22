@@ -5,6 +5,7 @@
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
 #' @importFrom Hmisc cut2
+#' @import stats
 maxNMI_numfact<-function(continuousY,factorX, includeNA=T){
 
   #if includeNA

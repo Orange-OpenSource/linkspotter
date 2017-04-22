@@ -5,6 +5,7 @@
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
 #' @import infotheo
+#' @import stats
 NormalizedMI<-function(x,y, includeNA=T){#GOOD! -> ratio d'incertitude/entropie expliquee
 
   #rule NA problems

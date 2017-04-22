@@ -6,6 +6,8 @@
 # ---------------------------------------------------------------------------------
 #' @import minerva
 #' @import energy
+#' @import stats
+#' @import utils
 multiBivariateCorrelation<-function(mixedData, corMethods=c("pearson","spearman","kendall","mic","MaxNormMutInfo")){
 
   # small formats
