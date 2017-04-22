@@ -42,3 +42,13 @@ a list containing all the material enabling to analyze correlations:
 \description{
 Computation of correlation matrices, variable clustering and the customizable user inferface to visualize them using a graph and visualize variables distributions and cross plots.
 }
+\examples{
+
+\dontrun{
+# run linkspotter on iris example data
+data(iris)
+lsOutputIris<-linkspotterComplete(iris)
+# launch the UI
+lsOutputIris$run_it
+}
+}

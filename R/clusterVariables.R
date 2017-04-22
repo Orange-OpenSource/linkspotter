@@ -5,6 +5,7 @@
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
 # clustering variables (using Normal Mixture Modeling for Model-Based Clustering : mclust)
+#' @import mclust
 clusterVariables<-function(correlation_matrix, nbCluster=1:9){
 
   # as NAs are not supported

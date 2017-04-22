@@ -29,6 +29,15 @@
 #'   \item \code{defaultCorMethod}: a string
 #'   \item \code{corMethods}: vector of strings
 #' }
+#' @examples
+#'
+#' \dontrun{
+#' # run linkspotter on iris example data
+#' data(iris)
+#' lsOutputIris<-linkspotterComplete(iris)
+#' # launch the UI
+#' lsOutputIris$run_it
+#' }
 #' @export
 linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendall","mic","MaxNormMutInfo"), defaultMinCor=0.3, defaultCorMethod="MaxNormMutInfo", clusteringCorMethod=NULL, nbCluster=1:9, printInfo=T){# clusteringCorMethod default with preference order
   startTime<-Sys.time()

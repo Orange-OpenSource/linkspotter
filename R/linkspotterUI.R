@@ -4,8 +4,9 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
-require(shiny)
-require(visNetwork)
+#' @import shiny
+#' @import visNetwork
+#' @import rAmCharts
 linkspotterUI<-function(dataset, multiBivariateCorrelationDataFrame, variablesClustering, clusteringCorMethod=NULL, defaultMinCor=0.3, defaultCorMethod="MaxNormMutInfo", appTitle="Linkspotter"){
 
   # small formats and checks

@@ -19,7 +19,8 @@ Imports:
     minerva,
     energy,
     mclust,
-    rAmCharts
+    rAmCharts,
+    Hmisc
 Collate:
   'linkspotterComplete.R'
   'boostedBoxplot.R'

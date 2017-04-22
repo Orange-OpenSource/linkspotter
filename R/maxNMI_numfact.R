@@ -4,6 +4,7 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
+#' @import Hmisc
 maxNMI_numfact<-function(continuousY,factorX, includeNA=T){
 
   #if includeNA
