@@ -4,7 +4,7 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
-#' @import Hmisc
+#' @importFrom Hmisc cut2
 maxNMI_numfact<-function(continuousY,factorX, includeNA=T){
 
   #if includeNA
@@ -34,7 +34,7 @@ maxNMI_numfact<-function(continuousY,factorX, includeNA=T){
   NMIs=lapply(nY,function(x){
     #breaksY=unique(quantile(continuousY,seq(0,1,1/x), type = 1, na.rm=T)); # EqualFreq binning
     #factorY=cut(continuousY,breaks = breaksY, include.lowest = T);
-    factorY=cut2(continuousY,g=x)
+    factorY=Hmisc::cut2(continuousY,g=x)
     list(ny=x,MaxNMI=NormalizedMI(factorY,factorX))
   })
   NMIsDF=as.data.frame(matrix(unlist(NMIs),ncol = 2, byrow = T))

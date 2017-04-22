@@ -29,9 +29,9 @@ linkspotterGraph<-function(multiBivariateCorrelationDataFrame, variablesClusteri
   edges=edges[!is.na(edges$value)&edges$value>=minCor,]
 
   #plot
-  visNetwork(nodes,edges, selectConnectedEdges=F, width = '100%', height = '100%') %>%
-    visEdges(smooth = smoothEdges) %>%
-    visEvents(stabilizationIterationsDone=paste0("function () {this.setOptions( { physics: ",tolower(dynamicNodes)," } );}"))
+  visNetwork::visNetwork(nodes,edges, selectConnectedEdges=F, width = '100%', height = '100%') %>%
+    visNetwork::visEdges(smooth = smoothEdges) %>%
+    visNetwork::visEvents(stabilizationIterationsDone=paste0("function () {this.setOptions( { physics: ",tolower(dynamicNodes)," } );}"))
 
 }
 #######

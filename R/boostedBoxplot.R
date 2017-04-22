@@ -5,7 +5,7 @@
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
 ## Boosted Boxplot : add useful features to R boxplot function
-#' @import visNetwork
+#' @import rAmCharts
 boostedBoxplot<-function(y,x, main="", labx=NULL,laby=NULL, plot.mean=T, text.freq=T, las=1, ylim=c(0,0), limitVisibleModalities=30, decreasing=NULL, dynamic=F){
 
   xlab=""
@@ -39,8 +39,7 @@ boostedBoxplot<-function(y,x, main="", labx=NULL,laby=NULL, plot.mean=T, text.fr
   #dynamicity
   if(dynamic){
     dataf=data.frame(Y=y,X=x)
-    require(rAmCharts)
-    amBoxplot(Y~X,data=dataf,labelRotation = (las==2)*90, ylab = laby, main = main)
+    rAmCharts::amBoxplot(Y~X,data=dataf,labelRotation = (las==2)*90, ylab = laby, main = main)
   }else{
     if(sum(ylim)==0){
       rb<-boxplot(y~x, main=main, xlab=xlab, ylab=laby, las=las)

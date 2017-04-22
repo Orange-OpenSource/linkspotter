@@ -4,8 +4,8 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
-#' @import minerva
-#' @import energy
+#' @importFrom minerva mine
+#' @importFrom energy dcor
 multiBivariateCorrelation<-function(mixedData, corMethods=c("pearson","spearman","kendall","mic","MaxNormMutInfo")){
 
   # small formats
@@ -46,8 +46,8 @@ multiBivariateCorrelation<-function(mixedData, corMethods=c("pearson","spearman"
                if("pearson"%in%corMethods){pearson=cor(x=mixedData[,as.character(x[1])],y=mixedData[,as.character(x[2])],use = "pairwise.complete.obs",method = "pearson"); cors=c(cors,pearson=pearson)}
                if("spearman"%in%corMethods){spearman=cor(x=mixedData[,as.character(x[1])],y=mixedData[,as.character(x[2])],use = "pairwise.complete.obs",method = "spearman"); cors=c(cors,spearman=spearman)}
                if("kendall"%in%corMethods){kendall=cor(x=mixedData[,as.character(x[1])],y=mixedData[,as.character(x[2])],use = "pairwise.complete.obs",method = "kendall"); cors=c(cors,kendall=kendall)}
-               if("distCor"%in%corMethods){distCor=dcor(x=mixedData[,as.character(x[1])],y=mixedData[,as.character(x[2])]); cors=c(cors,distCor=distCor)} # too long to compute
-               if("mic"%in%corMethods){mic=mine(x=mixedData[,as.character(x[1])],y=mixedData[,as.character(x[2])],use = "pairwise.complete.obs")$MIC; cors=c(cors,mic=mic)}
+               if("distCor"%in%corMethods){distCor=energy::dcor(x=mixedData[,as.character(x[1])],y=mixedData[,as.character(x[2])]); cors=c(cors,distCor=distCor)} # too long to compute
+               if("mic"%in%corMethods){mic=minerva::mine(x=mixedData[,as.character(x[1])],y=mixedData[,as.character(x[2])],use = "pairwise.complete.obs")$MIC; cors=c(cors,mic=mic)}
                if("MaxNormMutInfo"%in%corMethods){MaxNormMutInfo=maxNMI_numnum(mixedData[,as.character(x[1])],mixedData[,as.character(x[2])])$MaxNMI; cors=c(cors,MaxNormMutInfo=MaxNormMutInfo)}
                as.vector(cors)
              },

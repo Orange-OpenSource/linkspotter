@@ -4,7 +4,7 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
-#' @import infotheo
+#' @importFrom infotheo mutinformation
 NormalizedMI<-function(x,y, includeNA=T){#GOOD! -> ratio d'incertitude/entropie expliquee
 
   #rule NA problems
@@ -28,5 +28,5 @@ NormalizedMI<-function(x,y, includeNA=T){#GOOD! -> ratio d'incertitude/entropie 
   cc=complete.cases(cbind(x,y))
   x2=droplevels(as.factor(x[cc]))
   y2=droplevels(as.factor(y[cc]))
-  mutinformation(x2,y2)/log(min(c(length(levels(x2)),length(levels(y2))))) # (normalization) see section 2.2.2 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3325791/bin/NIHMS358982-supplement-Supplemental_Figures_and_Tables.pdf
+  infotheo::mutinformation(x2,y2)/log(min(c(length(levels(x2)),length(levels(y2))))) # (normalization) see section 2.2.2 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3325791/bin/NIHMS358982-supplement-Supplemental_Figures_and_Tables.pdf
 }
