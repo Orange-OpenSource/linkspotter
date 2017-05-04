@@ -42,7 +42,7 @@
 #' }
 #'
 #' @export
-linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendall","mic","MaxNormMutInfo"), defaultMinCor=0.3, defaultCorMethod="MaxNormMutInfo", clusteringCorMethod=NULL, nbCluster=1:9, printInfo=T){# clusteringCorMethod default with preference order
+linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendall","mic","MaxNormMutInfo"), defaultMinCor=0.3, defaultCorMethod=corMethods[length(corMethods)], clusteringCorMethod=NULL, nbCluster=1:9, printInfo=T){# clusteringCorMethod default with preference order
   startTime<-Sys.time()
   p=ncol(dataset)
   nbCouples=((p*p)-p)/2
