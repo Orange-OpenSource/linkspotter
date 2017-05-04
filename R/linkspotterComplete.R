@@ -60,7 +60,7 @@ linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendal
   corMethods=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")[pmatch(tolower(corMethods),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")))]
   corDF=multiBivariateCorrelation(mixedData = dataset, corMethods = corMethods)
   if(is.null(clusteringCorMethod)){
-    clusteringCorMethod=c("MaxNormMutInfo","distCor","spearman","kendall","pearson","mic")[c("MaxNormMutInfo","distCor","spearman","kendall","pearson","mic")%in%corMethods][1]
+    clusteringCorMethod=corMethods[length(corMethods)]
   }else{
     #complete abbreviations
     clusteringCorMethod=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")[pmatch(tolower(clusteringCorMethod),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")))]
