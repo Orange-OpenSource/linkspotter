@@ -42,7 +42,7 @@
 #' }
 #'
 #' @export
-linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendall","mic","MaxNormMutInfo"), defaultMinCor=0.3, defaultCorMethod=corMethods[length(corMethods)], clusteringCorMethod=NULL, nbCluster=1:9, printInfo=T){# clusteringCorMethod default with preference order
+linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendall","mic","MaxNormMutInfo"), defaultMinCor=0.3, defaultCorMethod=corMethods[length(corMethods)], clusteringCorMethod=corMethods[length(corMethods)], nbCluster=1:9, printInfo=T, appTitle="Linkspotter"){
   startTime<-Sys.time()
   p=ncol(dataset)
   nbCouples=((p*p)-p)/2
@@ -58,23 +58,25 @@ linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendal
   }
   #complete abbreviations
   corMethods=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")[pmatch(tolower(corMethods),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")))]
+  defaultCorMethod=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")[pmatch(tolower(defaultCorMethod),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")))]
+  clusteringCorMethod=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")[pmatch(tolower(clusteringCorMethod),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")))]
+  #compute corDF
   corDF=multiBivariateCorrelation(mixedData = dataset, corMethods = corMethods)
-  if(is.null(clusteringCorMethod)){
-    clusteringCorMethod=corMethods[length(corMethods)]
-  }else{
-    #complete abbreviations
-    clusteringCorMethod=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")[pmatch(tolower(clusteringCorMethod),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")))]
-  }
   if(printInfo) print(paste("Correlations computation finished:",Sys.time()))
+  #corr matrix for clustering
   corMatrix=matrixOfValuesOfAllCouples(x1_x2_val = corDF[,c('X1','X2',clusteringCorMethod)])# prefer MaxNormMutInfo or distCor for the clustering because they hilights different types of correlation (not only linear and monotonic ones) and because prefer MaxNormMutInfo because it is always available/computable (whatever the type of variable)
+  #perform clustering
   corGroups=clusterVariables(correlation_matrix = corMatrix, nbCluster = nbCluster)
   if(printInfo) print(paste("Clustering computation finished:",Sys.time()))
   endTime<-Sys.time()
+  #compute corr matrices
   corMatrices=lapply(corMethods,function(x){matrixOfValuesOfAllCouples(x1_x2_val = corDF[,c('X1','X2',x)])})
   names(corMatrices)<-corMethods
   computationTime=format(round(endTime-startTime,3),nsmall = 3)
-  run_it=linkspotterUI(dataset,corDF,corGroups,clusteringCorMethod = clusteringCorMethod, defaultMinCor = defaultMinCor,defaultCorMethod = defaultCorMethod)
+  #compute UI
+  run_it=linkspotterUI(dataset,corDF,corGroups, defaultMinCor = defaultMinCor, appTitle=appTitle)
   if(printInfo) print(paste(c("Total Computation time: ", computationTime),collapse=""))
+  #finish
   return(list(computationTime=computationTime,run_it=run_it,dataset=dataset,corDF=corDF,corMatrices=corMatrices,corGroups=corGroups,clusteringCorMethod=clusteringCorMethod,defaultMinCor=defaultMinCor,defaultCorMethod=defaultCorMethod,corMethods=corMethods))
 }
 ###

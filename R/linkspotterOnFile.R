@@ -6,13 +6,13 @@
 # ---------------------------------------------------------------------------------
 # function to load and properly proccess the file
 #' @import utils
-linkspotterOnFile<-function(file1, header, sep, quote, corMethods, clusteringCorMethod, defaultCorMethod="MaxNormMutInfo", defaultMinCor=0.5){
+linkspotterOnFile<-function(file1, header, sep, quote, corMethods=c("pearson","spearman","kendall","mic","MaxNormMutInfo"), defaultMinCor=0.3, defaultCorMethod=corMethods[length(corMethods)], clusteringCorMethod=corMethods[length(corMethods)], nbCluster=1:9, printInfo=T, appTitle="Linkspotter", ...){
   # commodity
   if (is.null(file1))
     return(NULL)
   # read file
   data=read.table(stringsAsFactors = T, file = file1$datapath, header=header, sep=sep,
-                  quote=quote)
+                  quote=quote, ...)
   # first format
   for(i in 1:ncol(data)){
     if(is.factor(data[,i]) | (sum(is.na(data[,i]))==length(data[,i])) | is.logical(data[,i]) | length(levels(as.factor(data[,i])))<20 ){
@@ -20,7 +20,6 @@ linkspotterOnFile<-function(file1, header, sep, quote, corMethods, clusteringCor
     }
   }
   # linskpotter complete
-  lsc=linkspotterComplete(data, corMethods=corMethods, defaultMinCor=defaultMinCor, defaultCorMethod=defaultCorMethod, clusteringCorMethod=clusteringCorMethod, nbCluster=1:9, printInfo=F)
-  corMatrix=lsc$corMatrixes[names(lsc$corMatrixes)%in%defaultCorMethod]
-  return(list(dataset=data,corDF=lsc$corDF, corMatrix=corMatrix, corGroups=lsc$corGroups,clusteringCorMethod=clusteringCorMethod,defaultMinCor=defaultMinCor,defaultCorMethod=defaultCorMethod,corMethods=corMethods))
+  lsc=linkspotterComplete(data, corMethods=corMethods, defaultMinCor=defaultMinCor, defaultCorMethod=defaultCorMethod, clusteringCorMethod=clusteringCorMethod, nbCluster=nbCluster, appTitle=appTitle, printInfo=F)
+  return(lsc)
 }

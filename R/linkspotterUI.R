@@ -8,13 +8,14 @@
 #' @import visNetwork
 #' @import rAmCharts
 #' @import utils
-linkspotterUI<-function(dataset, multiBivariateCorrelationDataFrame, variablesClustering, clusteringCorMethod=NULL, defaultMinCor=0.3, defaultCorMethod="MaxNormMutInfo", appTitle="Linkspotter"){
+linkspotterUI<-function(dataset, multiBivariateCorrelationDataFrame, variablesClustering, defaultMinCor=0.3, appTitle="Linkspotter"){
 
   # small formats and checks
   dataset=droplevels.data.frame(dataset)
-  #complete abbreviations
-  defaultCorMethod=c("pearson", "spearman", "kendall", "mic", "MaxNormMutInfo")[pmatch(tolower(defaultCorMethod),tolower(c("pearson", "spearman", "kendall", "mic", "MaxNormMutInfo")))] # correlation coefficient to use in the graph
+
+  # useful variables
   availableCorMethods=colnames(multiBivariateCorrelationDataFrame)[-c(1:3,ncol(multiBivariateCorrelationDataFrame))]
+  defaultCorMethod=availableCorMethods[length(availableCorMethods)] # correlation coefficient to use in the graph
 
   # shiny server
   server <- function(input, output) {

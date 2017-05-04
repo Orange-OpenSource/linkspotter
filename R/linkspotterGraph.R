@@ -5,7 +5,7 @@
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
 #' @import visNetwork
-linkspotterGraph<-function(multiBivariateCorrelationDataFrame, variablesClustering, minCor=0.3, corMethod="MaxNormMutInfo", smoothEdges=T, dynamicNodes=T, colorEdgesByCorDirection=T){
+linkspotterGraph<-function(multiBivariateCorrelationDataFrame, variablesClustering, minCor=0.3, corMethod=colnames(multiBivariateCorrelationDataFrame)[-c(1:3,ncol(multiBivariateCorrelationDataFrame))][length(colnames(multiBivariateCorrelationDataFrame)[-c(1:3,ncol(multiBivariateCorrelationDataFrame))])], smoothEdges=T, dynamicNodes=T, colorEdgesByCorDirection=T){
   # format edges
   edges_raw=multiBivariateCorrelationDataFrame
   colnames(edges_raw)[2:3]<-c("from","to")
@@ -23,6 +23,9 @@ linkspotterGraph<-function(multiBivariateCorrelationDataFrame, variablesClusteri
   ## initialize
   edges=edges_raw
   nodes=nodes_raw
+
+  # complete abbreviations
+  corMethod=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")[pmatch(tolower(corMethod),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")))]
 
   ## apply floating parameters
   edges=data.frame(edges,value=abs(edges[,corMethod]))
