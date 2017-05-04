@@ -6,8 +6,9 @@
 \usage{
 linkspotterComplete(dataset, corMethods = c("pearson", "spearman", "kendall",
   "mic", "MaxNormMutInfo"), defaultMinCor = 0.3,
-  defaultCorMethod = "MaxNormMutInfo", clusteringCorMethod = NULL,
-  nbCluster = 1:9, printInfo = T)
+  defaultCorMethod = corMethods[length(corMethods)],
+  clusteringCorMethod = corMethods[length(corMethods)], nbCluster = 1:9,
+  printInfo = T, appTitle = "Linkspotter")
 }
 \arguments{
 \item{dataset}{the dataframe which variables bivariate correlations are to be analyzed.}
@@ -23,6 +24,8 @@ linkspotterComplete(dataset, corMethods = c("pearson", "spearman", "kendall",
 \item{nbCluster}{an integer. It is the number of clusters to compute.}
 
 \item{printInfo}{a boolean indicating whether to print on the console some information about the dataset and the estimated computation time.}
+
+\item{appTitle}{a string taken as the title of the user interface.}
 }
 \value{
 a list containing all the material enabling to analyze correlations:

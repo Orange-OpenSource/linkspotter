@@ -14,7 +14,7 @@
 #' @param clusteringCorMethod a string. One of "pearson","spearman","kendall","mic", "distCor" or "MaxNormMutInfo". It is the correlation coefficient to consider for the variables clustering.
 #' @param nbCluster an integer. It is the number of clusters to compute.
 #' @param printInfo a boolean indicating whether to print on the console some information about the dataset and the estimated computation time.
-#'
+#' @param appTitle a string taken as the title of the user interface.
 #' @return a list containing all the material enabling to analyze correlations:
 #' \itemize{
 #'   \item{\code{computationTime}: a string}
