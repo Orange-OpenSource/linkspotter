@@ -11,7 +11,7 @@
 linkspotterUI<-function(dataset, multiBivariateCorrelationDataFrame, variablesClustering, defaultMinCor=0.3, appTitle="Linkspotter"){
 
   # small formats and checks
-  dataset=droplevels.data.frame(dataset)
+  dataset=data.frame(droplevels.data.frame(dataset))
 
   # useful variables
   availableCorMethods=colnames(multiBivariateCorrelationDataFrame)[-c(1:3,ncol(multiBivariateCorrelationDataFrame))]
