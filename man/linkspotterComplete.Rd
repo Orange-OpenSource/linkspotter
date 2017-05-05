@@ -7,8 +7,8 @@
 linkspotterComplete(dataset, corMethods = c("pearson", "spearman", "kendall",
   "mic", "MaxNormMutInfo"), defaultMinCor = 0.3,
   defaultCorMethod = corMethods[length(corMethods)],
-  clusteringCorMethod = corMethods[length(corMethods)], nbCluster = 1:9,
-  printInfo = T, appTitle = "Linkspotter")
+  clusteringCorMethod = defaultCorMethod, nbCluster = 1:9, printInfo = T,
+  appTitle = "Linkspotter")
 }
 \arguments{
 \item{dataset}{the dataframe which variables bivariate correlations are to be analyzed.}
