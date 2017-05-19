@@ -4,7 +4,24 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
-# transform a 2 column correlation dataframe into a correlation matrix
+#
+#' @title Linspotter / correlation dataframe to correlation matrix
+#' @description  Transform a 2 column correlation dataframe into a correlation matrix
+#'
+#' @param x1_x2_val a specific dataframe containing correlations values resulting from the function multiBivariateCorrelation() and containing only one coeffecient type.
+#' @return a dataframe corresponding to a correlation matrix.
+#'
+#' @examples
+#' \dontrun{
+#'
+#' # calculate a correlation dataframe
+#' data(iris)
+#' corDF=multiBivariateCorrelation(mixedData = iris, corMethods = "MaxNMI")
+#' corMatrix=matrixOfValuesOfAllCouples(x1_x2_val = corDF[,c('X1','X2',"MaxNMI")])
+#' print(corMatrix)
+#' }
+#'
+#' @export
 matrixOfValuesOfAllCouples<-function(x1_x2_val){
   #conforme uniquement aux tableaux de couples complets
   #quelques conditions a ajouter

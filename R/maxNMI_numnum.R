@@ -4,6 +4,25 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
+#' @title Linspotter / Maximal Normalized Mutual Information (MaxNMI) function for a couple of numeric variable
+#' @description  Calculate the MaxNMI relationship measurement between to numeric variables
+#'
+#' @param continuousX a vector of numeric.
+#' @param continuousY a vector of numeric.
+#' @param maxNbBins an integer corresponding to the number of bin limitation, maxNbBins=100 by default.
+#' @return a double between 0 and 1 corresponding to the MaxNMI.
+#'
+#' @examples
+#' \dontrun{
+#'
+#' # calculate a correlation dataframe
+#' data(iris)
+#' maxNMI_numnum(iris$Sepal.Length,iris$Sepal.Width)
+#'
+#' }
+#'
+#' #@export
+#'
 #' @importFrom Hmisc cut2
 #' @import stats
 maxNMI_numnum<-function(continuousX,continuousY,maxNbBins=NA){

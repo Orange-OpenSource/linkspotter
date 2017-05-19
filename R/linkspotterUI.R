@@ -4,24 +4,54 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
+#' @title Linspotter / linkSpotter user interface runner
+#' @description  Run the linkSpotter user interface
+#'
+#' @param dataset the dataframe which variables bivariate correlations are contained in corDF
+#' @param corDF a specific dataframe containing correlations values resulting from the function multiBivariateCorrelation()
+#' @param variablesClustering a specific dataframe containing the output of the variable clustering resulting from the function clusterVariables()
+#' @param defaultMinCor a double between 0 and 1. It is the minimal correlation absolute value to consider for the first graph plot.
+#' @param appTitle a string taken as the title of the user interface.
+#' @return a shiny.appobj object enable to deploy instantly the user interface for a customizable visualization.
+#'
+#' @examples
+#' \dontrun{
+#'
+#' # calculate a correlation dataframe
+#' data(iris)
+#' corDF=multiBivariateCorrelation(mixedData = iris, corMethods = "MaxNMI")
+#' corMatrix=matrixOfValuesOfAllCouples(x1_x2_val = corDF[,c('X1','X2',"MaxNMI")])
+#' corGroups=clusterVariables(correlation_matrix = corMatrix, nbCluster = 3)
+#'
+#' # launch the UI
+#' linkspotterUI(dataset=iris,
+#' corDF=corDF,
+#' variablesClustering=corGroups,
+#' defaultMinCor=0.3,
+#' appTitle="Linkspotter on iris data")
+#'
+#' }
+#'
+#' @export
+#'
 #' @import shiny
 #' @import visNetwork
 #' @import rAmCharts
 #' @import utils
-linkspotterUI<-function(dataset, multiBivariateCorrelationDataFrame, variablesClustering, defaultMinCor=0.3, appTitle="Linkspotter"){
+linkspotterUI<-function(dataset, corDF, variablesClustering, defaultMinCor=0.3, appTitle="Linkspotter"){
 
   # small formats and checks
   dataset=data.frame(droplevels.data.frame(dataset))
 
   # useful variables
-  availableCorMethods=colnames(multiBivariateCorrelationDataFrame)[-c(1:3,ncol(multiBivariateCorrelationDataFrame))]
+  availableCorMethods=colnames(corDF)[-c(1:3,ncol(corDF))]
   defaultCorMethod=availableCorMethods[length(availableCorMethods)] # correlation coefficient to use in the graph
 
   # shiny server
   server <- function(input, output) {
 
     # format edges
-    edges_raw=multiBivariateCorrelationDataFrame
+    edges_raw=corDF
     colnames(edges_raw)[2:3]<-c("from","to")
     edges_raw=data.frame(edges_raw,color=factor(edges_raw$correlationType,levels = c("negative","positive","nominal"),labels =  c("red","blue","grey")))
 
@@ -212,10 +242,10 @@ linkspotterUI<-function(dataset, multiBivariateCorrelationDataFrame, variablesCl
     output$shiny_edges_plot<-renderPlot({
       if((!is.null(input$edgeid))){
         edgeid=input$edgeid
-        variab1=as.character(multiBivariateCorrelationDataFrame$X1[multiBivariateCorrelationDataFrame$id%in%c(edgeid)])
-        variab2=as.character(multiBivariateCorrelationDataFrame$X2[multiBivariateCorrelationDataFrame$id%in%c(edgeid)])
+        variab1=as.character(corDF$X1[corDF$id%in%c(edgeid)])
+        variab2=as.character(corDF$X2[corDF$id%in%c(edgeid)])
         dataset=dataset
-        edges=multiBivariateCorrelationDataFrame
+        edges=corDF
         if((edges$typeOfCouple[edges$id%in%c(edgeid)])%in%c("num.num")){
           plot(x = as.numeric(dataset[,variab1]), y = as.numeric(dataset[,variab2]), xlab = variab1, ylab=variab2, main=paste(paste(variab1,"vs"),variab2))
         }else if((edges$typeOfCouple[edges$id%in%c(edgeid)])%in%c("num.fact")){
@@ -268,13 +298,13 @@ linkspotterUI<-function(dataset, multiBivariateCorrelationDataFrame, variablesCl
       tagList(
         selectInput(inputId = "selectCorTableMethod",
                     label = "Correlation coefficient:",
-                    choices = c("Max Normalized Mutual Information"="MaxNormMutInfo",
+                    choices = c("Max Normalized Mutual Information"="MaxNMI",
                                 "Pearson's r [numeric variables only]"="pearson",
                                 "Spearman's rho [numeric variables only]"="spearman",
                                 "Kendall's tau [numeric variables only]"="kendall",
                                 "Distance correlation [numeric variables only]"="distCor",
                                 "Maximal Information Coefficient (MIC) [numeric variables only]"="mic"
-                    )[c("MaxNormMutInfo","pearson", "spearman", "kendall", "distCor", "mic")%in%availableCorMethods],
+                    )[c("MaxNMI","pearson", "spearman", "kendall", "distCor", "mic")%in%availableCorMethods],
                     multiple = FALSE,
                     selected = c(input$selectCorMethod))
       )
@@ -283,7 +313,7 @@ linkspotterUI<-function(dataset, multiBivariateCorrelationDataFrame, variablesCl
     # Table 1 : correlation matrix
     output$shiny_corMatrix<-renderTable({
       if(!is.null(input$selectCorTableMethod)){
-        cordf=multiBivariateCorrelationDataFrame[,c('X1','X2',input$selectCorTableMethod)]
+        cordf=corDF[,c('X1','X2',input$selectCorTableMethod)]
         cormatrix=matrixOfValuesOfAllCouples(cordf)
         cormatrix<-data.frame(colnames(cormatrix),cormatrix)
         colnames(cormatrix)[1]<-""
@@ -315,13 +345,13 @@ linkspotterUI<-function(dataset, multiBivariateCorrelationDataFrame, variablesCl
                           sidebarPanel(
                             selectInput(inputId = "selectCorMethod",
                                         label = "Correlation coefficient:",
-                                        choices = c("Max Normalized Mutual Information"="MaxNormMutInfo",
+                                        choices = c("Max Normalized Mutual Information"="MaxNMI",
                                                     "Pearson's r [numeric variables only]"="pearson",
                                                     "Spearman's rho [numeric variables only]"="spearman",
                                                     "Kendall's tau [numeric variables only]"="kendall",
                                                     "Distance correlation [numeric variables only]"="distCor",
                                                     "Maximal Information Coefficient (MIC) [numeric variables only]"="mic"
-                                        )[c("MaxNormMutInfo","pearson", "spearman", "kendall", "distCor", "mic")%in%availableCorMethods],
+                                        )[c("MaxNMI","pearson", "spearman", "kendall", "distCor", "mic")%in%availableCorMethods],
                                         multiple = FALSE,
                                         selected = c(defaultCorMethod)),
                             sliderInput("minCor",

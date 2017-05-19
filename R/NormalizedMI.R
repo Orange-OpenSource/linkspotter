@@ -4,9 +4,28 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
+#' @title Linspotter / Maximal Normalized Mutual Information (MaxNMI) function for 2 categorical variables
+#' @description  Calculate the MaxNMI relationship measurement for 2 categorical variables
+#'
+#' @param x a vector of factor.
+#' @param y a vector of factor.
+#' @param includeNA a boolean. TRUE to include NA value as a factor level.
+#' @return a double between 0 and 1 corresponding to the MaxNMI.
+#'
+#' @examples
+#' \dontrun{
+#'
+#' # calculate a correlation dataframe
+#' data(iris)
+#' NormalizedMI(iris$Species,iris$Species)
+#'
+#' }
+#'
+#' #@export
+#'
 #' @import infotheo
 #' @import stats
-NormalizedMI<-function(x,y, includeNA=T){#GOOD! -> ratio d'incertitude/entropie expliquee
+NormalizedMI<-function(x,y, includeNA=T){#-> ratio d'incertitude/entropie expliquee
 
   #rule NA problems
   if(includeNA){

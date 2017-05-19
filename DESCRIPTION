@@ -1,7 +1,7 @@
 Package: linkspotter
 Type: Package
 Title: Comprehensive Dataset Bivariate Correlations Computation and Visualization Using Graphs
-Version: 1.1.2
+Version: 1.1.3
 Author: Alassane Samba
 Maintainer: Alassane Samba <alassane.samba@orange.com>
 Description: Compute and visualize using the visNetwork package all the bivariate correlations of a dataframe.
@@ -33,7 +33,7 @@ Collate:
   'linkspotterOnFile.R'
   'linkspotterUI.R'
   'matrixOfValuesOfAllCouples.R'
-  'maxNMI_generic.R'
+  'maxNMI.R'
   'maxNMI_numfact.R'
   'maxNMI_numnum.R'
   'multiBivariateCorrelation.R'

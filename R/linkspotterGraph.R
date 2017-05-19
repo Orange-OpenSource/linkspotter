@@ -4,10 +4,38 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
+#' @title Linspotter / linkSpotter graph runner
+#' @description  Run the linkSpotter graph
+#'
+#' @param corDF a specific dataframe containing correlations values resulting from the function multiBivariateCorrelation()
+#' @param variablesClustering a specific dataframe containing the output of the variable clustering resulting from the function clusterVariables()
+#' @param minCor a double between 0 and 1. It is the minimal correlation absolute value to consider for the first graph plot.
+#' @param corMethod a string. One of "pearson","spearman","kendall","mic", "distCor" or "MaxNMI". It is the correlation coefficient to consider for the first graph plot.
+#' @param smoothEdges a boolean. TRUE to let the edges be smooth.
+#' @param dynamicNodes a boolean. TRUE to let the graph re-organize itself after any movement.
+#' @param colorEdgesByCorDirection a boolean. TRUE to get the edges colored according to the correlation direction (positive-> blue, negative->red or NA->grey).
+#' @return a visNetwork object corresponding to a dynamic graph for the correlation matrix visualization.
+#'
+#' @examples
+#' \dontrun{
+#'
+#' # calculate a correlation dataframe
+#' data(iris)
+#' corDF=multiBivariateCorrelation(mixedData = iris, corMethods = "MaxNMI")
+#' corMatrix=matrixOfValuesOfAllCouples(x1_x2_val = corDF[,c('X1','X2',"MaxNMI")])
+#' corGroups=clusterVariables(correlation_matrix = corMatrix, nbCluster = 3)
+#'
+#' # launch the graph
+#' linkspotterGraph(corDF=corDF, variablesClustering=corGroups, minCor=0.3)
+#'
+#' }
+#'
+#' @export
+#'
 #' @import visNetwork
-linkspotterGraph<-function(multiBivariateCorrelationDataFrame, variablesClustering, minCor=0.3, corMethod=colnames(multiBivariateCorrelationDataFrame)[-c(1:3,ncol(multiBivariateCorrelationDataFrame))][length(colnames(multiBivariateCorrelationDataFrame)[-c(1:3,ncol(multiBivariateCorrelationDataFrame))])], smoothEdges=T, dynamicNodes=T, colorEdgesByCorDirection=T){
+linkspotterGraph<-function(corDF, variablesClustering, minCor=0.3, corMethod=colnames(corDF)[-c(1:3,ncol(corDF))][length(colnames(corDF)[-c(1:3,ncol(corDF))])], smoothEdges=T, dynamicNodes=T, colorEdgesByCorDirection=T){
   # format edges
-  edges_raw=multiBivariateCorrelationDataFrame
+  edges_raw=corDF
   colnames(edges_raw)[2:3]<-c("from","to")
   if(colorEdgesByCorDirection) edges_raw=data.frame(edges_raw,color=factor(edges_raw$correlationType,levels = c("negative","positive","nominal"),labels =  c("red","blue","grey")))
 
@@ -25,7 +53,7 @@ linkspotterGraph<-function(multiBivariateCorrelationDataFrame, variablesClusteri
   nodes=nodes_raw
 
   # complete abbreviations
-  corMethod=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")[pmatch(tolower(corMethod),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")))]
+  corMethod=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")[pmatch(tolower(corMethod),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")))]
 
   ## apply floating parameters
   edges=data.frame(edges,value=abs(edges[,corMethod]))

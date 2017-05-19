@@ -4,6 +4,25 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
+#' @title Linspotter / Maximal Normalized Mutual Information (MaxNMI) function for a numeric vs a factor variable
+#' @description  Calculate the MaxNMI relationship measurement for a numeric vs a factor variable
+#'
+#' @param continuousY a vector of numeric.
+#' @param factorX a vector of factor.
+#' @param includeNA a boolean. TRUE to include NA value as a factor level.
+#' @return a double between 0 and 1 corresponding to the MaxNMI.
+#'
+#' @examples
+#' \dontrun{
+#'
+#' # calculate a correlation dataframe
+#' data(iris)
+#' maxNMI_numfact(continuousY=iris$Sepal.Length,factorX=iris$Species)
+#'
+#' }
+#'
+#' #@export
+#'
 #' @importFrom Hmisc cut2
 #' @import stats
 maxNMI_numfact<-function(continuousY,factorX, includeNA=T){

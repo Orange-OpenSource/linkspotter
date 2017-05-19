@@ -8,10 +8,10 @@
 #' @description  Computation of correlation matrices, variable clustering and the customizable user inferface to visualize them using a graph together with variables distributions and cross plots.
 #'
 #' @param dataset the dataframe which variables bivariate correlations are to be analyzed.
-#' @param corMethods a vector of correlation coefficients to compute. The available coefficient are the following : \code{c("pearson","spearman","kendall","mic","distCor","MaxNormMutInfo")}. It is not case sensitive and still work if only the beginning of the word is put (e.g. \code{pears}).
+#' @param corMethods a vector of correlation coefficients to compute. The available coefficients are the following : \code{c("pearson","spearman","kendall","mic","distCor","MaxNMI")}. It is not case sensitive and still work if only the beginning of the word is put (e.g. \code{pears}).
 #' @param defaultMinCor a double between 0 and 1. It is the minimal correlation absolute value to consider for the first graph plot.
-#' @param defaultCorMethod a string. One of "pearson","spearman","kendall","mic", "distCor" or "MaxNormMutInfo". It is the correlation coefficient to consider for the first graph plot.
-#' @param clusteringCorMethod a string. One of "pearson","spearman","kendall","mic", "distCor" or "MaxNormMutInfo". It is the correlation coefficient to consider for the variables clustering.
+#' @param defaultCorMethod a string. One of "pearson","spearman","kendall","mic", "distCor" or "MaxNMI". It is the correlation coefficient to consider for the first graph plot.
+#' @param clusteringCorMethod a string. One of "pearson","spearman","kendall","mic", "distCor" or "MaxNMI". It is the correlation coefficient to consider for the variables clustering.
 #' @param nbCluster an integer. It is the number of clusters to compute.
 #' @param printInfo a boolean indicating whether to print on the console some information about the dataset and the estimated computation time.
 #' @param appTitle a string taken as the title of the user interface.
@@ -42,13 +42,23 @@
 #' }
 #'
 #' @export
-linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendall","mic","MaxNormMutInfo"), defaultMinCor=0.3, defaultCorMethod=corMethods[length(corMethods)], clusteringCorMethod=defaultCorMethod, nbCluster=1:9, printInfo=T, appTitle="Linkspotter"){
+linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendall","mic","MaxNMI"), defaultMinCor=0.3, defaultCorMethod=corMethods[length(corMethods)], clusteringCorMethod=defaultCorMethod, nbCluster=1:9, printInfo=T, appTitle="Linkspotter"){
   startTime<-Sys.time()
   p=ncol(dataset)
   nbCouples=((p*p)-p)/2
   nbObs=nrow(dataset)
   unitDuration=0.050 # in seconds
   durationEstim=nbObs/100*nbCouples*unitDuration
+
+  # puseless=length(uselessVar(dataset))
+  # pempty=length(emptyVar(dataset))
+  # pnum=sum(unlist(lapply(dataset[,colnames(dataset)%in%c(emptyVar(dataset),uselessVar(dataset))],is.numeric)))
+  # pfact=p-pempty-puseless-pnum
+  # nbMixCouples=pfact*pnum
+  # nbFactCouples=((pfact*pfact)-pfact)/2
+  # nbNumCouples=((pnum*pnum)-pnum)/2
+  # nbUsefulCouples=nbMixCouples+nbFactCouples+nbNumCouples
+
   if(printInfo){
     print(paste(c("Number of variables: ", p), collapse=""))
     print(paste(c("Number of couples: ", nbCouples), collapse=""))
@@ -57,16 +67,16 @@ linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendal
     print(paste("Start time:",startTime))
   }
   #complete abbreviations
-  corMethods=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")[pmatch(tolower(corMethods),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")))]
-  defaultCorMethod=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")[pmatch(tolower(defaultCorMethod),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")))]
-  clusteringCorMethod=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")[pmatch(tolower(clusteringCorMethod),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNormMutInfo")))]
+  corMethods=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")[pmatch(tolower(corMethods),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")))]
+  defaultCorMethod=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")[pmatch(tolower(defaultCorMethod),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")))]
+  clusteringCorMethod=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")[pmatch(tolower(clusteringCorMethod),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")))]
   #compute corDF
-  corDF=multiBivariateCorrelation(mixedData = dataset, corMethods = corMethods)
+  corDF=multiBivariateCorrelation(dataset = dataset, corMethods = corMethods)
   if(printInfo) print(paste("Correlations computation finished:",Sys.time()))
   #corr matrix for clustering
-  corMatrix=matrixOfValuesOfAllCouples(x1_x2_val = corDF[,c('X1','X2',clusteringCorMethod)])# prefer MaxNormMutInfo or distCor for the clustering because they hilights different types of correlation (not only linear and monotonic ones) and because prefer MaxNormMutInfo because it is always available/computable (whatever the type of variable)
+  corMatrix=matrixOfValuesOfAllCouples(x1_x2_val = corDF[,c('X1','X2',clusteringCorMethod)])# prefer MaxNMI or distCor for the clustering because they hilights different types of correlation (not only linear and monotonic ones) and because prefer MaxNMI because it is always available/computable (whatever the type of variable)
   #perform clustering
-  corGroups=clusterVariables(correlation_matrix = corMatrix, nbCluster = nbCluster)
+  corGroups=clusterVariables(correlationMatrix = corMatrix, nbCluster = nbCluster)
   if(printInfo) print(paste("Clustering computation finished:",Sys.time()))
   endTime<-Sys.time()
   #compute corr matrices
