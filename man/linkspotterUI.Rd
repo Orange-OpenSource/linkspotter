@@ -4,8 +4,8 @@
 \alias{linkspotterUI}
 \title{Linspotter / linkSpotter user interface runner}
 \usage{
-linkspotterUI(dataset, corDF, variablesClustering, defaultMinCor = 0.3,
-  appTitle = "Linkspotter")
+linkspotterUI(dataset, corDF, variablesClustering = NULL,
+  defaultMinCor = 0.3, appTitle = "Linkspotter")
 }
 \arguments{
 \item{dataset}{the dataframe which variables bivariate correlations are contained in corDF}

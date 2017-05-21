@@ -4,7 +4,7 @@
 \alias{linkspotterGraph}
 \title{Linspotter / linkSpotter graph runner}
 \usage{
-linkspotterGraph(corDF, variablesClustering, minCor = 0.3,
+linkspotterGraph(corDF, variablesClustering = NULL, minCor = 0.3,
   corMethod = colnames(corDF)[-c(1:3,
   ncol(corDF))][length(colnames(corDF)[-c(1:3, ncol(corDF))])],
   smoothEdges = T, dynamicNodes = T, colorEdgesByCorDirection = T)

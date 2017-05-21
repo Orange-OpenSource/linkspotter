@@ -38,7 +38,7 @@
 #' @import visNetwork
 #' @import rAmCharts
 #' @import utils
-linkspotterUI<-function(dataset, corDF, variablesClustering, defaultMinCor=0.3, appTitle="Linkspotter"){
+linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=0.3, appTitle="Linkspotter"){
 
   # small formats and checks
   dataset=data.frame(droplevels.data.frame(dataset))
