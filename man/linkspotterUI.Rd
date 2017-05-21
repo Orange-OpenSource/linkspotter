@@ -2,7 +2,7 @@
 % Please edit documentation in R/linkspotterUI.R
 \name{linkspotterUI}
 \alias{linkspotterUI}
-\title{Linspotter / linkSpotter user interface runner}
+\title{Linspotter user interface runner}
 \usage{
 linkspotterUI(dataset, corDF, variablesClustering = NULL,
   defaultMinCor = 0.3, appTitle = "Linkspotter")

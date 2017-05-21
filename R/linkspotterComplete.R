@@ -4,7 +4,7 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
-#' @title Linspotter
+#' @title Linspotter complete runner
 #' @description  Computation of correlation matrices, variable clustering and the customizable user inferface to visualize them using a graph together with variables distributions and cross plots.
 #'
 #' @param dataset the dataframe which variables bivariate correlations are to be analyzed.

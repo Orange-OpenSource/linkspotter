@@ -2,7 +2,7 @@
 % Please edit documentation in R/linkspotterGraph.R
 \name{linkspotterGraph}
 \alias{linkspotterGraph}
-\title{Linspotter / linkSpotter graph runner}
+\title{Linspotter graph runner}
 \usage{
 linkspotterGraph(corDF, variablesClustering = NULL, minCor = 0.3,
   corMethod = colnames(corDF)[-c(1:3,

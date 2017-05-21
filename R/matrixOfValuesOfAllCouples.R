@@ -5,7 +5,7 @@
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
 #
-#' @title Linspotter / correlation dataframe to correlation matrix
+#' @title Transform a correlation dataframe into a correlation matrix
 #' @description  Transform a 2 column correlation dataframe into a correlation matrix
 #'
 #' @param x1_x2_val a specific dataframe containing correlations values resulting from the function multiBivariateCorrelation() and containing only one coeffecient type.

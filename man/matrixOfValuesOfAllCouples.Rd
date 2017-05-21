@@ -2,7 +2,7 @@
 % Please edit documentation in R/matrixOfValuesOfAllCouples.R
 \name{matrixOfValuesOfAllCouples}
 \alias{matrixOfValuesOfAllCouples}
-\title{Linspotter / correlation dataframe to correlation matrix}
+\title{Transform a correlation dataframe into a correlation matrix}
 \usage{
 matrixOfValuesOfAllCouples(x1_x2_val)
 }

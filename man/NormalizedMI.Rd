@@ -2,7 +2,7 @@
 % Please edit documentation in R/NormalizedMI.R
 \name{NormalizedMI}
 \alias{NormalizedMI}
-\title{Linspotter / Maximal Normalized Mutual Information (MaxNMI) function for 2 categorical variables}
+\title{Maximal Normalized Mutual Information (MaxNMI) function for 2 categorical variables}
 \usage{
 NormalizedMI(x, y, includeNA = T)
 }

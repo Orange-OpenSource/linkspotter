@@ -2,7 +2,7 @@
 % Please edit documentation in R/multiBivariateCorrelation.R
 \name{multiBivariateCorrelation}
 \alias{multiBivariateCorrelation}
-\title{Linspotter / Calculation of all the bivariate correlations in a dataframe}
+\title{Calculation of all the bivariate correlations in a dataframe}
 \usage{
 multiBivariateCorrelation(dataset, corMethods = c("pearson", "spearman",
   "kendall", "mic", "MaxNMI"))

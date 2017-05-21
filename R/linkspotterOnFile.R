@@ -5,7 +5,7 @@
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
 #
-#' @title Linspotter / linkspotterOnFile a function to load and proccess Linkspotter on a file
+#' @title LinkspotterOnFile a function to load and proccess Linkspotter on a file
 #' @description  Computation of correlation matrices, variable clustering and the customizable user inferface to visualize them using a graph together with variables distributions and cross plots.
 #'
 #' @param file the file containing a structured dataset which the bivariate correlations are to be analyzed.

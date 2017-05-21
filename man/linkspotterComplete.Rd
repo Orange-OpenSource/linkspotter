@@ -2,7 +2,7 @@
 % Please edit documentation in R/linkspotterComplete.R
 \name{linkspotterComplete}
 \alias{linkspotterComplete}
-\title{Linspotter}
+\title{Linspotter complete runner}
 \usage{
 linkspotterComplete(dataset, corMethods = c("pearson", "spearman", "kendall",
   "mic", "MaxNMI"), defaultMinCor = 0.3,

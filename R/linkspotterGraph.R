@@ -4,7 +4,7 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
-#' @title Linspotter / linkSpotter graph runner
+#' @title Linspotter graph runner
 #' @description  Run the linkSpotter graph
 #'
 #' @param corDF a specific dataframe containing correlations values resulting from the function multiBivariateCorrelation()

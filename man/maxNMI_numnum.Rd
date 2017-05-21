@@ -2,7 +2,7 @@
 % Please edit documentation in R/maxNMI_numnum.R
 \name{maxNMI_numnum}
 \alias{maxNMI_numnum}
-\title{Linspotter / Maximal Normalized Mutual Information (MaxNMI) function for a couple of numeric variable}
+\title{Maximal Normalized Mutual Information (MaxNMI) function for a couple of numeric variable}
 \usage{
 maxNMI_numnum(continuousX, continuousY, maxNbBins = NA)
 }

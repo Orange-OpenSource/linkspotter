@@ -2,7 +2,7 @@
 % Please edit documentation in R/linkspotterOnFile.R
 \name{linkspotterOnFile}
 \alias{linkspotterOnFile}
-\title{Linspotter / linkspotterOnFile a function to load and proccess Linkspotter on a file}
+\title{LinkspotterOnFile a function to load and proccess Linkspotter on a file}
 \usage{
 linkspotterOnFile(file, header, sep, quote, corMethods = c("pearson",
   "spearman", "kendall", "mic", "MaxNMI"), defaultMinCor = 0.3,

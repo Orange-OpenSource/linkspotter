@@ -4,7 +4,7 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
-#' @title Linspotter / Maximal Normalized Mutual Information (MaxNMI) function for a numeric vs a factor variable
+#' @title Maximal Normalized Mutual Information (MaxNMI) function for a numeric vs a factor variable
 #' @description  Calculate the MaxNMI relationship measurement for a numeric vs a factor variable
 #'
 #' @param continuousY a vector of numeric.

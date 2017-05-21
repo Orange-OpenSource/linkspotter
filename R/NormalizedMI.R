@@ -4,7 +4,7 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
-#' @title Linspotter / Maximal Normalized Mutual Information (MaxNMI) function for 2 categorical variables
+#' @title Maximal Normalized Mutual Information (MaxNMI) function for 2 categorical variables
 #' @description  Calculate the MaxNMI relationship measurement for 2 categorical variables
 #'
 #' @param x a vector of factor.

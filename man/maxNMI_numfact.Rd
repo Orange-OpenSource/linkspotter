@@ -2,7 +2,7 @@
 % Please edit documentation in R/maxNMI_numfact.R
 \name{maxNMI_numfact}
 \alias{maxNMI_numfact}
-\title{Linspotter / Maximal Normalized Mutual Information (MaxNMI) function for a numeric vs a factor variable}
+\title{Maximal Normalized Mutual Information (MaxNMI) function for a numeric vs a factor variable}
 \usage{
 maxNMI_numfact(continuousY, factorX, includeNA = T)
 }

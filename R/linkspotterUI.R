@@ -4,7 +4,7 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
-#' @title Linspotter / linkSpotter user interface runner
+#' @title Linspotter user interface runner
 #' @description  Run the linkSpotter user interface
 #'
 #' @param dataset the dataframe which variables bivariate correlations are contained in corDF

@@ -4,7 +4,7 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
-#' @title Linspotter / Calculation of all the bivariate correlations in a dataframe
+#' @title Calculation of all the bivariate correlations in a dataframe
 #' @description  Computation of a correlation dataframe.
 #'
 #' @param dataset the dataframe which variables bivariate correlations are to be analyzed.

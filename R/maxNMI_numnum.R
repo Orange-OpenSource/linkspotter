@@ -4,7 +4,7 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
-#' @title Linspotter / Maximal Normalized Mutual Information (MaxNMI) function for a couple of numeric variable
+#' @title Maximal Normalized Mutual Information (MaxNMI) function for a couple of numeric variable
 #' @description  Calculate the MaxNMI relationship measurement between to numeric variables
 #'
 #' @param continuousX a vector of numeric.
