@@ -69,7 +69,7 @@ multiBivariateCorrelation<-function(dataset, corMethods=c("pearson","spearman","
                if("kendall"%in%corMethods){kendall=cor(x=dataset[,as.character(x[1])],y=dataset[,as.character(x[2])],use = "pairwise.complete.obs",method = "kendall"); cors=c(cors,kendall=kendall)}
                if("distCor"%in%corMethods){distCor=energy::dcor(x=dataset[,as.character(x[1])],y=dataset[,as.character(x[2])]); cors=c(cors,distCor=distCor)} # too long to compute
                if("mic"%in%corMethods){mic=minerva::mine(x=dataset[,as.character(x[1])],y=dataset[,as.character(x[2])],use = "pairwise.complete.obs")$MIC; cors=c(cors,mic=mic)}
-               if("MaxNMI"%in%corMethods){MaxNMI=maxNMI(dataset[,as.character(x[1])],dataset[,as.character(x[2])])$MaxNMI; cors=c(cors,MaxNMI=MaxNMI)}
+               if("MaxNMI"%in%corMethods){MaxNMI=maxNMI(dataset[,as.character(x[1])],dataset[,as.character(x[2])]); cors=c(cors,MaxNMI=MaxNMI)}
                as.vector(cors)
              },
              "num.fact"={
@@ -79,7 +79,7 @@ multiBivariateCorrelation<-function(dataset, corMethods=c("pearson","spearman","
                if("kendall"%in%corMethods){kendall=NA; cors=c(cors,kendall=kendall)}
                if("distCor"%in%corMethods){distCor=NA; cors=c(cors,distCor=distCor)} # too long to compute
                if("mic"%in%corMethods){mic=NA; cors=c(cors,mic=mic)}
-               if("MaxNMI"%in%corMethods){MaxNMI=maxNMI(dataset[,as.character(x[1])],dataset[,as.character(x[2])])$MaxNMI; cors=c(cors,MaxNMI=MaxNMI)}
+               if("MaxNMI"%in%corMethods){MaxNMI=maxNMI(dataset[,as.character(x[1])],dataset[,as.character(x[2])]); cors=c(cors,MaxNMI=MaxNMI)}
                as.vector(cors)
              },
              "fact.num"={
@@ -89,7 +89,7 @@ multiBivariateCorrelation<-function(dataset, corMethods=c("pearson","spearman","
                if("kendall"%in%corMethods){kendall=NA; cors=c(cors,kendall=kendall)}
                if("distCor"%in%corMethods){distCor=NA; cors=c(cors,distCor=distCor)} # too long to compute
                if("mic"%in%corMethods){mic=NA; cors=c(cors,mic=mic)}
-               if("MaxNMI"%in%corMethods){MaxNMI=maxNMI(dataset[,as.character(x[2])],dataset[,as.character(x[1])])$MaxNMI; cors=c(cors,MaxNMI=MaxNMI)}
+               if("MaxNMI"%in%corMethods){MaxNMI=maxNMI(dataset[,as.character(x[2])],dataset[,as.character(x[1])]); cors=c(cors,MaxNMI=MaxNMI)}
                as.vector(cors)
              },
              "fact.fact"={
@@ -99,7 +99,7 @@ multiBivariateCorrelation<-function(dataset, corMethods=c("pearson","spearman","
                if("kendall"%in%corMethods){kendall=NA; cors=c(cors,kendall=kendall)}
                if("distCor"%in%corMethods){distCor=NA; cors=c(cors,distCor=distCor)} # too long to compute
                if("mic"%in%corMethods){mic=NA; cors=c(cors,mic=mic)}
-               if("MaxNMI"%in%corMethods){MaxNMI=maxNMI(dataset[,as.character(x[1])],dataset[,as.character(x[2])])$MaxNMI; cors=c(cors,MaxNMI=MaxNMI)}
+               if("MaxNMI"%in%corMethods){MaxNMI=maxNMI(dataset[,as.character(x[1])],dataset[,as.character(x[2])]); cors=c(cors,MaxNMI=MaxNMI)}
                as.vector(cors)
              }
       )
@@ -125,6 +125,5 @@ multiBivariateCorrelation<-function(dataset, corMethods=c("pearson","spearman","
 
   # return result formatted
   dfcmb=data.frame(id=as.character(1:nrow(dfcmb)),dfcmb)
-  #return(dfcmb[order(abs(dfcmb$MaxNMI),decreasing = T),])
   return(dfcmb)
 }
