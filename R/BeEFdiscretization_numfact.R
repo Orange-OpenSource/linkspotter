@@ -1,15 +1,15 @@
 # --------------------------------------------------------------------------------
-# title: Linkspotter/maxNMI_numfact
-# description: compute MaxNMI (Max Normalized Mutal Information) correlation coefficient between a discrete variable and a continuous variable according to the binning of the latter
+# title: Linkspotter/BeEFdiscretization.numfact
+# description: Discretize a quantitative variable by optimizing the obtained the Normalized Mutual Information with a target qualitative variable
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
-#' @title Maximal Normalized Mutual Information (MaxNMI) function for a numeric vs a factor variable
-#' @description  Calculate the MaxNMI relationship measurement for a numeric vs a factor variable
+#' @title BeEF: Best Equal-Frequency discretization
+#' @description  Discretize a quantitative variable by optimizing the obtained the Normalized Mutual Information with a target qualitative variable
 #'
 #' @param continuousY a vector of numeric.
 #' @param factorX a vector of factor.
-#' @param includeNA a boolean. TRUE to include NA value as a factor level.
+#' @param includeFactorNA a boolean. TRUE to include NA value as a factor level.
 #' @return a double between 0 and 1 corresponding to the MaxNMI.
 #'
 #' @examples
@@ -17,18 +17,18 @@
 #'
 #' # calculate a correlation dataframe
 #' data(iris)
-#' maxNMI_numfact(continuousY=iris$Sepal.Length,factorX=iris$Species)
-#'
+#' sepallength=BeEFdiscretization.numfact(continuousY=iris$Sepal.Length,factorX=iris$Species)
+#' summary(sepallength)
 #' }
 #'
-#' #@export
+#' @export
 #'
 #' @importFrom Hmisc cut2
 #' @import stats
-maxNMI_numfact<-function(continuousY,factorX, includeNA=T){
+BeEFdiscretization.numfact<-function(continuousY,factorX, includeFactorNA=T){
 
-  #if includeNA
-  if(includeNA&(sum(is.na(factorX))>0)){
+  #if includeFactorNA
+  if(includeFactorNA&(sum(is.na(factorX))>0)){
     factorX=as.character(factorX)
     factorX[is.na(factorX)] <- c("NA")
     factorX=as.factor(factorX)
@@ -59,5 +59,6 @@ maxNMI_numfact<-function(continuousY,factorX, includeNA=T){
   })
   NMIsDF=as.data.frame(matrix(unlist(NMIs),ncol = 2, byrow = T))
   colnames(NMIsDF)<-c("ny","MaxNMI")
-  return(as.list(NMIsDF[which.max(NMIsDF$MaxNMI),]))
+  best=NMIsDF[which.max(NMIsDF$MaxNMI),]
+  return(Hmisc::cut2(continuousY,g=best$ny))
 }

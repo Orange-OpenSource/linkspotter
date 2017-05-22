@@ -1,11 +1,11 @@
 # --------------------------------------------------------------------------------
-# title: Linkspotter/maxNMI_numnum
-# description: compute MaxNMI (Max Normalized Mutal Information) correlation coefficient between the 2 continuous variables using the best equal-freq-based discretization of both variables (underestimates MIC)
+# title: Linkspotter/BeEFdiscretization.numnum
+# description: Discretize two quantitative variables by optimizing the obtained the Normalized Mutual Information
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
-#' @title Maximal Normalized Mutual Information (MaxNMI) function for a couple of numeric variable
-#' @description  Calculate the MaxNMI relationship measurement between to numeric variables
+#' @title BeEF: Best Equal-Frequency discretization (for a couple of quantitative variables)
+#' @description  Discretize two quantitative variables by optimizing the obtained the Normalized Mutual Information
 #'
 #' @param continuousX a vector of numeric.
 #' @param continuousY a vector of numeric.
@@ -17,15 +17,17 @@
 #'
 #' # calculate a correlation dataframe
 #' data(iris)
-#' maxNMI_numnum(iris$Sepal.Length,iris$Sepal.Width)
+#' disc=BeEFdiscretization.numnum(iris$Sepal.Length,iris$Sepal.Width)
+#' summary(disc$x)
+#' summary(disc$y)
 #'
 #' }
 #'
-#' #@export
+#' @export
 #'
 #' @importFrom Hmisc cut2
 #' @import stats
-maxNMI_numnum<-function(continuousX,continuousY,maxNbBins=NA){
+BeEFdiscretization.numnum<-function(continuousX,continuousY,maxNbBins=NA){
 
   # Only on complete obs
   cc=complete.cases(data.frame(continuousX,continuousY))
@@ -55,5 +57,6 @@ maxNMI_numnum<-function(continuousX,continuousY,maxNbBins=NA){
   })
   NMIsDF=as.data.frame(matrix(unlist(NMIs),ncol = 3, byrow = T))
   colnames(NMIsDF)<-c("nx","ny","MaxNMI")
-  return(as.list(NMIsDF[which.max(NMIsDF$MaxNMI),]))
+  best=NMIsDF[which.max(NMIsDF$MaxNMI),]
+  return(list(x=Hmisc::cut2(continuousX,g = best$nx),y=Hmisc::cut2(continuousY,g = best$ny)))
 }

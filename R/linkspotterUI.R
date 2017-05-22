@@ -20,7 +20,7 @@
 #' # calculate a correlation dataframe
 #' data(iris)
 #' corDF=multiBivariateCorrelation(mixedData = iris, corMethods = "MaxNMI")
-#' corMatrix=matrixOfValuesOfAllCouples(x1_x2_val = corDF[,c('X1','X2',"MaxNMI")])
+#' corMatrix=corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',"MaxNMI")])
 #' corGroups=clusterVariables(correlation_matrix = corMatrix, nbCluster = 3)
 #'
 #' # launch the UI
@@ -314,7 +314,7 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
     output$shiny_corMatrix<-renderTable({
       if(!is.null(input$selectCorTableMethod)){
         cordf=corDF[,c('X1','X2',input$selectCorTableMethod)]
-        cormatrix=matrixOfValuesOfAllCouples(cordf)
+        cormatrix=corCouplesToMatrix(cordf)
         cormatrix<-data.frame(colnames(cormatrix),cormatrix)
         colnames(cormatrix)[1]<-""
         cormatrix

@@ -2,7 +2,7 @@
 % Please edit documentation in R/maxNMI.R
 \name{maxNMI}
 \alias{maxNMI}
-\title{Linspotter / Maximal Normalized Mutual Information (MaxNMI) function}
+\title{Maximal Normalized Mutual Information (MaxNMI)}
 \usage{
 maxNMI(x, y)
 }
@@ -15,7 +15,7 @@ maxNMI(x, y)
 a double between 0 and 1 corresponding to the MaxNMI.
 }
 \description{
-Calculate the MaxNMI relationship measurement
+Computes the MaxNMI between the two variables whatever their types, by discretizing using Best Equal-Frequency-based discretization (BeEF) if necessary.
 }
 \examples{
 \dontrun{
@@ -23,6 +23,7 @@ Calculate the MaxNMI relationship measurement
 # calculate a correlation dataframe
 data(iris)
 maxNMI(iris$Sepal.Length,iris$Sepal.Width)
+maxNMI(iris$Sepal.Length,iris$Species)
 
 }
 

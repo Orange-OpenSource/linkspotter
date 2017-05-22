@@ -36,7 +36,7 @@ Run the linkSpotter graph
 # calculate a correlation dataframe
 data(iris)
 corDF=multiBivariateCorrelation(mixedData = iris, corMethods = "MaxNMI")
-corMatrix=matrixOfValuesOfAllCouples(x1_x2_val = corDF[,c('X1','X2',"MaxNMI")])
+corMatrix=corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',"MaxNMI")])
 corGroups=clusterVariables(correlation_matrix = corMatrix, nbCluster = 3)
 
 # launch the graph

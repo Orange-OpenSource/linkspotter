@@ -74,13 +74,13 @@ linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendal
   corDF=multiBivariateCorrelation(dataset = dataset, corMethods = corMethods)
   if(printInfo) print(paste("Correlations computation finished:",Sys.time()))
   #corr matrix for clustering
-  corMatrix=matrixOfValuesOfAllCouples(x1_x2_val = corDF[,c('X1','X2',clusteringCorMethod)])# prefer MaxNMI or distCor for the clustering because they hilights different types of correlation (not only linear and monotonic ones) and because prefer MaxNMI because it is always available/computable (whatever the type of variable)
+  corMatrix=corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',clusteringCorMethod)])# prefer MaxNMI or distCor for the clustering because they hilights different types of correlation (not only linear and monotonic ones) and because prefer MaxNMI because it is always available/computable (whatever the type of variable)
   #perform clustering
   corGroups=clusterVariables(correlationMatrix = corMatrix, nbCluster = nbCluster)
   if(printInfo) print(paste("Clustering computation finished:",Sys.time()))
   endTime<-Sys.time()
   #compute corr matrices
-  corMatrices=lapply(corMethods,function(x){matrixOfValuesOfAllCouples(x1_x2_val = corDF[,c('X1','X2',x)])})
+  corMatrices=lapply(corMethods,function(x){corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',x)])})
   names(corMatrices)<-corMethods
   computationTime=format(round(endTime-startTime,3),nsmall = 3)
   #compute UI

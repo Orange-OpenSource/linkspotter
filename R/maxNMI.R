@@ -1,11 +1,11 @@
 # --------------------------------------------------------------------------------
 # title: Linkspotter/maxNMI
-# description: compute MaxNMI correlation coefficient whatever the type of couple of variable
+# description: Computes the MaxNMI between the two variables whatever their types, by discretizing using Best Equal-Frequency-based discretization (BeEF) if necessary.
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
-#' @title Linspotter / Maximal Normalized Mutual Information (MaxNMI) function
-#' @description  Calculate the MaxNMI relationship measurement
+#' @title Maximal Normalized Mutual Information (MaxNMI)
+#' @description Computes the MaxNMI between the two variables whatever their types, by discretizing using Best Equal-Frequency-based discretization (BeEF) if necessary.
 #'
 #' @param x a vector of numeric or factor.
 #' @param y a vector of numeric or factor.
@@ -17,6 +17,7 @@
 #' # calculate a correlation dataframe
 #' data(iris)
 #' maxNMI(iris$Sepal.Length,iris$Sepal.Width)
+#' maxNMI(iris$Sepal.Length,iris$Species)
 #'
 #' }
 #'
@@ -29,13 +30,16 @@ maxNMI<-function(x,y){
            NormalizedMI(x,y,includeNA = F)
          },
          fact.num={
-           maxNMI_numfact(y,x,includeNA = F)
+           yfact=BeEFdiscretization.numfact(y,x,includeFactorNA = F)
+           NormalizedMI(x,yfact,includeNA = F)
          },
          num.fact={
-           maxNMI_numfact(x,y,includeNA = F)
+           xfact=BeEFdiscretization.numfact(x,y,includeFactorNA = F)
+           NormalizedMI(xfact,y,includeNA = F)
          },
          num.num={
-           maxNMI_numnum(x,y,maxNbBins=100)
+           disc=BeEFdiscretization.numnum(x,y,maxNbBins=100)
+           NormalizedMI(disc$x,disc$y,includeNA = F)
          }
   )
 }

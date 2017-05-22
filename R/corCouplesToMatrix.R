@@ -1,5 +1,5 @@
 # --------------------------------------------------------------------------------
-# title: Linkspotter/matrixOfValuesOfAllCouples
+# title: Linkspotter/corCouplesToMatrix
 # description: transform a 2 column correlation dataframe into a correlation matrix
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Orange
@@ -17,12 +17,12 @@
 #' # calculate a correlation dataframe
 #' data(iris)
 #' corDF=multiBivariateCorrelation(mixedData = iris, corMethods = "MaxNMI")
-#' corMatrix=matrixOfValuesOfAllCouples(x1_x2_val = corDF[,c('X1','X2',"MaxNMI")])
+#' corMatrix=corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',"MaxNMI")])
 #' print(corMatrix)
 #' }
 #'
 #' @export
-matrixOfValuesOfAllCouples<-function(x1_x2_val){
+corCouplesToMatrix<-function(x1_x2_val){
   #conforme uniquement aux tableaux de couples complets
   #quelques conditions a ajouter
 
