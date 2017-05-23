@@ -4,15 +4,15 @@ Linkspotter is a package of the R software that mainly allows to calculate and v
 
 Its main features are:
 
-* calculation of several correlation matrices corresponding to different link coefficients
-* clustering of variables using an unsupervised learning
-* supervised discretization of one or a couple of variables.
+* Calculation of several correlation matrices corresponding to different link coefficients
+* Clustering of variables using an unsupervised learning
+* Supervised discretization of one or a couple of variables.
 
 It also offers a customizable user interface, allowing to:
 
-* Visualize the links using a graph (the variables corresdond to the nodes and the links correspond to the edges)
-* View the distribution of each variable using its histogram or barplot
-* Visualize a link between a couple of variables using scatter plots, box plots, etc.
+* visualize the links using a graph (the variables corresdond to the nodes and the links correspond to the edges)
+* show the distribution of each variable using its histogram or barplot
+* visualize a link between a couple of variables using scatter plots, box plots, etc.
 
 Available link coefficients are:
 
