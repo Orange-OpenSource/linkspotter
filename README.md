@@ -1,15 +1,3 @@
----
-title: "Linkspotter: User Guide of the R Package"
-author: "Alassane Samba - Orange Labs"
-date: "2017/05/23"
-output: html_document
-runtime: shiny
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 # Introduction
 
 Linkspotter is a package of R software that mainly allows to calculate and visualize using a graph all the bivariate links of a dataset.
@@ -33,10 +21,7 @@ Available link coefficients are:
 * [Kendall's tau](https://en.wikipedia.org/wiki/Kendall_rank_correlation_coefficient)
 * [the Maximal Information Coefficient (MIC)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3325791/)
 * [the distance correlation](https://en.wikipedia.org/wiki/Distance_correlation)
-* [the Maximal Normalized Mutual Information (MaxNMI)]()
-
-The MaxNMI a bivariate link measurement, which uses a supervised discretization called [Best Equal-Frequency Discretization (BeEF)](). Both are introduced by Linkspotter. Th interest of this new link measurement is that it enable to assess and compare the link between a couple of variables, whatever their types (quantitative vs qualitative, quantitative vs quantitative, qualitative vs qualitative).
-
+* the Maximal Normalized Mutual Information (MaxNMI)]
 
 # Installing and loading the package
 
