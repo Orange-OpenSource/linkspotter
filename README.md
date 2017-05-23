@@ -97,78 +97,6 @@ linkspotterGraph(corDF = corCouples, variablesClustering = cl, corMethod = "MaxN
 linkspotterUI(dataset = iris, corDF = corCouples, variablesClustering = cl, appTitle = "Linkspotter example")
 ```
 
-## User interface guide
-
-[Linskpotter UI example on 'iris' data](http://linkspotter.sigmant.net)
-
-### 'Graphs' tab
-
-#### The graph
-The variables corresdond to the nodes and their links correspond to the edges.
-Node color depends on the clustering. Edge color depends on the correlation direction quantitative couples (blue: positive correlatuion, red: negative correlation).
-
-#### First features
-
-* **Correlation coefficient** drop-down list : allows to choose the link coefficient to be visualized.
-* **Minimum Correlation** cursor: allows to define the minimum link measurement (from 0 to 1) threshold necessary to plot a edge.
-* **Interest variable** drop-down list: allows to choose a variable of interest. If a variable of interest is selected, a new cursor named **Minimum Correlation with interest variable** appears. It gives the possibility of defining a new minimum threshold of correlation specific to this variable of interest, in addition to the general threshold. The upper limit of this specific threshold is the global threshold.
-
-#### Checkboxes
-
-* **Highlight variable on click**: if checked, it is possible to focus on a node, by clicking on it or by selecting it from the drop-down list that appears.
-* **Variable Clustering**: If checked, the nodes are colored according to the group to which they belong. If it is not checked, all nodes are blue.
-* **Color Edges by correlation direction**: if checked, the edges are colored according to the direction of the correlation (blue for a positive correlation, red for a negative correlation and gray for **NA**) found between the two variables. The NA case corresponds to when at least one of the two variables is qualitative.
-* **Smooth edges**: if checked, edges are allowed to bend as needed. Otherwise, they remain straight.
-* **Dynamic nodes stabilization**: if checked, the graph is repositioned according to the graph stabilization algorithm after each movement by the user.
-* **Re-stabilize**: button that allows to re-stabilize the graph (centering and redistribution of the nodes on plane in "almost optimal" way)
-
-#### Displaying general information about the graph
-
-#### Click on a graph link
-
-It produces the following:
-
-##### Link summary figure (bottom right of the graph)
-
-Its type depends on the nature of the corresponding link:
-
-* Quantitative variable vs quantitative variable: a point cloud
-* Variable quantitative vs qualitative variable: a boxplot
-* Qualitative variable vs qualitative variable: not yet treated
-
-##### Link summary table (under general information)
-
-It displays all the measurements calculated for the link corresponding to the clicked edge. When at least one of the variables is qualitative, only the MaxNMI has a value.
-
-#### Click on a node of the graph
-
-It produces the following:
-
-##### A summary figure for the corresponding variable (bottom left of the graph)
-
-Its type depends on the nature of the corresponding variable:
-
-* Quantitative variable: a histogram
-* Qualitative variable: a bar graph
-
-##### A summary table for the corresponding variable (under general information)
-
-Its type depends on the nature of the variable:
-
-* Quantitative variable: a table containing the min, 1st quartile, median, mean, 3rd quartile and max of the variable.
-* Qualitative variable: a table containing the frequency of each modality of the variable.
-
-
-### 'Tables' tab
-
-This tab displays 2 tables:
-
-* A correlation matrix corresponding to the selected correlation coefficient
-* A table indicating the group which each variable is assigned to after by the clustering.
-
-The **Correlation coefficient** option allows you to choose the coefficient of correlation to be considered among those calculated initially.
-
-
 ## Additional features
 
 Complete Linkspotter computation:
@@ -199,6 +127,78 @@ Help:
 ```{r, echo=TRUE, eval=FALSE}
 help(linkspotterComplete)
 ```
+
+# User interface guide
+
+[Linskpotter UI example on 'iris' data](http://linkspotter.sigmant.net)
+
+## 'Graphs' tab
+
+### The graph
+The variables corresdond to the nodes and their links correspond to the edges.
+Node color depends on the clustering. Edge color depends on the correlation direction quantitative couples (blue: positive correlatuion, red: negative correlation).
+
+### First features
+
+* **Correlation coefficient** drop-down list : allows to choose the link coefficient to be visualized.
+* **Minimum Correlation** cursor: allows to define the minimum link measurement (from 0 to 1) threshold necessary to plot a edge.
+* **Interest variable** drop-down list: allows to choose a variable of interest. If a variable of interest is selected, a new cursor named **Minimum Correlation with interest variable** appears. It gives the possibility of defining a new minimum threshold of correlation specific to this variable of interest, in addition to the general threshold. The upper limit of this specific threshold is the global threshold.
+
+### Checkboxes
+
+* **Highlight variable on click**: if checked, it is possible to focus on a node, by clicking on it or by selecting it from the drop-down list that appears.
+* **Variable Clustering**: If checked, the nodes are colored according to the group to which they belong. If it is not checked, all nodes are blue.
+* **Color Edges by correlation direction**: if checked, the edges are colored according to the direction of the correlation (blue for a positive correlation, red for a negative correlation and gray for **NA**) found between the two variables. The NA case corresponds to when at least one of the two variables is qualitative.
+* **Smooth edges**: if checked, edges are allowed to bend as needed. Otherwise, they remain straight.
+* **Dynamic nodes stabilization**: if checked, the graph is repositioned according to the graph stabilization algorithm after each movement by the user.
+* **Re-stabilize**: button that allows to re-stabilize the graph (centering and redistribution of the nodes on plane in "almost optimal" way)
+
+### Displaying general information about the graph
+
+### Click on a graph link
+
+It produces the following:
+
+#### Link summary figure (bottom right of the graph)
+
+Its type depends on the nature of the corresponding link:
+
+* Quantitative variable vs quantitative variable: a point cloud
+* Variable quantitative vs qualitative variable: a boxplot
+* Qualitative variable vs qualitative variable: not yet treated
+
+#### Link summary table (under general information)
+
+It displays all the measurements calculated for the link corresponding to the clicked edge. When at least one of the variables is qualitative, only the MaxNMI has a value.
+
+### Click on a node of the graph
+
+It produces the following:
+
+#### A summary figure for the corresponding variable (bottom left of the graph)
+
+Its type depends on the nature of the corresponding variable:
+
+* Quantitative variable: a histogram
+* Qualitative variable: a bar graph
+
+#### A summary table for the corresponding variable (under general information)
+
+Its type depends on the nature of the variable:
+
+* Quantitative variable: a table containing the min, 1st quartile, median, mean, 3rd quartile and max of the variable.
+* Qualitative variable: a table containing the frequency of each modality of the variable.
+
+
+## 'Tables' tab
+
+This tab displays 2 tables:
+
+* A correlation matrix corresponding to the selected correlation coefficient
+* A table indicating the group which each variable is assigned to after by the clustering.
+
+The **Correlation coefficient** option allows you to choose the coefficient of correlation to be considered among those calculated initially.
+
 
 # Sources
 
