@@ -21,9 +21,9 @@ Available link coefficients are:
 * [Kendall's tau](https://en.wikipedia.org/wiki/Kendall_rank_correlation_coefficient)
 * [the Maximal Information Coefficient (MIC)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3325791/)
 * [the distance correlation](https://en.wikipedia.org/wiki/Distance_correlation)
-* the Maximal Normalized Mutual Information (MaxNMI)]
+* the Maximal Normalized Mutual Information (MaxNMI)
 
-# Installing and loading the package
+# Install and load the package
 
 ```{r, echo=TRUE, eval=FALSE}
 devtools::install_github("sambaala/linkspotter")
@@ -34,8 +34,6 @@ library(linkspotter)
 ```
 
 # Usage
-
-[Linskpotter UI example on 'iris' data](linskpotter.sigmant.net)
 
 First, take a look at the documentation:
 
@@ -98,6 +96,8 @@ linkspotterUI(dataset = iris, corDF = corCouples, variablesClustering = cl, appT
 ```
 
 ## User interface guide
+
+[Linskpotter UI example on 'iris' data](http://linskpotter.sigmant.net)
 
 ### 'Graphs' tab
 
