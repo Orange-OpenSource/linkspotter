@@ -1,6 +1,6 @@
 # Introduction
 
-Linkspotter is a package of R software that mainly allows to calculate and visualize using a graph all the bivariate links of a dataset.
+Linkspotter is a package of the R software that mainly allows to calculate and visualize using a graph all the bivariate links of a dataset.
 
 Its main features are:
 
