@@ -97,7 +97,7 @@ linkspotterUI(dataset = iris, corDF = corCouples, variablesClustering = cl, appT
 
 ## User interface guide
 
-[Linskpotter UI example on 'iris' data](http://linskpotter.sigmant.net)
+[Linskpotter UI example on 'iris' data](http://linkspotter.sigmant.net)
 
 ### 'Graphs' tab
 
