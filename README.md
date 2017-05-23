@@ -148,7 +148,7 @@ Node color depends on the clustering. Edge color depends on the correlation dire
 
 * **Highlight variable on click**: if checked, it is possible to focus on a node, by clicking on it or by selecting it from the drop-down list that appears.
 * **Variable Clustering**: If checked, the nodes are colored according to the group to which they belong. If it is not checked, all nodes are blue.
-* **Color Edges by correlation direction**: if checked, the edges are colored according to the direction of the correlation (blue for a positive correlation, red for a negative correlation and gray for **NA**) found between the two variables. The NA case corresponds to when at least one of the two variables is qualitative.
+* **Color Edges by correlation direction**: if checked, the edges are colored according to the direction of the correlation (blue for a positive correlation, red for a negative correlation and gray for NA) found between the two variables. The NA case corresponds to when at least one of the two variables is qualitative.
 * **Smooth edges**: if checked, edges are allowed to bend as needed. Otherwise, they remain straight.
 * **Dynamic nodes stabilization**: if checked, the graph is repositioned according to the graph stabilization algorithm after each movement by the user.
 * **Re-stabilize**: button that allows to re-stabilize the graph (centering and redistribution of the nodes on plane in "almost optimal" way)
