@@ -41,7 +41,7 @@ First, take a look at the documentation:
 help(package="linkspotter")
 ```
 
-Examples are carried out using "iris" data.
+The examples are carried out using "iris" data.
 
 ## Calculate the MaxNMI between two variables
 
