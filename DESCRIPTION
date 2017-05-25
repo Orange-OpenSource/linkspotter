@@ -1,7 +1,8 @@
 Package: linkspotter
 Type: Package
 Title: Comprehensive Dataset Bivariate Correlations Computation and Visualization Using Graphs
-Version: 1.1.5
+Version: 1.1.6
+Date: 2017-05-23
 Author: Alassane Samba
 Maintainer: Alassane Samba <alassane.samba@orange.com>
 Description: Compute and visualize using the visNetwork package all the bivariate correlations of a dataframe.
@@ -39,4 +40,5 @@ Collate:
   'multiBivariateCorrelation.R'
   'NormalizedMI.R'
   'uselessVar.R'
+  'createShinyAppFolder.R'
 RoxygenNote: 6.0.1

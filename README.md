@@ -153,7 +153,12 @@ Node color depends on the clustering. Edge color depends on the correlation dire
 * **Dynamic nodes stabilization**: if checked, the graph is repositioned according to the graph stabilization algorithm after each movement by the user.
 * **Re-stabilize**: button that allows to re-stabilize the graph (centering and redistribution of the nodes on plane in "almost optimal" way)
 
-### Displaying general information about the graph
+### General information
+
+* **nb. observations**: the number of entries in the dataset
+* **nb. variables**: the number of variables in the dataset
+* **nb. couples**: the number of couples
+* **nb. current edges**: the current number of edges plotted according to the chosen thresolds
 
 ### Click on a graph link
 

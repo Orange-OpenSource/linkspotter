@@ -15,6 +15,8 @@
 #' @param nbCluster an integer. It is the number of clusters to compute.
 #' @param printInfo a boolean indicating whether to print on the console some information about the dataset and the estimated computation time.
 #' @param appTitle a string taken as the title of the user interface.
+#' @param htmlTop a character string that enable to customize your shiny app by adding an HTML code in the HEAD tag.
+#' @param htmlBottom a character string that enable to customize your shiny app by adding an HTML code at the end of the BODY tag.
 #' @return a list containing all the material enabling to analyze correlations:
 #' \itemize{
 #'   \item{\code{computationTime}: a string}
@@ -42,13 +44,13 @@
 #' }
 #'
 #' @export
-linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendall","mic","MaxNMI"), defaultMinCor=0.3, defaultCorMethod=corMethods[length(corMethods)], clusteringCorMethod=defaultCorMethod, nbCluster=1:9, printInfo=T, appTitle="Linkspotter"){
+linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendall","mic","MaxNMI"), defaultMinCor=0.3, defaultCorMethod=corMethods[length(corMethods)], clusteringCorMethod=defaultCorMethod, nbCluster=1:9, printInfo=T, appTitle="Linkspotter", htmlTop="", htmlBottom=""){
   startTime<-Sys.time()
   p=ncol(dataset)
   nbCouples=((p*p)-p)/2
   nbObs=nrow(dataset)
-  unitDuration=0.050 # in seconds
-  durationEstim=nbObs/100*nbCouples*unitDuration
+  #unitDuration=0.050 # in seconds
+  #durationEstim=nbObs/100*nbCouples*unitDuration
 
   # puseless=length(uselessVar(dataset))
   # pempty=length(emptyVar(dataset))
@@ -63,7 +65,7 @@ linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendal
     print(paste(c("Number of variables: ", p), collapse=""))
     print(paste(c("Number of couples: ", nbCouples), collapse=""))
     print(paste(c("Number of observations: ", nbObs), collapse=""))
-    print(paste(c("Duration estimation: ",format(as.POSIXct(durationEstim, origin = "1970-01-01", tz = "UTC"), "%T")), collapse=""))
+    #print(paste(c("Duration estimation: ",format(as.POSIXct(durationEstim, origin = "1970-01-01", tz = "UTC"), "%T")), collapse=""))
     print(paste("Start time:",startTime))
   }
   #complete abbreviations
@@ -84,7 +86,7 @@ linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendal
   names(corMatrices)<-corMethods
   computationTime=format(round(endTime-startTime,3),nsmall = 3)
   #compute UI
-  run_it=linkspotterUI(dataset,corDF,corGroups, defaultMinCor = defaultMinCor, appTitle=appTitle)
+  run_it=linkspotterUI(dataset,corDF,corGroups, defaultMinCor = defaultMinCor, appTitle=appTitle, htmlTop=htmlTop, htmlBottom=htmlBottom)
   if(printInfo) print(paste(c("Total Computation time: ", computationTime),collapse=""))
   #finish
   return(list(computationTime=computationTime,run_it=run_it,dataset=dataset,corDF=corDF,corMatrices=corMatrices,corGroups=corGroups,clusteringCorMethod=clusteringCorMethod,defaultMinCor=defaultMinCor,defaultCorMethod=defaultCorMethod,corMethods=corMethods))

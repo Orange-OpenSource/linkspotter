@@ -2,13 +2,14 @@
 % Please edit documentation in R/linkspotterOnFile.R
 \name{linkspotterOnFile}
 \alias{linkspotterOnFile}
-\title{LinkspotterOnFile a function to load and proccess Linkspotter on a file}
+\title{Proccess Linkspotter on an external file}
 \usage{
 linkspotterOnFile(file, header, sep, quote, corMethods = c("pearson",
   "spearman", "kendall", "mic", "MaxNMI"), defaultMinCor = 0.3,
   defaultCorMethod = corMethods[length(corMethods)],
   clusteringCorMethod = corMethods[length(corMethods)], nbCluster = 1:9,
-  printInfo = T, appTitle = "Linkspotter", ...)
+  printInfo = T, appTitle = "Linkspotter", htmlTop = "",
+  htmlBottom = "", ...)
 }
 \arguments{
 \item{file}{the file containing a structured dataset which the bivariate correlations are to be analyzed.}
@@ -33,6 +34,10 @@ linkspotterOnFile(file, header, sep, quote, corMethods = c("pearson",
 
 \item{appTitle}{a string taken as the title of the user interface.}
 
+\item{htmlTop}{a character string that enable to customize your shiny app by adding an HTML code in the HEAD tag.}
+
+\item{htmlBottom}{a character string that enable to customize your shiny app by adding an HTML code at the end of the BODY tag.}
+
 \item{...}{Further arguments to be passed to the used read.table function.}
 }
 \value{
@@ -51,7 +56,7 @@ a list containing all the material enabling to analyze correlations:
 }
 }
 \description{
-Computation of correlation matrices, variable clustering and the customizable user inferface to visualize them using a graph together with variables distributions and cross plots.
+This function imports an external dataset, computates its correlation matrices, variable clustering and the customizable user inferface to visualize them using a graph.
 }
 \examples{
 \dontrun{

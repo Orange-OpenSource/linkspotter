@@ -8,7 +8,7 @@ linkspotterComplete(dataset, corMethods = c("pearson", "spearman", "kendall",
   "mic", "MaxNMI"), defaultMinCor = 0.3,
   defaultCorMethod = corMethods[length(corMethods)],
   clusteringCorMethod = defaultCorMethod, nbCluster = 1:9, printInfo = T,
-  appTitle = "Linkspotter")
+  appTitle = "Linkspotter", htmlTop = "", htmlBottom = "")
 }
 \arguments{
 \item{dataset}{the dataframe which variables bivariate correlations are to be analyzed.}
@@ -26,6 +26,10 @@ linkspotterComplete(dataset, corMethods = c("pearson", "spearman", "kendall",
 \item{printInfo}{a boolean indicating whether to print on the console some information about the dataset and the estimated computation time.}
 
 \item{appTitle}{a string taken as the title of the user interface.}
+
+\item{htmlTop}{a character string that enable to customize your shiny app by adding an HTML code in the HEAD tag.}
+
+\item{htmlBottom}{a character string that enable to customize your shiny app by adding an HTML code at the end of the BODY tag.}
 }
 \value{
 a list containing all the material enabling to analyze correlations:

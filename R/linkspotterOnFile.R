@@ -5,8 +5,8 @@
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
 #
-#' @title LinkspotterOnFile a function to load and proccess Linkspotter on a file
-#' @description  Computation of correlation matrices, variable clustering and the customizable user inferface to visualize them using a graph together with variables distributions and cross plots.
+#' @title Proccess Linkspotter on an external file
+#' @description  This function imports an external dataset, computates its correlation matrices, variable clustering and the customizable user inferface to visualize them using a graph.
 #'
 #' @param file the file containing a structured dataset which the bivariate correlations are to be analyzed.
 #' @param header a boolean.TRUE if the file contains a header (similar to read.table)
@@ -19,6 +19,8 @@
 #' @param nbCluster an integer. It is the number of clusters to compute.
 #' @param printInfo a boolean indicating whether to print on the console some information about the dataset and the estimated computation time.
 #' @param appTitle a string taken as the title of the user interface.
+#' @param htmlTop a character string that enable to customize your shiny app by adding an HTML code in the HEAD tag.
+#' @param htmlBottom a character string that enable to customize your shiny app by adding an HTML code at the end of the BODY tag.
 #' @param ...	Further arguments to be passed to the used read.table function.
 #' @return a list containing all the material enabling to analyze correlations:
 #' \itemize{
@@ -49,7 +51,7 @@
 #' @export
 #'
 #' @import utils
-linkspotterOnFile<-function(file, header, sep, quote, corMethods=c("pearson","spearman","kendall","mic","MaxNMI"), defaultMinCor=0.3, defaultCorMethod=corMethods[length(corMethods)], clusteringCorMethod=corMethods[length(corMethods)], nbCluster=1:9, printInfo=T, appTitle="Linkspotter", ...){
+linkspotterOnFile<-function(file, header, sep, quote, corMethods=c("pearson","spearman","kendall","mic","MaxNMI"), defaultMinCor=0.3, defaultCorMethod=corMethods[length(corMethods)], clusteringCorMethod=corMethods[length(corMethods)], nbCluster=1:9, printInfo=T, appTitle="Linkspotter", htmlTop="", htmlBottom="", ...){
   # commodity
   if (is.null(file))
     return(NULL)
@@ -63,6 +65,6 @@ linkspotterOnFile<-function(file, header, sep, quote, corMethods=c("pearson","sp
     }
   }
   # linskpotter complete
-  lsc=linkspotterComplete(data, corMethods=corMethods, defaultMinCor=defaultMinCor, defaultCorMethod=defaultCorMethod, clusteringCorMethod=clusteringCorMethod, nbCluster=nbCluster, appTitle=appTitle, printInfo=F)
+  lsc=linkspotterComplete(data, corMethods=corMethods, defaultMinCor=defaultMinCor, defaultCorMethod=defaultCorMethod, clusteringCorMethod=clusteringCorMethod, nbCluster=nbCluster, appTitle=appTitle, printInfo=printInfo, htmlTop=htmlTop, htmlBottom=htmlBottom)
   return(lsc)
 }

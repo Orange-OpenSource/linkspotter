@@ -11,7 +11,9 @@
 #' @param corDF a specific dataframe containing correlations values resulting from the function multiBivariateCorrelation()
 #' @param variablesClustering a specific dataframe containing the output of the variable clustering resulting from the function clusterVariables()
 #' @param defaultMinCor a double between 0 and 1. It is the minimal correlation absolute value to consider for the first graph plot.
-#' @param appTitle a string taken as the title of the user interface.
+#' @param appTitle a character string taken as the title of the user interface.
+#' @param htmlTop a character string that enable to customize your shiny app by adding an HTML code in the HEAD tag.
+#' @param htmlBottom a character string that enable to customize your shiny app by adding an HTML code at the end of the BODY tag.
 #' @return a shiny.appobj object enable to deploy instantly the user interface for a customizable visualization.
 #'
 #' @examples
@@ -38,7 +40,7 @@
 #' @import visNetwork
 #' @import rAmCharts
 #' @import utils
-linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=0.3, appTitle="Linkspotter"){
+linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=0.3, appTitle="Linkspotter", htmlTop="", htmlBottom=""){
 
   # small formats and checks
   dataset=data.frame(droplevels.data.frame(dataset))
@@ -338,7 +340,7 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
 
   # shiny ui
   ui <- fluidPage(
-    #titlePanel(appTitle),
+    tags$head(HTML(htmlTop)),
     navbarPage(title = appTitle,
                tabPanel("Graphs",
                         sidebarLayout(
@@ -406,14 +408,9 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
                )
     ),
     fluidRow(align="center",
-             tags$small(paste(c(
-               "LinkSpotter",
-               "Author : Alassane Samba (alassane.samba@orange.com)",
-               "Copyright 2017"),
-               #"uses infotheo, minerva, mclust, energy, Hmisc, shiny, visNetwork, rAmCharts. "),
-               collapse=" - ")
-             )
-    )
+             tags$small("Linkspotter (c) 2017 Alassane Samba Orange Labs")
+    ),
+    tags$head(HTML(htmlBottom))
   )
 
   shinyApp(ui = ui, server = server)

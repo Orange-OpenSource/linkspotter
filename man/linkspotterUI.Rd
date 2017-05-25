@@ -5,7 +5,8 @@
 \title{Linspotter user interface runner}
 \usage{
 linkspotterUI(dataset, corDF, variablesClustering = NULL,
-  defaultMinCor = 0.3, appTitle = "Linkspotter")
+  defaultMinCor = 0.3, appTitle = "Linkspotter", htmlTop = "",
+  htmlBottom = "")
 }
 \arguments{
 \item{dataset}{the dataframe which variables bivariate correlations are contained in corDF}
@@ -16,7 +17,11 @@ linkspotterUI(dataset, corDF, variablesClustering = NULL,
 
 \item{defaultMinCor}{a double between 0 and 1. It is the minimal correlation absolute value to consider for the first graph plot.}
 
-\item{appTitle}{a string taken as the title of the user interface.}
+\item{appTitle}{a character string taken as the title of the user interface.}
+
+\item{htmlTop}{a character string that enable to customize your shiny app by adding an HTML code in the HEAD tag.}
+
+\item{htmlBottom}{a character string that enable to customize your shiny app by adding an HTML code at the end of the BODY tag.}
 }
 \value{
 a shiny.appobj object enable to deploy instantly the user interface for a customizable visualization.
