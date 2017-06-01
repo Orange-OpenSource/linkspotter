@@ -18,7 +18,7 @@ createShinyAppFolder<-function(linkspotterShinyAppObject, folderName){
   outputFileName=file.path(file.path(folderName, 'src'),"linkspotterShinyAppObject.rdata")
   save(linkspotterShinyAppObject,file = outputFileName)
   write("####################################################",file = file.path(folderName,"app.r"))
-  write("### ShinyApp from Linkspotter ShinyObject Output ###",file = file.path(folderName,"app.r"),append = T)
+  write("######### ShinyApp from Linkspotter Output #########",file = file.path(folderName,"app.r"),append = T)
   write("### Copyright 2017 Alassane Samba - Orange Labs ####",file = file.path(folderName,"app.r"),append = T)
   write("####################################################",file = file.path(folderName,"app.r"),append = T)
   write("load('./src/linkspotterShinyAppObject.rdata')",file = file.path(folderName,"app.r"),append = T)

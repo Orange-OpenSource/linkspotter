@@ -21,7 +21,7 @@ Available link coefficients are:
 * [Kendall's tau](https://en.wikipedia.org/wiki/Kendall_rank_correlation_coefficient)
 * [the Maximal Information Coefficient (MIC)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3325791/)
 * [the distance correlation](https://en.wikipedia.org/wiki/Distance_correlation)
-* the Maximal Normalized Mutual Information (MaxNMI)
+* [the Maximal Normalized Mutual Information (MaxNMI)](https://en.wikipedia.org/wiki/Mutual_information)
 
 # Install and load the package
 
@@ -130,7 +130,7 @@ help(linkspotterComplete)
 
 # User interface guide
 
-[Linskpotter UI example on 'iris' data](http://linkspotter.sigmant.net)
+[Linskpotter UI example on 'iris' data](http://linkspotteririsexample.sigmant.net)
 
 ## 'Graphs' tab
 

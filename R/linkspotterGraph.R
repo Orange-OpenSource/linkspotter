@@ -41,10 +41,10 @@ linkspotterGraph<-function(corDF, variablesClustering=NULL, minCor=0.3, corMetho
 
   # format nodes
   if(!is.null(variablesClustering)){
-    nodes_raw=data.frame(variablesClustering,label=variablesClustering[,1])
-    colnames(nodes_raw)<-c("id","group","label")
+    nodes_raw=data.frame(variablesClustering,label=variablesClustering[,1],title=variablesClustering[,1])
+    colnames(nodes_raw)<-c("id","group","label","title")
   }else{
-    nodes_raw=data.frame(id=unique(c(as.character(edges_raw$from),as.character(edges_raw$to))),label=unique(c(as.character(edges_raw$from),as.character(edges_raw$to))))
+    nodes_raw=data.frame(id=unique(c(as.character(edges_raw$from),as.character(edges_raw$to))),label=unique(c(as.character(edges_raw$from),as.character(edges_raw$to))), title=unique(c(as.character(edges_raw$from),as.character(edges_raw$to))))
   }
 
   # take options into account
@@ -56,7 +56,7 @@ linkspotterGraph<-function(corDF, variablesClustering=NULL, minCor=0.3, corMetho
   corMethod=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")[pmatch(tolower(corMethod),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")))]
 
   ## apply floating parameters
-  edges=data.frame(edges,value=abs(edges[,corMethod]))
+  edges=data.frame(edges,value=abs(edges[,corMethod]), title=unlist(lapply(edges[,corMethod], function(x){paste(c(corMethod, ': ', format(round(x, digits = 2), nsmall = 2)),collapse="")})))
   edges=edges[!is.na(edges$value)&edges$value>=minCor,]
 
   #plot

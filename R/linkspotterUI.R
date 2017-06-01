@@ -59,10 +59,10 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
 
     # format nodes
     if(!is.null(variablesClustering)){
-      nodes_raw=data.frame(variablesClustering,label=variablesClustering[,1])
-      colnames(nodes_raw)<-c("id","group","label")
+      nodes_raw=data.frame(variablesClustering,label=variablesClustering[,1],title=variablesClustering[,1])
+      colnames(nodes_raw)<-c("id","group","label","title")
     }else{
-      nodes_raw=data.frame(id=unique(c(as.character(edges_raw$from),as.character(edges_raw$to))),label=unique(c(as.character(edges_raw$from),as.character(edges_raw$to))))
+      nodes_raw=data.frame(id=unique(c(as.character(edges_raw$from),as.character(edges_raw$to))),label=unique(c(as.character(edges_raw$from),as.character(edges_raw$to))),title=unique(c(as.character(edges_raw$from),as.character(edges_raw$to))))
     }
 
     # create network plot
@@ -73,7 +73,7 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
       nodes=nodes_raw
 
       # apply initial parameters
-      edges=data.frame(edges,value=abs(edges[,defaultCorMethod]))
+      edges=data.frame(edges,value=abs(edges[,defaultCorMethod]),title=unlist(lapply(edges[,defaultCorMethod], function(x){paste(c(defaultCorMethod, ': ', format(round(x, digits = 2), nsmall = 2)),collapse="")})))
       edges=edges[!is.na(edges$value)&edges$value>=defaultMinCor,]
 
       #plot
@@ -93,7 +93,7 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
     observe({
 
       # minCor
-      edges=data.frame(edges_raw,value=abs(edges_raw[,input$selectCorMethod]))
+      edges=data.frame(edges_raw,value=abs(edges_raw[,input$selectCorMethod]),title=unlist(lapply(edges_raw[,input$selectCorMethod], function(x){paste(c(input$selectCorMethod, ': ', format(round(x, digits = 2), nsmall = 2)),collapse="")})))
       edges=edges[edges$value>=input$minCor,]
 
       # smoothEdges
@@ -102,7 +102,7 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
 
       # interestVarMinCor
       if(!input$selectInterestVar%in%"(NONE)"){
-        edges2=data.frame(edges_raw,value=abs(edges_raw[,input$selectCorMethod]))
+        edges2=data.frame(edges_raw,value=abs(edges_raw[,input$selectCorMethod]),title=unlist(lapply(edges_raw[,input$selectCorMethod], function(x){paste(c(input$selectCorMethod, ': ', format(round(x, digits = 2), nsmall = 2)),collapse="")})))
         edges2=edges2[edges2$from%in%c(input$selectInterestVar)|edges2$to%in%c(input$selectInterestVar),]
         edges2=edges2[edges2$value>=input$interestVarMinCor,]
         edges=rbind(edges,edges2)
