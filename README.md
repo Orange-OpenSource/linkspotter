@@ -23,19 +23,32 @@ Available link coefficients are:
 * [the distance correlation](https://en.wikipedia.org/wiki/Distance_correlation)
 * [the Maximal Normalized Mutual Information (MaxNMI)](https://en.wikipedia.org/wiki/Mutual_information)
 
-# Install and load the package
+# Installation
 
 ```{r, echo=TRUE, eval=FALSE}
-devtools::install_github("sambaala/linkspotter")
+library(devtools)
+install_github("sambaala/linkspotter")
 ```
+Behind a proxy:
+
+```{r, echo=TRUE, eval=FALSE}
+library(devtools)
+library(httr)
+set_config(
+  use_proxy(url="<my_proxy>", port=<my_proxy_port>)
+)
+install_github("sambaala/linkspotter")
+```
+
+# Usage
+
+Load the package:
 
 ```{r, echo=TRUE}
 library(linkspotter)
 ```
 
-# Usage
-
-First, take a look at the documentation:
+Take a look at the documentation:
 
 ```{r, echo=TRUE, eval=FALSE}
 help(package="linkspotter")
