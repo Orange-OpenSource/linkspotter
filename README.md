@@ -65,7 +65,7 @@ maxNMI(iris$Sepal.Length,iris$Petal.Length)
 ## Calculate all link coefficients for all variable couples
 
 ```{r, echo=TRUE}
-corCouples=multiBivariateCorrelation(iris)
+corCouples<-multiBivariateCorrelation(iris)
 print(corCouples)
 ```
 
@@ -74,21 +74,21 @@ print(corCouples)
 The Pearson correlation matrix:
 
 ```{r, echo=TRUE}
-corMatrixPearson=corCouplesToMatrix(x1_x2_val = corCouples[,c('X1','X2',"pearson")])
+corMatrixPearson<-corCouplesToMatrix(x1_x2_val = corCouples[,c('X1','X2',"pearson")])
 print(corMatrixPearson)
 ```
 
 The MaxNMI matrix:
 
 ```{r, echo=TRUE}
-corMatrixMaxNMI=corCouplesToMatrix(x1_x2_val = corCouples[,c('X1','X2',"MaxNMI")])
+corMatrixMaxNMI<-corCouplesToMatrix(x1_x2_val = corCouples[,c('X1','X2',"MaxNMI")])
 print(corMatrixMaxNMI)
 ```
 
 ## Clustering of variables using a correlation matrix
 
 ```{r, echo=TRUE}
-cl=clusterVariables(correlationMatrix = corMatrixMaxNMI)
+cl<-clusterVariables(correlationMatrix = corMatrixMaxNMI)
 print(cl)
 ```
 
@@ -115,13 +115,13 @@ linkspotterUI(dataset = iris, corDF = corCouples, variablesClustering = cl, appT
 Complete Linkspotter computation:
 
 ```{r, echo=TRUE}
-lsiris=linkspotterComplete(iris)
+lsiris<-linkspotterComplete(iris)
 ```
 
 Complete Linkspotter computation from an external file:
 
 ```{r, echo=TRUE, eval=FALSE}
-lsiris=linkspotterOnFile("iris.csv")
+lsiris<-linkspotterOnFile("iris.csv")
 summary(lsiris)
 ```
 
