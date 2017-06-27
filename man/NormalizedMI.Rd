@@ -28,6 +28,4 @@ NormalizedMI(iris$Species,iris$Species)
 
 }
 
-#@export
-
 }
