@@ -95,19 +95,24 @@ print(cl)
 ## Visualize the graph using Pearson correlation
 
 ```{r, echo=TRUE}
-linkspotterGraph(corDF = corCouples, variablesClustering = cl, corMethod = "pearson", minCor = 0.25, smoothEdges = FALSE, dynamicNodes = FALSE)
+linkspotterGraph(corDF = corCouples, variablesClustering = cl, 
+  corMethod = "pearson", minCor = 0.25, smoothEdges = FALSE, 
+  dynamicNodes = FALSE)
 ```
 
 ## Visualize the graph using MaxNMI
 
 ```{r, echo=TRUE}
-linkspotterGraph(corDF = corCouples, variablesClustering = cl, corMethod = "MaxNMI", minCor = 0.25, smoothEdges = F, dynamicNodes = TRUE)
+linkspotterGraph(corDF = corCouples, variablesClustering = cl, 
+  corMethod = "MaxNMI", minCor = 0.25, smoothEdges = F, 
+  dynamicNodes = TRUE)
 ```
 
 ## Launch the costumizable user interface
 
 ```{r, echo=TRUE, eval=FALSE}
-linkspotterUI(dataset = iris, corDF = corCouples, variablesClustering = cl, appTitle = "Linkspotter example")
+linkspotterUI(dataset = iris, corDF = corCouples, 
+  variablesClustering = cl, appTitle = "Linkspotter example")
 ```
 
 ## Additional features
