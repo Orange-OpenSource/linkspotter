@@ -40,6 +40,7 @@
 #' @import visNetwork
 #' @import rAmCharts
 #' @import utils
+#' @import ggplot2
 linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=0.3, appTitle="Linkspotter", htmlTop="", htmlBottom=""){
 
   # small formats and checks
@@ -254,6 +255,15 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
           boostedBoxplot(y=as.numeric(dataset[,variab1]),x=as.factor(dataset[,variab2]), laby = variab1, labx=variab2, main=paste(paste(variab1,"vs"),variab2))
         }else if((edges$typeOfCouple[edges$id%in%c(edgeid)])%in%c("fact.num")){
           plot(as.numeric(dataset[,variab2])~as.factor(dataset[,variab1]), ylab = variab2, xlab=variab1, main=paste(paste(variab1,"vs"),variab2))
+        }else if((edges$typeOfCouple[edges$id%in%c(edgeid)])%in%c("fact.fact")){
+          ggplot(as.data.frame(table(x=dataset[,variab1],y=dataset[,variab2])), aes(x, y)) +
+            geom_tile(aes(fill = Freq)) +
+            geom_text(aes(label = Freq), color="white") +
+            scale_x_discrete(expand = c(0,0)) +
+            scale_y_discrete(expand = c(0,0)) +
+            scale_fill_gradient("Freq", low = "lightblue", high = "blue") +
+            theme_bw() +
+            labs(x = variab1, y = variab2)
         }
       }
     })

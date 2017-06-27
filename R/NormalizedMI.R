@@ -21,7 +21,7 @@
 #'
 #' }
 #'
-#' #@export
+#' @export
 #'
 #' @import infotheo
 #' @import stats

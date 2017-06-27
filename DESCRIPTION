@@ -23,7 +23,8 @@ Imports:
     energy,
     mclust,
     rAmCharts,
-    Hmisc
+    Hmisc,
+    ggplot2
 Collate:
   'linkspotterComplete.R'
   'boostedBoxplot.R'
