@@ -256,9 +256,9 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
         }else if((edges$typeOfCouple[edges$id%in%c(edgeid)])%in%c("fact.num")){
           plot(as.numeric(dataset[,variab2])~as.factor(dataset[,variab1]), ylab = variab2, xlab=variab1, main=paste(paste(variab1,"vs"),variab2))
         }else if((edges$typeOfCouple[edges$id%in%c(edgeid)])%in%c("fact.fact")){
-          ggplot(as.data.frame(table(x=dataset[,variab1],y=dataset[,variab2])), aes(x, y)) +
-            geom_tile(aes(fill = Freq)) +
-            geom_text(aes(label = Freq), color="white") +
+          ggplot(as.data.frame(table(x=dataset[,variab1],y=dataset[,variab2])), aes_string('x', 'y')) +
+            geom_tile(aes_string(fill = 'Freq')) +
+            geom_text(aes_string(label = 'Freq'), color="white") +
             scale_x_discrete(expand = c(0,0)) +
             scale_y_discrete(expand = c(0,0)) +
             scale_fill_gradient("Freq", low = "lightblue", high = "blue") +

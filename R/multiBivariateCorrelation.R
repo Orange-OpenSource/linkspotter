@@ -9,6 +9,7 @@
 #'
 #' @param dataset the dataframe which variables bivariate correlations are to be analyzed.
 #' @param corMethods a vector of correlation coefficients to compute. The available coefficients are the following : \code{c("pearson","spearman","kendall","mic","distCor","MaxNMI")}. It is not case sensitive and still work if only the beginning of the word is put (e.g. \code{pears}).
+#' @param showProgress a boolean to decide whether to show the progress bar.
 #' @return a specific dataframe containing correlations values or each specified correlation coefficient.
 #'
 #' @examples
@@ -27,7 +28,17 @@
 #' @import energy
 #' @import stats
 #' @import utils
-multiBivariateCorrelation<-function(dataset, corMethods=c("pearson","spearman","kendall","mic","MaxNMI")){
+#' @import pbapply
+multiBivariateCorrelation<-function(dataset, corMethods=c("pearson","spearman","kendall","mic","MaxNMI"), showProgress=T){
+
+  #progress bar
+  if(!showProgress){
+    pbo <- pboptions(type = "none")
+    on.exit(pboptions(pbo), add = TRUE)
+  }else{
+    pbo <- pboptions(type = "timer")
+    on.exit(pboptions(pbo), add = TRUE)
+  }
 
   # small formats
   dataset=droplevels.data.frame(data.frame(dataset))
@@ -50,7 +61,7 @@ multiBivariateCorrelation<-function(dataset, corMethods=c("pearson","spearman","
   uninterestingVariables=c(uselessVar(dataset),emptyVar(dataset))
 
   # compute correlations according to type of couples
-  corrs=t(apply(dfcmb,1,function(x){
+  corrs=t(pbapply::pbapply(dfcmb,1,function(x){
     if(as.character(x[1])%in%uninterestingVariables|as.character(x[2])%in%uninterestingVariables){ #so put NA for all corMethods
       cors=c()
       if("pearson"%in%corMethods){pearson=NA; cors=c(cors,pearson=pearson)}

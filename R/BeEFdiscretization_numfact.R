@@ -10,6 +10,7 @@
 #' @param continuousY a vector of numeric.
 #' @param factorX a vector of factor.
 #' @param includeFactorNA a boolean. TRUE to include NA value as a factor level.
+#' @param showProgress a boolean to decide whether to show the progress bar.
 #' @return a double between 0 and 1 corresponding to the MaxNMI.
 #'
 #' @examples
@@ -25,7 +26,16 @@
 #'
 #' @importFrom Hmisc cut2
 #' @import stats
-BeEFdiscretization.numfact<-function(continuousY,factorX, includeFactorNA=T){
+BeEFdiscretization.numfact<-function(continuousY,factorX, includeFactorNA=T, showProgress=F){
+
+  #progress bar
+  if(!showProgress){
+    pbo <- pboptions(type = "none")
+    on.exit(pboptions(pbo), add = TRUE)
+  }else{
+    pbo <- pboptions(type = "timer")
+    on.exit(pboptions(pbo), add = TRUE)
+  }
 
   #if includeFactorNA
   if(includeFactorNA&(sum(is.na(factorX))>0)){

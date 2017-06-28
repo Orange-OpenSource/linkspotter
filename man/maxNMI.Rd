@@ -4,12 +4,16 @@
 \alias{maxNMI}
 \title{Maximal Normalized Mutual Information (MaxNMI)}
 \usage{
-maxNMI(x, y)
+maxNMI(x, y, maxNbBins = 100, showProgress = F)
 }
 \arguments{
 \item{x}{a vector of numeric or factor.}
 
 \item{y}{a vector of numeric or factor.}
+
+\item{maxNbBins}{an integer corresponding to the number of bin limitation (for computation time limitation), maxNbBins=100 by default.}
+
+\item{showProgress}{a boolean to decide whether to show the progress bar.}
 }
 \value{
 a double between 0 and 1 corresponding to the MaxNMI.

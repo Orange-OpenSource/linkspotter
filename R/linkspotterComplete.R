@@ -73,7 +73,7 @@ linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendal
   defaultCorMethod=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")[pmatch(tolower(defaultCorMethod),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")))]
   clusteringCorMethod=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")[pmatch(tolower(clusteringCorMethod),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")))]
   #compute corDF
-  corDF=multiBivariateCorrelation(dataset = dataset, corMethods = corMethods)
+  corDF=multiBivariateCorrelation(dataset = dataset, corMethods = corMethods, showProgress=printInfo)
   if(printInfo) print(paste("Correlations computation finished:",Sys.time()))
   #corr matrix for clustering
   corMatrix=corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',clusteringCorMethod)])# prefer MaxNMI or distCor for the clustering because they hilights different types of correlation (not only linear and monotonic ones) and because prefer MaxNMI because it is always available/computable (whatever the type of variable)
