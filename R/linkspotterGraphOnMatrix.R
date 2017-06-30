@@ -34,6 +34,8 @@
 #'
 #' @import visNetwork
 linkspotterGraphOnMatrix<-function(corMatrix, cluster=F, nbCluster=1:9, variablesClustering=NULL, minCor=0.3, corMethod="Coef", smoothEdges=T, dynamicNodes=T, colorEdgesByCorDirection=T){
+  corMatrix<-as.data.frame(corMatrix)
+
   # format edges
   edges_raw=matrixToCorCouples(corMatrix,corMethod)
   colnames(edges_raw)[1:2]<-c("from","to")
