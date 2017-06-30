@@ -25,7 +25,9 @@ Imports:
     rAmCharts,
     Hmisc,
     ggplot2,
-    pbapply
+    pbapply,
+    dplyr,
+    tidyr
 Collate:
   'linkspotterComplete.R'
   'boostedBoxplot.R'
@@ -33,9 +35,11 @@ Collate:
   'emptyVar.R'
   'linkspotterDurationEstimator.R'
   'linkspotterGraph.R'
+  'linkspotterGraphOnMatrix.R'
   'linkspotterOnFile.R'
   'linkspotterUI.R'
   'corCouplesToMatrix.R'
+  'matrixToCorCouples.R'
   'maxNMI.R'
   'BeEFdiscretization_numfact.R'
   'BeEFdiscretization_numnum.R'

@@ -5,7 +5,7 @@
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
 #
-#' @title Transform a correlation dataframe into a correlation matrix
+#' @title Couples to matrix
 #' @description  Transform a 2 column correlation dataframe into a correlation matrix
 #'
 #' @param x1_x2_val a specific dataframe containing correlations values resulting from the function multiBivariateCorrelation() and containing only one coeffecient type.
@@ -16,9 +16,11 @@
 #'
 #' # calculate a correlation dataframe
 #' data(iris)
-#' corDF=multiBivariateCorrelation(mixedData = iris, corMethods = "MaxNMI")
-#' corMatrix=corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',"MaxNMI")])
+#' corDF<-multiBivariateCorrelation(mixedData = iris, corMethods = "MaxNMI")
+#' corMatrix<-corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',"MaxNMI")])
 #' print(corMatrix)
+#' corCouples<-matrixToCOrCouples(corMatrix,coefName="pearson")
+#' print(corCouples)
 #' }
 #'
 #' @export
@@ -38,3 +40,12 @@ corCouplesToMatrix<-function(x1_x2_val){
   complete_x1_x2_val$val<-as.numeric(as.character(complete_x1_x2_val$val))
   as.data.frame.matrix(with(complete_x1_x2_val[,c('x1','x2')], tapply(complete_x1_x2_val[,'val'], list(x1,x2), sum )))
 }
+# corCouplesToMatrix<-function(corCouples){
+#   cnames=colnames(corCouples)
+#   cc_1<-cc %>% transmute_(X1=as.character(cnames[1]),X2=as.character(cnames[2]),coef=cnames[3])
+#   cc_2<-cc %>% mutate_(temp='X1') %>% transmute_(X1='X2',X2='temp',coef=cnames[3])
+#   vars<-cc_1 %>% bind_rows(cc_2) %>% select_('X1') %>% distinct()
+#   filling<-vars %>% mutate_('X2'='X1',coef=rep(1,nrow(vars)))
+#   ccc<-cc_1 %>% bind_rows(cc_2, filling) %>% spread(key = "X2",value = "coef")
+#   ccc %>% 'row.names<-'(ccc$X1) %>% select(-1)
+# } # quelques warnings
