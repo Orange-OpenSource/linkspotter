@@ -28,6 +28,7 @@
 #' @import tidyr
 #' @export
 matrixToCorCouples<-function(matrix,coefName){
+  matrix<-as.data.frame(matrix)
   vars<-rownames(matrix)
   resfull<-matrix %>% mutate_(X1=quote(vars)) %>% gather_(key = 'X2', value = coefName,select_vars_(names(.),names(.),exclude="X1"))
   resfull[paste0(resfull$X1,resfull$X2)%in%apply(combn(vars,m = 2),2,paste,collapse=""),]
