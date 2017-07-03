@@ -24,9 +24,10 @@
 #' print(corGroups)
 #' }
 #'
+#' @importFrom mclust Mclust mclustBIC
+#'
 #' @export
 #'
-#' @importFrom mclust Mclust mclustBIC
 clusterVariables<-function(correlationMatrix, nbCluster=1:9){
 
   # as NAs are not supported

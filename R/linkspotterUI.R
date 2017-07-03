@@ -34,13 +34,15 @@
 #'
 #' }
 #'
-#' @export
-#'
 #' @import shiny
 #' @import visNetwork
 #' @import rAmCharts
-#' @import utils
 #' @import ggplot2
+#' @importFrom utils capture.output head
+#' @importFrom stats na.omit
+#'
+#' @export
+#'
 linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=0.3, appTitle="Linkspotter", htmlTop="", htmlBottom=""){
 
   # small formats and checks
@@ -148,7 +150,7 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
 
       #show number of edges
       output$shiny_text_currentNbLinks<-renderText({
-        paste0("nb. current edges: ",length(na.omit(edges$value)))
+        paste0("nb. current edges: ",length(stats::na.omit(edges$value)))
       })
 
       # plot network
@@ -206,7 +208,7 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
         resume=data.frame(unclass(summary(dataset[,variab],10)),check.names = FALSE, stringsAsFactors = FALSE)
         #resume=data.frame(rownames(resume),resume[,1])
         colnames(resume)=""
-        resume_string <- paste(c(paste("Node:",variab),capture.output(print.data.frame(resume,col.names=F,right=T,quote = F))), "\n", sep="")
+        resume_string <- paste(c(paste("Node:",variab),utils::capture.output(print.data.frame(resume,col.names=F,right=T,quote = F))), "\n", sep="")
         paste(resume_string,collapse='')
       }
     })
@@ -220,7 +222,7 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
         edge[,unlist(lapply(edge,is.numeric))]<-lapply(edge[,unlist(lapply(edge,is.numeric))], function(x){format(round(x, digits = 2),nsmall = 2)})
         edge=data.frame(t(edge))
         colnames(edge)<-""
-        edge_strings <- paste(c("Edge:",capture.output(print.data.frame(edge,col.names=F,right=T,quote = F))), "\n", sep="")
+        edge_strings <- paste(c("Edge:",utils::capture.output(print.data.frame(edge,col.names=F,right=T,quote = F))), "\n", sep="")
         paste(edge_strings,collapse='')
       }
     })
@@ -233,7 +235,7 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
           amHist(x = as.numeric(dataset[,variab]), xlab = variab) %>%
             amOptions(export = TRUE)
         }else{
-          tab=data.frame(Var1=as.vector(head(names(sort(table(dataset[,variab]),decreasing = T)),n=20)),Freq=as.vector(head(sort(table(dataset[,variab]),decreasing = T),n=20)))#plot at max the 20 most frequent categories
+          tab=data.frame(Var1=as.vector(utils::head(names(sort(table(dataset[,variab]),decreasing = T)),n=20)),Freq=as.vector(utils::head(sort(table(dataset[,variab]),decreasing = T),n=20)))#plot at max the 20 most frequent categories
           tab=data.frame(tab, description=apply(tab,1,paste,collapse=": "))
           amBarplot(x = "Var1", y = "Freq", data = tab, xlab = variab, ylab='Frequency', labelRotation = -45, depth = 15) %>%
             amOptions(export = TRUE, main = variab)

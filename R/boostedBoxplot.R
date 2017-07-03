@@ -5,9 +5,9 @@
 # Copyright (c) 2017 Orange
 # ---------------------------------------------------------------------------------
 ## Boosted Boxplot : add useful features to R boxplot function
-#' @import stats
-#' @import graphics
-#' @import rAmCharts
+#' @importFrom stats sd median
+#' @importFrom graphics boxplot points arrows text grid
+#' @importFrom rAmCharts amBoxplot
 boostedBoxplot<-function(y,x, main="", labx=NULL,laby=NULL, plot.mean=T, text.freq=T, las=1, ylim=c(0,0), limitVisibleModalities=30, decreasing=NULL, dynamic=F){
 
   xlab=""
@@ -21,7 +21,7 @@ boostedBoxplot<-function(y,x, main="", labx=NULL,laby=NULL, plot.mean=T, text.fr
   x=droplevels(as.factor(x))
   p=length(levels(as.factor(x)))
   if(!is.null(decreasing)){
-    x=factor(x,levels = names(sort(tapply(y,x,median), decreasing = decreasing)), ordered = F)
+    x=factor(x,levels = names(sort(tapply(y,x,stats::median), decreasing = decreasing)), ordered = F)
   }else{
     decreasing=T
   }
@@ -44,22 +44,22 @@ boostedBoxplot<-function(y,x, main="", labx=NULL,laby=NULL, plot.mean=T, text.fr
     rAmCharts::amBoxplot(Y~X,data=dataf,labelRotation = (las==2)*90, ylab = laby, main = main)
   }else{
     if(sum(ylim)==0){
-      rb<-boxplot(y~x, main=main, xlab=xlab, ylab=laby, las=las)
-      grid()
-      #rb<-boxplot(y~x, main=main, xlab=xlab, ylab=laby, las=las, add=T)
+      rb<-graphics::boxplot(y~x, main=main, xlab=xlab, ylab=laby, las=las)
+      graphics::grid()
+      #rb<-graphics::boxplot(y~x, main=main, xlab=xlab, ylab=laby, las=las, add=T)
     }else{
-      rb<-boxplot(y~x, main=main, xlab=xlab, ylab=laby, las=las, ylim=ylim)
-      grid()
-      #rb<-boxplot(y~x, main=main, xlab=xlab, ylab=laby, las=las, add=T)
+      rb<-graphics::boxplot(y~x, main=main, xlab=xlab, ylab=laby, las=las, ylim=ylim)
+      graphics::grid()
+      #rb<-graphics::boxplot(y~x, main=main, xlab=xlab, ylab=laby, las=las, add=T)
     }
     if(plot.mean){
       mn.t <- tapply(y, x, mean, na.rm=T)
-      sd.t <- tapply(y, x, sd, na.rm=T)
+      sd.t <- tapply(y, x, stats::sd, na.rm=T)
       xi <- 0.3 + seq(rb$n)
-      points(xi, mn.t, col = "red", pch = 18, cex=1)
-      arrows(xi, mn.t - sd.t, xi, mn.t + sd.t,code = 3, col = "red", angle = 75, length = .1, lwd = 1)
+      graphics::points(xi, mn.t, col = "red", pch = 18, cex=1)
+      graphics::arrows(xi, mn.t - sd.t, xi, mn.t + sd.t,code = 3, col = "red", angle = 75, length = .1, lwd = 1)
     }
-    if(text.freq)text(x=1:length(rb$names), y=(rb$stats[3,]+rb$stats[4,])/2,label=rb$n)
+    if(text.freq) graphics::text(x=1:length(rb$names), y=(rb$stats[3,]+rb$stats[4,])/2,label=rb$n)
   }
 }
 ############

@@ -8,8 +8,7 @@
 #' @description  Run the linkSpotter graph on a correlation matrix.
 #'
 #' @param corMatrix a dataframe corresponding to a matrix of correlation or distance.
-#' @param cluster a boolean to decide if to cluster variables.
-#' @param nbCluster an integer corresponding to the number of clusters to consider.
+#' @param cluster a boolean to decide if to cluster variables or an integer corresponding directly to the number of clusters to consider. If variablesClustering is filled, "cluster" parameter is ignored.
 #' @param variablesClustering a specific dataframe containing the output of the variable clustering resulting from the function clusterVariables()
 #' @param minCor a double between 0 and 1. It is the minimal correlation absolute value to consider for the first graph plot.
 #' @param corMethod a string. One of "pearson","spearman","kendall","mic", "distCor" or "MaxNMI". It is the correlation coefficient to consider for the first graph plot.
@@ -30,10 +29,11 @@
 #'
 #' }
 #'
+#' @import visNetwork
+#'
 #' @export
 #'
-#' @import visNetwork
-linkspotterGraphOnMatrix<-function(corMatrix, cluster=F, nbCluster=1:9, variablesClustering=NULL, minCor=0.3, corMethod="Coef", smoothEdges=T, dynamicNodes=T, colorEdgesByCorDirection=T){
+linkspotterGraphOnMatrix<-function(corMatrix, cluster=FALSE, variablesClustering=NULL, minCor=0.3, corMethod="Coef", smoothEdges=T, dynamicNodes=F, colorEdgesByCorDirection=F){
   corMatrix<-as.data.frame(corMatrix)
 
   # format edges
@@ -41,16 +41,17 @@ linkspotterGraphOnMatrix<-function(corMatrix, cluster=F, nbCluster=1:9, variable
   colnames(edges_raw)[1:2]<-c("from","to")
 
   # format nodes
-  if(!is.null(variablesClustering)){
+  if(!is.null(variablesClustering)){ # variablesClustering case
     nodes_raw=data.frame(variablesClustering,label=variablesClustering[,1],title=variablesClustering[,1])
     colnames(nodes_raw)<-c("id","group","label","title")
   }else if(cluster){
     #perform clustering
-    variablesClustering=clusterVariables(correlationMatrix = corMatrix, nbCluster = nbCluster)
+    if(cluster==1) cluster=1:9 # TRUE case
+    variablesClustering=clusterVariables(correlationMatrix = corMatrix, nbCluster = cluster)
     nodes_raw=data.frame(variablesClustering,label=variablesClustering[,1],title=variablesClustering[,1])
     colnames(nodes_raw)<-c("id","group","label","title")
     }
-  else{
+  else{ # FALSE case
     nodes_raw=data.frame(id=unique(c(as.character(edges_raw$from),as.character(edges_raw$to))),label=unique(c(as.character(edges_raw$from),as.character(edges_raw$to))), title=unique(c(as.character(edges_raw$from),as.character(edges_raw$to))))
   }
 

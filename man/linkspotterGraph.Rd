@@ -7,7 +7,7 @@
 linkspotterGraph(corDF, variablesClustering = NULL, minCor = 0.3,
   corMethod = colnames(corDF)[-c(1:3,
   ncol(corDF))][length(colnames(corDF)[-c(1:3, ncol(corDF))])],
-  smoothEdges = T, dynamicNodes = T, colorEdgesByCorDirection = T)
+  smoothEdges = T, dynamicNodes = F, colorEdgesByCorDirection = F)
 }
 \arguments{
 \item{corDF}{a specific dataframe containing correlations values resulting from the function multiBivariateCorrelation()}

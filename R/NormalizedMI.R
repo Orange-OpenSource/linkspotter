@@ -21,10 +21,11 @@
 #'
 #' }
 #'
+#' @importFrom infotheo mutinformation
+#' @importFrom stats complete.cases
+#'
 #' @export
 #'
-#' @import infotheo
-#' @import stats
 NormalizedMI<-function(x,y, includeNA=T){#-> ratio d'incertitude/entropie expliquee
 
   #rule NA problems

@@ -4,12 +4,14 @@
 \alias{matrixToCorCouples}
 \title{Matrix to couples}
 \usage{
-matrixToCorCouples(matrix, coefName)
+matrixToCorCouples(matrix, coefName = "Coef.", sortByDescAbs = F)
 }
 \arguments{
 \item{matrix}{a dataframe corresponding to a matrix of correlation.}
 
 \item{coefName}{a string: the name of the coefficient the values of the matrix represent.}
+
+\item{sortByDescAbs}{a boolean to decide if to sort by descending absolute value of the coefficient.}
 }
 \value{
 a dataframe corresponding to a correlation matrix.

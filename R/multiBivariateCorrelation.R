@@ -22,13 +22,14 @@
 #'
 #' }
 #'
+#' @importFrom minerva mine
+#' @importFrom energy dcor
+#' @importFrom stats cor
+#' @importFrom utils combn
+#' @importFrom pbapply pbapply
+#'
 #' @export
 #'
-#' @import minerva
-#' @import energy
-#' @import stats
-#' @import utils
-#' @import pbapply
 multiBivariateCorrelation<-function(dataset, corMethods=c("pearson","spearman","kendall","mic","MaxNMI"), showProgress=T){
 
   #progress bar
@@ -48,7 +49,7 @@ multiBivariateCorrelation<-function(dataset, corMethods=c("pearson","spearman","
   corMethods=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")[c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")%in%corMethods]
 
   # all combinaisons
-  dfcmb=data.frame(t(combn(colnames(dataset),2)))
+  dfcmb=data.frame(t(utils::combn(colnames(dataset),2)))
 
   # detect type of couples
   typeOfCouple=apply(dfcmb,1,function(x){
@@ -75,9 +76,9 @@ multiBivariateCorrelation<-function(dataset, corMethods=c("pearson","spearman","
       switch(x[3],
              "num.num"={
                cors=c()
-               if("pearson"%in%corMethods){pearson=cor(x=dataset[,as.character(x[1])],y=dataset[,as.character(x[2])],use = "pairwise.complete.obs",method = "pearson"); cors=c(cors,pearson=pearson)}
-               if("spearman"%in%corMethods){spearman=cor(x=dataset[,as.character(x[1])],y=dataset[,as.character(x[2])],use = "pairwise.complete.obs",method = "spearman"); cors=c(cors,spearman=spearman)}
-               if("kendall"%in%corMethods){kendall=cor(x=dataset[,as.character(x[1])],y=dataset[,as.character(x[2])],use = "pairwise.complete.obs",method = "kendall"); cors=c(cors,kendall=kendall)}
+               if("pearson"%in%corMethods){pearson=stats::cor(x=dataset[,as.character(x[1])],y=dataset[,as.character(x[2])],use = "pairwise.complete.obs",method = "pearson"); cors=c(cors,pearson=pearson)}
+               if("spearman"%in%corMethods){spearman=stats::cor(x=dataset[,as.character(x[1])],y=dataset[,as.character(x[2])],use = "pairwise.complete.obs",method = "spearman"); cors=c(cors,spearman=spearman)}
+               if("kendall"%in%corMethods){kendall=stats::cor(x=dataset[,as.character(x[1])],y=dataset[,as.character(x[2])],use = "pairwise.complete.obs",method = "kendall"); cors=c(cors,kendall=kendall)}
                if("distCor"%in%corMethods){distCor=energy::dcor(x=dataset[,as.character(x[1])],y=dataset[,as.character(x[2])]); cors=c(cors,distCor=distCor)} # too long to compute
                if("mic"%in%corMethods){mic=minerva::mine(x=dataset[,as.character(x[1])],y=dataset[,as.character(x[2])],use = "pairwise.complete.obs")$MIC; cors=c(cors,mic=mic)}
                if("MaxNMI"%in%corMethods){MaxNMI=maxNMI(dataset[,as.character(x[1])],dataset[,as.character(x[2])]); cors=c(cors,MaxNMI=MaxNMI)}

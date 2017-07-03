@@ -30,10 +30,11 @@
 #'
 #' }
 #'
+#' @import visNetwork
+#'
 #' @export
 #'
-#' @import visNetwork
-linkspotterGraph<-function(corDF, variablesClustering=NULL, minCor=0.3, corMethod=colnames(corDF)[-c(1:3,ncol(corDF))][length(colnames(corDF)[-c(1:3,ncol(corDF))])], smoothEdges=T, dynamicNodes=T, colorEdgesByCorDirection=T){
+linkspotterGraph<-function(corDF, variablesClustering=NULL, minCor=0.3, corMethod=colnames(corDF)[-c(1:3,ncol(corDF))][length(colnames(corDF)[-c(1:3,ncol(corDF))])], smoothEdges=T, dynamicNodes=F, colorEdgesByCorDirection=F){
   # format edges
   edges_raw=corDF
   colnames(edges_raw)[2:3]<-c("from","to")

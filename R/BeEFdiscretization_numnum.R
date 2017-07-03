@@ -24,19 +24,21 @@
 #'
 #' }
 #'
+#' @importFrom Hmisc cut2
+#' @importFrom stats complete.cases
+#' @importFrom pbapply pblapply pboptions
+#'
 #' @export
 #'
-#' @importFrom Hmisc cut2
-#' @import stats
 BeEFdiscretization.numnum<-function(continuousX,continuousY,maxNbBins=100,showProgress=F){
 
   #progress bar
   if(!showProgress){
-    pbo <- pboptions(type = "none")
-    on.exit(pboptions(pbo), add = TRUE)
+    pbo <- pbapply::pboptions(type = "none")
+    on.exit(pbapply::pboptions(pbo), add = TRUE)
   }else{
-    pbo <- pboptions(type = "timer")
-    on.exit(pboptions(pbo), add = TRUE)
+    pbo <- pbapply::pboptions(type = "timer")
+    on.exit(pbapply::pboptions(pbo), add = TRUE)
   }
 
   # Only on complete obs

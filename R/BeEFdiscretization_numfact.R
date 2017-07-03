@@ -22,10 +22,11 @@
 #' summary(sepallength)
 #' }
 #'
+#' @importFrom Hmisc cut2
+#' @importFrom stats complete.cases
+#'
 #' @export
 #'
-#' @importFrom Hmisc cut2
-#' @import stats
 BeEFdiscretization.numfact<-function(continuousY,factorX, includeFactorNA=T, showProgress=F){
 
   #progress bar
@@ -49,7 +50,7 @@ BeEFdiscretization.numfact<-function(continuousY,factorX, includeFactorNA=T, sho
     return(list(ny=NA,MaxNMI=NA))
 
   # Adapt for pair.wise.complete.obs computation
-  cc=complete.cases(cbind(continuousY,factorX))
+  cc=stats::complete.cases(cbind(continuousY,factorX))
   continuousY=continuousY[cc]
   factorX=droplevels(as.factor(factorX[cc]))
 

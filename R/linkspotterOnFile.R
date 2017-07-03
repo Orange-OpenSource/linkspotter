@@ -50,13 +50,13 @@
 #'
 #' @export
 #'
-#' @import utils
+#' @importFrom utils read.table
 linkspotterOnFile<-function(file, header, sep, quote, corMethods=c("pearson","spearman","kendall","mic","MaxNMI"), defaultMinCor=0.3, defaultCorMethod=corMethods[length(corMethods)], clusteringCorMethod=corMethods[length(corMethods)], nbCluster=1:9, printInfo=T, appTitle="Linkspotter", htmlTop="", htmlBottom="", ...){
   # commodity
   if (is.null(file))
     return(NULL)
   # read file
-  data=read.table(stringsAsFactors = T, file = file$datapath, header=header, sep=sep,
+  data=utils::read.table(stringsAsFactors = T, file = file$datapath, header=header, sep=sep,
                   quote=quote, ...)
   # first format
   for(i in 1:ncol(data)){

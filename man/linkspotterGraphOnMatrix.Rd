@@ -4,16 +4,14 @@
 \alias{linkspotterGraphOnMatrix}
 \title{Linspotter graph on matrix}
 \usage{
-linkspotterGraphOnMatrix(corMatrix, cluster = F, nbCluster = 1:9,
+linkspotterGraphOnMatrix(corMatrix, cluster = FALSE,
   variablesClustering = NULL, minCor = 0.3, corMethod = "Coef",
-  smoothEdges = T, dynamicNodes = T, colorEdgesByCorDirection = T)
+  smoothEdges = T, dynamicNodes = F, colorEdgesByCorDirection = F)
 }
 \arguments{
 \item{corMatrix}{a dataframe corresponding to a matrix of correlation or distance.}
 
-\item{cluster}{a boolean to decide if to cluster variables.}
-
-\item{nbCluster}{an integer corresponding to the number of clusters to consider.}
+\item{cluster}{a boolean to decide if to cluster variables or an integer corresponding directly to the number of clusters to consider. If variablesClustering is filled, "cluster" parameter is ignored.}
 
 \item{variablesClustering}{a specific dataframe containing the output of the variable clustering resulting from the function clusterVariables()}
 
