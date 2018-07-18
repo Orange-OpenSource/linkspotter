@@ -2,7 +2,7 @@
 # title: Linkspotter/linkspotterGraphOnMatrix
 # description: compute the linkspotter graph
 # author: Alassane Samba (alassane.samba@orange.com)
-# Copyright (c) 2017 Orange
+# Copyright (c) 2017 Alassane Samba, Orange
 # ---------------------------------------------------------------------------------
 #' @title Linspotter graph on matrix
 #' @description  Run the linkSpotter graph on a correlation matrix.
@@ -18,27 +18,39 @@
 #' @return a visNetwork object corresponding to a dynamic graph for the correlation matrix visualization.
 #'
 #' @examples
-#' \dontrun{
-#'
 #' # calculate a correlation dataframe
 #' data(iris)
-#' corDF=multiBivariateCorrelation(mixedData = iris, corMethods = "pearson")
+#' corDF=multiBivariateCorrelation(dataset = iris)
 #' corMatrix=corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',"pearson")])
 #' # launch the graph
-#' linkspotterGraph(corMatrix=corMatrix, minCor=0.3)
-#'
-#' }
+#' linkspotterGraphOnMatrix(corMatrix=corMatrix, minCor=0.3)
 #'
 #' @import visNetwork
 #'
 #' @export
 #'
-linkspotterGraphOnMatrix<-function(corMatrix, cluster=FALSE, variablesClustering=NULL, minCor=0.3, corMethod="Coef", smoothEdges=T, dynamicNodes=F, colorEdgesByCorDirection=F){
-  corMatrix<-as.data.frame(corMatrix)
+linkspotterGraphOnMatrix<-function(corMatrix, cluster=FALSE, variablesClustering=NULL, minCor=0.3, corMethod="Coef.", smoothEdges=T, dynamicNodes=F, colorEdgesByCorDirection=F){
 
   # format edges
-  edges_raw=matrixToCorCouples(corMatrix,corMethod)
+  edges_raw<-corMatrix %>% as.data.frame() %>% matrixToCorCouples(coefName=corMethod)
   colnames(edges_raw)[1:2]<-c("from","to")
+
+  if(!"correlationType"%in%colnames(edges_raw)){
+    # detect negative (monotomic) relationships
+    corToUse=c("spearman","pearson","kendall") #in this order
+    corToUse=corToUse[corToUse%in%colnames(edges_raw)]
+    if(length(corToUse)==0){
+      correlationType=rep("unknown",nrow(edges_raw))
+    }else{
+      correlationType=sign(edges_raw[,corToUse[1]])
+      correlationType[correlationType==-1]<-"negative"
+      correlationType[correlationType==1]<-"positive"
+      correlationType[is.na(correlationType)]<-"nominal"
+    }
+    edges_raw=data.frame(edges_raw,correlationType)
+  }
+
+  if(colorEdgesByCorDirection) edges_raw=data.frame(edges_raw,color=factor(edges_raw$correlationType,levels = c("negative","positive","nominal"),labels =  c("red","blue","grey")))
 
   # format nodes
   if(!is.null(variablesClustering)){ # variablesClustering case
@@ -47,7 +59,7 @@ linkspotterGraphOnMatrix<-function(corMatrix, cluster=FALSE, variablesClustering
   }else if(cluster){
     #perform clustering
     if(cluster==1) cluster=1:9 # TRUE case
-    variablesClustering=clusterVariables(correlationMatrix = corMatrix, nbCluster = cluster)
+    variablesClustering=clusterVariables(corMatrix = corMatrix, nbCluster = cluster)
     nodes_raw=data.frame(variablesClustering,label=variablesClustering[,1],title=variablesClustering[,1])
     colnames(nodes_raw)<-c("id","group","label","title")
     }
