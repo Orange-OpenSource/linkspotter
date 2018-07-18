@@ -99,7 +99,7 @@ print(corMatrixMaxNMI)
 ## Clustering of variables using a correlation matrix
 
 ```{r, echo=TRUE}
-cl<-clusterVariables(correlationMatrix = corMatrixMaxNMI)
+cl<-clusterVariables(corMatrix = corMatrixMaxNMI)
 print(cl)
 ```
 
