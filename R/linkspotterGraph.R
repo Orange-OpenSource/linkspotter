@@ -2,7 +2,7 @@
 # title: Linkspotter/linkspotterGraph
 # description: compute the linkspotter graph
 # author: Alassane Samba (alassane.samba@orange.com)
-# Copyright (c) 2017 Orange
+# Copyright (c) 2017 Alassane Samba, Orange
 # ---------------------------------------------------------------------------------
 #' @title Linspotter graph runner
 #' @description  Run the linkSpotter graph
@@ -17,27 +17,41 @@
 #' @return a visNetwork object corresponding to a dynamic graph for the correlation matrix visualization.
 #'
 #' @examples
-#' \dontrun{
-#'
 #' # calculate a correlation dataframe
 #' data(iris)
-#' corDF=multiBivariateCorrelation(mixedData = iris, corMethods = "MaxNMI")
-#' corMatrix=corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',"MaxNMI")])
-#' corGroups=clusterVariables(correlation_matrix = corMatrix, nbCluster = 3)
-#'
+#' corDF=multiBivariateCorrelation(dataset = iris)
+#' corMatrix=corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',"spearman")])
+#' corGroups=clusterVariables(corMatrix = corMatrix, nbCluster = 3)
 #' # launch the graph
-#' linkspotterGraph(corDF=corDF, variablesClustering=corGroups, minCor=0.3)
-#'
-#' }
+#' linkspotterGraph(corDF=corDF, variablesClustering=corGroups, minCor=0.3,
+#' corMethod='spearman', colorEdgesByCorDirection=TRUE)
 #'
 #' @import visNetwork
 #'
 #' @export
 #'
 linkspotterGraph<-function(corDF, variablesClustering=NULL, minCor=0.3, corMethod=colnames(corDF)[-c(1:3,ncol(corDF))][length(colnames(corDF)[-c(1:3,ncol(corDF))])], smoothEdges=T, dynamicNodes=F, colorEdgesByCorDirection=F){
+
   # format edges
   edges_raw=corDF
   colnames(edges_raw)[2:3]<-c("from","to")
+
+
+  if(!"correlationType"%in%colnames(edges_raw)){
+    # detect negative (monotomic) relationships
+    corToUse=c("spearman","pearson","kendall") #in this order
+    corToUse=corToUse[corToUse%in%colnames(edges_raw)]
+    if(length(corToUse)==0){
+      correlationType=rep("unknown",nrow(edges_raw))
+    }else{
+      correlationType=sign(edges_raw[,corToUse[1]])
+      correlationType[correlationType==-1]<-"negative"
+      correlationType[correlationType==1]<-"positive"
+      correlationType[is.na(correlationType)]<-"nominal"
+    }
+    edges_raw=data.frame(edges_raw,correlationType)
+  }
+
   if(colorEdgesByCorDirection) edges_raw=data.frame(edges_raw,color=factor(edges_raw$correlationType,levels = c("negative","positive","nominal"),labels =  c("red","blue","grey")))
 
   # format nodes
