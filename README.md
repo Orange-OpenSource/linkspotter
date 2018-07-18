@@ -88,7 +88,7 @@ print(corMatrixMaxNMI)
 ## Clustering of variables using a correlation matrix
 
 ```{r, echo=TRUE}
-cl<-clusterVariables(correlationMatrix = corMatrixMaxNMI)
+cl<-clusterVariables(corMatrix = corMatrixMaxNMI)
 print(cl)
 ```
 
@@ -134,10 +134,10 @@ summary(lsiris)
 summary(lsiris)
 ```
 
-Then launch the user interface using:
+Then launch the user interface (linkspotter shiny app) on port 8000 for example:
 
 ```{r, echo=TRUE, eval=FALSE}
-lsiris$run_it
+lsiris$launchShiny(options=list(port=8000))
 ```
 
 Help:

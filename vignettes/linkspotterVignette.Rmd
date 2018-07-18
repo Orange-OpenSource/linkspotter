@@ -148,7 +148,7 @@ summary(lsiris)
 Then launch the user interface using:
 
 ```{r, echo=TRUE, eval=FALSE}
-lsiris$run_it
+lsiris$launchShiny()
 ```
 
 Help:
