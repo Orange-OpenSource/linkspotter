@@ -6,7 +6,7 @@
 \usage{
 linkspotterUI(dataset, corDF, variablesClustering = NULL,
   defaultMinCor = 0.3, appTitle = "Linkspotter", htmlTop = "",
-  htmlBottom = "")
+  htmlBottom = "", ...)
 }
 \arguments{
 \item{dataset}{the dataframe which variables bivariate correlations are contained in corDF}
@@ -22,29 +22,27 @@ linkspotterUI(dataset, corDF, variablesClustering = NULL,
 \item{htmlTop}{a character string that enable to customize your shiny app by adding an HTML code in the HEAD tag.}
 
 \item{htmlBottom}{a character string that enable to customize your shiny app by adding an HTML code at the end of the BODY tag.}
+
+\item{...}{: arguments for 'shiny::shinyApp' function}
 }
 \value{
-a shiny.appobj object enable to deploy instantly the user interface for a customizable visualization.
+a 'shiny.appobj' object enable to deploy instantly the user interface for a customizable visualization.
 }
 \description{
 Run the linkSpotter user interface
 }
 \examples{
-\dontrun{
-
 # calculate a correlation dataframe
 data(iris)
-corDF=multiBivariateCorrelation(mixedData = iris, corMethods = "MaxNMI")
+corDF=multiBivariateCorrelation(dataset = iris)
 corMatrix=corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',"MaxNMI")])
-corGroups=clusterVariables(correlation_matrix = corMatrix, nbCluster = 3)
-
+corGroups=clusterVariables(corMatrix = corMatrix, nbCluster = 3)
+\dontrun{
 # launch the UI
-linkspotterUI(dataset=iris,
-corDF=corDF,
-variablesClustering=corGroups,
-defaultMinCor=0.3,
-appTitle="Linkspotter on iris data")
-
+linkspotterUI(dataset=iris, corDF=corDF, variablesClustering=corGroups,
+defaultMinCor=0.3,cappTitle="Linkspotter on iris data",
+options = list(port=8000)
+)
 }
 
 }

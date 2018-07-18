@@ -22,13 +22,9 @@ a double between 0 and 1 corresponding to the MaxNMI.
 Computes the MaxNMI between the two variables whatever their types, by discretizing using Best Equal-Frequency-based discretization (BeEF) if necessary.
 }
 \examples{
-\dontrun{
-
 # calculate a correlation dataframe
 data(iris)
-maxNMI(iris$Sepal.Length,iris$Sepal.Width)
 maxNMI(iris$Sepal.Length,iris$Species)
-
-}
+maxNMI(iris$Sepal.Length,iris$Sepal.Width)
 
 }

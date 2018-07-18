@@ -4,8 +4,8 @@
 \alias{linkspotterOnFile}
 \title{Proccess Linkspotter on an external file}
 \usage{
-linkspotterOnFile(file, header, sep, quote, corMethods = c("pearson",
-  "spearman", "kendall", "mic", "MaxNMI"), defaultMinCor = 0.3,
+linkspotterOnFile(file, corMethods = c("pearson", "spearman", "kendall",
+  "mic", "MaxNMI"), defaultMinCor = 0.3,
   defaultCorMethod = corMethods[length(corMethods)],
   clusteringCorMethod = corMethods[length(corMethods)], nbCluster = 1:9,
   printInfo = T, appTitle = "Linkspotter", htmlTop = "",
@@ -13,12 +13,6 @@ linkspotterOnFile(file, header, sep, quote, corMethods = c("pearson",
 }
 \arguments{
 \item{file}{the file containing a structured dataset which the bivariate correlations are to be analyzed.}
-
-\item{header}{a boolean.TRUE if the file contains a header (similar to read.table)}
-
-\item{sep}{the separation character used in the file (similar to read.table)}
-
-\item{quote}{the quote character used in the file (similar to read.table)}
 
 \item{corMethods}{a vector of correlation coefficients to compute. The available coefficients are the following : \code{c("pearson","spearman","kendall","mic","distCor","MaxNMI")}. It is not case sensitive and still work if only the beginning of the word is put (e.g. \code{pears}).}
 
@@ -38,7 +32,7 @@ linkspotterOnFile(file, header, sep, quote, corMethods = c("pearson",
 
 \item{htmlBottom}{a character string that enable to customize your shiny app by adding an HTML code at the end of the BODY tag.}
 
-\item{...}{Further arguments to be passed to the used read.table function.}
+\item{...}{Further arguments to be passed to the used read.csv function.}
 }
 \value{
 a list containing all the material enabling to analyze correlations:
@@ -59,15 +53,15 @@ a list containing all the material enabling to analyze correlations:
 This function imports an external dataset, computates its correlation matrices, variable clustering and the customizable user inferface to visualize them using a graph.
 }
 \examples{
-\dontrun{
-
 # run linkspotter on iris example data
 data(iris)
-lsOutputIrisFromFile<-linkspotterOnFile("iris.csv")
-
+tmpCSV<-tempfile(fileext = '.csv')
+write.csv(iris, tmpCSV, row.names = FALSE)
+lsOutputIrisFromFile<-linkspotterOnFile(file=tmpCSV)
+summary(lsOutputIrisFromFile)
+\dontrun{
 # launch the UI
-lsOutputIrisFromFile$run_it
-
+lsOutputIrisFromFile$launchShiny(options=list(port=8000))
 }
 
 }

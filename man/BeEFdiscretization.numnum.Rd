@@ -23,14 +23,10 @@ a double between 0 and 1 corresponding to the MaxNMI.
 Discretize two quantitative variables by optimizing the obtained the Normalized Mutual Information
 }
 \examples{
-\dontrun{
-
 # calculate a correlation dataframe
 data(iris)
 disc=BeEFdiscretization.numnum(iris$Sepal.Length,iris$Sepal.Width)
 summary(disc$x)
 summary(disc$y)
-
-}
 
 }

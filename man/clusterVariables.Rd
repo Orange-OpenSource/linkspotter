@@ -4,10 +4,10 @@
 \alias{clusterVariables}
 \title{Variable clustering (using Normal Mixture Modeling for Model-Based Clustering : mclust)}
 \usage{
-clusterVariables(correlationMatrix, nbCluster = 1:9)
+clusterVariables(corMatrix, nbCluster = 1:9)
 }
 \arguments{
-\item{correlationMatrix}{a dataframe corresponding to a correlation matrix}
+\item{corMatrix}{a dataframe corresponding to a correlation matrix}
 
 \item{nbCluster}{an intyeger or a vector of integers corresponding to the prefered number of cluster for the unsupervised learning.}
 }
@@ -18,16 +18,13 @@ a dataframe: the first column contains the variable names, the second column the
 Computation of a variable clustering on a correlation matrix.
 }
 \examples{
-\dontrun{
-
 # calculate a correlation dataframe
 data(iris)
-corDF=multiBivariateCorrelation(mixedData = iris, corMethods = "MaxNMI")
+corDF <- multiBivariateCorrelation(dataset = iris, corMethods = "MaxNMI")
 # tranform to correlation matrix
-corMatrix=matrixOfValuesOfAllCouples(x1_x2_val = corDF[,c('X1','X2',"MaxNMI")])
+corMatrix <- corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',"MaxNMI")])
 # perform the clustering
-corGroups=clusterVariables(correlationMatrix = corMatrix, nbCluster = 3)
+corGroups <- clusterVariables(corMatrix = corMatrix, nbCluster = 3)
 print(corGroups)
-}
 
 }

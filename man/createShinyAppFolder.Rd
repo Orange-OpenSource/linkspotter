@@ -14,3 +14,16 @@ createShinyAppFolder(linkspotterShinyAppObject, folderName)
 \description{
 This function creates a shiny app folder containing a shiny app object directly readable by a shiny-server.
 }
+\examples{
+data(iris)
+lsOutputIris<-linkspotterComplete(iris)
+lsShinyObject<-lsOutputIris$launchShiny()
+tmpShinyFolder<-tempdir()
+createShinyAppFolder(lsShinyObject,
+folderName=file.path(tmpShinyFolder,"myIrisLinkspotterShinyApp1")
+)
+\dontrun{
+# launch the shiny app
+shiny::runApp(tmpShinyFolder)
+}
+}

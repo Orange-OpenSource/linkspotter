@@ -50,15 +50,13 @@ a list containing all the material enabling to analyze correlations:
 Computation of correlation matrices, variable clustering and the customizable user inferface to visualize them using a graph together with variables distributions and cross plots.
 }
 \examples{
-\dontrun{
-
 # run linkspotter on iris example data
 data(iris)
 lsOutputIris<-linkspotterComplete(iris)
-
+summary(lsOutputIris)
+\dontrun{
 # launch the UI
-lsOutputIris$run_it
-
+lsOutputIris$launchShiny(option=list(port=8000))
 }
 
 }

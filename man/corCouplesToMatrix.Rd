@@ -16,15 +16,12 @@ a dataframe corresponding to a correlation matrix.
 Transform a 2 column correlation dataframe into a correlation matrix
 }
 \examples{
-\dontrun{
-
 # calculate a correlation dataframe
 data(iris)
-corDF<-multiBivariateCorrelation(mixedData = iris, corMethods = "MaxNMI")
+corDF<-multiBivariateCorrelation(dataset = iris, corMethods = "MaxNMI")
 corMatrix<-corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',"MaxNMI")])
 print(corMatrix)
-corCouples<-matrixToCOrCouples(corMatrix,coefName="pearson")
+corCouples<-matrixToCorCouples(corMatrix,coefName="pearson")
 print(corCouples)
-}
 
 }

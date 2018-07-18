@@ -20,12 +20,9 @@ a double between 0 and 1 corresponding to the MaxNMI.
 Calculate the MaxNMI relationship measurement for 2 categorical variables
 }
 \examples{
-\dontrun{
-
 # calculate a correlation dataframe
 data(iris)
-NormalizedMI(iris$Species,iris$Species)
-
-}
+discreteSepalLength=BeEFdiscretization.numfact(continuousY=iris$Sepal.Length,factorX=iris$Species)
+NormalizedMI(iris$Species,discreteSepalLength)
 
 }

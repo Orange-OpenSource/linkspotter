@@ -21,13 +21,9 @@ a specific dataframe containing correlations values or each specified correlatio
 Computation of a correlation dataframe.
 }
 \examples{
-\dontrun{
-
 # run linkspotter on iris example data
 data(iris)
 corDF<-multiBivariateCorrelation(iris)
 print(corDF)
-
-}
 
 }

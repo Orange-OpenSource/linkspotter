@@ -5,7 +5,7 @@
 \title{Linspotter graph on matrix}
 \usage{
 linkspotterGraphOnMatrix(corMatrix, cluster = FALSE,
-  variablesClustering = NULL, minCor = 0.3, corMethod = "Coef",
+  variablesClustering = NULL, minCor = 0.3, corMethod = "Coef.",
   smoothEdges = T, dynamicNodes = F, colorEdgesByCorDirection = F)
 }
 \arguments{
@@ -32,15 +32,11 @@ a visNetwork object corresponding to a dynamic graph for the correlation matrix 
 Run the linkSpotter graph on a correlation matrix.
 }
 \examples{
-\dontrun{
-
 # calculate a correlation dataframe
 data(iris)
-corDF=multiBivariateCorrelation(mixedData = iris, corMethods = "pearson")
+corDF=multiBivariateCorrelation(dataset = iris)
 corMatrix=corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',"pearson")])
 # launch the graph
-linkspotterGraph(corMatrix=corMatrix, minCor=0.3)
-
-}
+linkspotterGraphOnMatrix(corMatrix=corMatrix, minCor=0.3)
 
 }

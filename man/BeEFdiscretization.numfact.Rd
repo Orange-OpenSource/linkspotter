@@ -23,12 +23,9 @@ a double between 0 and 1 corresponding to the MaxNMI.
 Discretize a quantitative variable by optimizing the obtained the Normalized Mutual Information with a target qualitative variable
 }
 \examples{
-\dontrun{
-
 # calculate a correlation dataframe
 data(iris)
-sepallength=BeEFdiscretization.numfact(continuousY=iris$Sepal.Length,factorX=iris$Species)
-summary(sepallength)
-}
+discreteSepalLength=BeEFdiscretization.numfact(continuousY=iris$Sepal.Length,factorX=iris$Species)
+summary(discreteSepalLength)
 
 }

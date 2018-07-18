@@ -14,21 +14,18 @@ matrixToCorCouples(matrix, coefName = "Coef.", sortByDescAbs = F)
 \item{sortByDescAbs}{a boolean to decide if to sort by descending absolute value of the coefficient.}
 }
 \value{
-a dataframe corresponding to a correlation matrix.
+a dataframe corresponding to all correlation couples from the matrix.
 }
 \description{
 Transform a correlation matrix into a correlation couples dataframe
 }
 \examples{
-\dontrun{
-
 # calculate a correlation dataframe
 data(iris)
-corDF<-multiBivariateCorrelation(mixedData = iris, corMethods = "MaxNMI")
-corMatrix<-corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',"MaxNMI")])
+corDF<-multiBivariateCorrelation(dataset = iris)
+corMatrix<-corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',"pearson")])
 print(corMatrix)
-corCouples<-matrixToCOrCouples(corMatrix,coefName="pearson")
+corCouples<-matrixToCorCouples(matrix = corMatrix,coefName="pearson")
 print(corCouples)
-}
 
 }
