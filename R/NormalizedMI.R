@@ -2,7 +2,7 @@
 # title: Linkspotter/NormalizedMI
 # description: calculate the normalized mutual information between 2 categorical variables
 # author: Alassane Samba (alassane.samba@orange.com)
-# Copyright (c) 2017 Orange
+# Copyright (c) 2017 Alassane Samba, Orange
 # ---------------------------------------------------------------------------------
 #' @title Maximal Normalized Mutual Information (MaxNMI) function for 2 categorical variables
 #' @description  Calculate the MaxNMI relationship measurement for 2 categorical variables
@@ -13,13 +13,10 @@
 #' @return a double between 0 and 1 corresponding to the MaxNMI.
 #'
 #' @examples
-#' \dontrun{
-#'
 #' # calculate a correlation dataframe
 #' data(iris)
-#' NormalizedMI(iris$Species,iris$Species)
-#'
-#' }
+#' discreteSepalLength=BeEFdiscretization.numfact(continuousY=iris$Sepal.Length,factorX=iris$Species)
+#' NormalizedMI(iris$Species,discreteSepalLength)
 #'
 #' @importFrom infotheo mutinformation
 #' @importFrom stats complete.cases

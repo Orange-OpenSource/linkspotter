@@ -2,7 +2,7 @@
 # title: Linkspotter/linkspotterDurationEstimator
 # description: estimate the duration of the computation
 # author: Alassane Samba (alassane.samba@orange.com)
-# Copyright (c) 2017 Orange
+# Copyright (c) 2017 Alassane Samba, Orange
 # ---------------------------------------------------------------------------------
 linkspotterDurationEstimator<-function(dataset){
   p=ncol(dataset)

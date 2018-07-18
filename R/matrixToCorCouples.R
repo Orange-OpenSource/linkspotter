@@ -1,8 +1,8 @@
 # --------------------------------------------------------------------------------
-# title: Linkspotter/matrixToCOrCouples
+# title: Linkspotter/matrixToCorCouples
 # description:  transform a correlation matrix into a 2 column correlation dataframe
 # author: Alassane Samba (alassane.samba@orange.com)
-# Copyright (c) 2017 Orange
+# Copyright (c) 2017 Alassane Samba, Orange
 # ---------------------------------------------------------------------------------
 #
 #' @title Matrix to couples
@@ -11,19 +11,16 @@
 #' @param matrix a dataframe corresponding to a matrix of correlation.
 #' @param coefName a string: the name of the coefficient the values of the matrix represent.
 #' @param sortByDescAbs a boolean to decide if to sort by descending absolute value of the coefficient.
-#' @return a dataframe corresponding to a correlation matrix.
+#' @return a dataframe corresponding to all correlation couples from the matrix.
 #'
 #' @examples
-#' \dontrun{
-#'
 #' # calculate a correlation dataframe
 #' data(iris)
-#' corDF<-multiBivariateCorrelation(mixedData = iris, corMethods = "MaxNMI")
-#' corMatrix<-corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',"MaxNMI")])
+#' corDF<-multiBivariateCorrelation(dataset = iris)
+#' corMatrix<-corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',"pearson")])
 #' print(corMatrix)
-#' corCouples<-matrixToCOrCouples(corMatrix,coefName="pearson")
+#' corCouples<-matrixToCorCouples(matrix = corMatrix,coefName="pearson")
 #' print(corCouples)
-#' }
 #'
 #' @import dplyr
 #' @import tidyr

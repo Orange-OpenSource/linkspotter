@@ -2,7 +2,7 @@
 # title: Linkspotter/maxNMI
 # description: Computes the MaxNMI between the two variables whatever their types, by discretizing using Best Equal-Frequency-based discretization (BeEF) if necessary.
 # author: Alassane Samba (alassane.samba@orange.com)
-# Copyright (c) 2017 Orange
+# Copyright (c) 2017 Alassane Samba, Orange
 # ---------------------------------------------------------------------------------
 #' @title Maximal Normalized Mutual Information (MaxNMI)
 #' @description Computes the MaxNMI between the two variables whatever their types, by discretizing using Best Equal-Frequency-based discretization (BeEF) if necessary.
@@ -14,14 +14,10 @@
 #' @return a double between 0 and 1 corresponding to the MaxNMI.
 #'
 #' @examples
-#' \dontrun{
-#'
 #' # calculate a correlation dataframe
 #' data(iris)
-#' maxNMI(iris$Sepal.Length,iris$Sepal.Width)
 #' maxNMI(iris$Sepal.Length,iris$Species)
-#'
-#' }
+#' maxNMI(iris$Sepal.Length,iris$Sepal.Width)
 #'
 #' @export
 maxNMI<-function(x,y,maxNbBins=100, showProgress = F){

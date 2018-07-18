@@ -2,7 +2,7 @@
 # title: Linkspotter/BeEFdiscretization.numnum
 # description: Discretize two quantitative variables by optimizing the obtained the Normalized Mutual Information
 # author: Alassane Samba (alassane.samba@orange.com)
-# Copyright (c) 2017 Orange
+# Copyright (c) 2017 Alassane Samba, Orange
 # ---------------------------------------------------------------------------------
 #' @title BeEF: Best Equal-Frequency discretization (for a couple of quantitative variables)
 #' @description  Discretize two quantitative variables by optimizing the obtained the Normalized Mutual Information
@@ -14,15 +14,11 @@
 #' @return a double between 0 and 1 corresponding to the MaxNMI.
 #'
 #' @examples
-#' \dontrun{
-#'
 #' # calculate a correlation dataframe
 #' data(iris)
 #' disc=BeEFdiscretization.numnum(iris$Sepal.Length,iris$Sepal.Width)
 #' summary(disc$x)
 #' summary(disc$y)
-#'
-#' }
 #'
 #' @importFrom Hmisc cut2
 #' @importFrom stats complete.cases

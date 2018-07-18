@@ -2,7 +2,7 @@
 # title: Linkspotter/boostedBoxplot
 # description: Boosted Boxplot : add useful features to R boxplot function
 # author: Alassane Samba (alassane.samba@orange.com)
-# Copyright (c) 2017 Orange
+# Copyright (c) 2017 Alassane Samba, Orange
 # ---------------------------------------------------------------------------------
 ## Boosted Boxplot : add useful features to R boxplot function
 #' @importFrom stats sd median

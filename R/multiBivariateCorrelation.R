@@ -2,7 +2,7 @@
 # title: Linkspotter/multiBivariateCorrelation
 # description: function to compute several type of correlation coefficients on all couples of a dataframe
 # author: Alassane Samba (alassane.samba@orange.com)
-# Copyright (c) 2017 Orange
+# Copyright (c) 2017 Alassane Samba, Orange
 # ---------------------------------------------------------------------------------
 #' @title Calculation of all the bivariate correlations in a dataframe
 #' @description  Computation of a correlation dataframe.
@@ -13,14 +13,10 @@
 #' @return a specific dataframe containing correlations values or each specified correlation coefficient.
 #'
 #' @examples
-#' \dontrun{
-#'
 #' # run linkspotter on iris example data
 #' data(iris)
 #' corDF<-multiBivariateCorrelation(iris)
 #' print(corDF)
-#'
-#' }
 #'
 #' @importFrom minerva mine
 #' @importFrom energy dcor
