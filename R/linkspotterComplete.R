@@ -2,7 +2,7 @@
 # title: Linkspotter/linkspotterComplete
 # description: global function combining all others : compute data and generate UI
 # author: Alassane Samba (alassane.samba@orange.com)
-# Copyright (c) 2017 Orange
+# Copyright (c) 2017 Alassane Samba, Orange
 # ---------------------------------------------------------------------------------
 #' @title Linspotter complete runner
 #' @description  Computation of correlation matrices, variable clustering and the customizable user inferface to visualize them using a graph together with variables distributions and cross plots.
@@ -32,15 +32,13 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
-#'
 #' # run linkspotter on iris example data
 #' data(iris)
 #' lsOutputIris<-linkspotterComplete(iris)
-#'
+#' summary(lsOutputIris)
+#' \dontrun{
 #' # launch the UI
-#' lsOutputIris$run_it
-#'
+#' lsOutputIris$launchShiny(option=list(port=8000))
 #' }
 #'
 #' @export
@@ -78,7 +76,7 @@ linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendal
   #corr matrix for clustering
   corMatrix=corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',clusteringCorMethod)])# prefer MaxNMI or distCor for the clustering because they hilights different types of correlation (not only linear and monotonic ones) and because prefer MaxNMI because it is always available/computable (whatever the type of variable)
   #perform clustering
-  corGroups=clusterVariables(correlationMatrix = corMatrix, nbCluster = nbCluster)
+  corGroups=clusterVariables(corMatrix = corMatrix, nbCluster = nbCluster)
   if(printInfo) print(paste("Clustering computation finished:",Sys.time()))
   endTime<-Sys.time()
   #compute corr matrices
@@ -86,9 +84,9 @@ linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendal
   names(corMatrices)<-corMethods
   computationTime=format(round(endTime-startTime,3),nsmall = 3)
   #compute UI
-  run_it=linkspotterUI(dataset,corDF,corGroups, defaultMinCor = defaultMinCor, appTitle=appTitle, htmlTop=htmlTop, htmlBottom=htmlBottom)
+  launchShiny=function(...){linkspotterUI(dataset,corDF,corGroups, defaultMinCor = defaultMinCor, appTitle=appTitle, htmlTop=htmlTop, htmlBottom=htmlBottom, ...)}
   if(printInfo) print(paste(c("Total Computation time: ", computationTime),collapse=""))
   #finish
-  return(list(computationTime=computationTime,run_it=run_it,dataset=dataset,corDF=corDF,corMatrices=corMatrices,corGroups=corGroups,clusteringCorMethod=clusteringCorMethod,defaultMinCor=defaultMinCor,defaultCorMethod=defaultCorMethod,corMethods=corMethods))
+  return(list(computationTime=computationTime,launchShiny=launchShiny,dataset=dataset,corDF=corDF,corMatrices=corMatrices,corGroups=corGroups,clusteringCorMethod=clusteringCorMethod,defaultMinCor=defaultMinCor,defaultCorMethod=defaultCorMethod,corMethods=corMethods))
 }
 ###
