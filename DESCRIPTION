@@ -2,17 +2,16 @@ Package: linkspotter
 Type: Package
 Title: Bivariate Correlations Calculation and Visualization
 Version: 1.2.0
-Date: 2017-05-23
+Date: 2018-07-18
 Authors@R: c(
   person("Alassane", "Samba", role = c("aut", "cre"),email = "alassane.samba@orange.com"), 
   person(family="Orange", role = c("cph"))
   )
-Maintainer: Alassane Samba <alassane.samba@orange.com>
 Description: Compute and visualize using the 'visNetwork' package all the bivariate correlations of a dataframe.
   Several and different types of correlation coefficients (Pearson's r, Spearman's rho, Kendall's tau,
   distance correlation, maximal information coefficient and 
   equal-freq discretization-based maximal normalized mutual information) are used according to 
-  the variable couple type (quantitative vs categorial, quantitative vs quantitative, categorial vs categorial).
+  the variable couple type (quantitative vs categorical, quantitative vs quantitative, categorical vs categorical).
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
