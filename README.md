@@ -1,4 +1,6 @@
-# Introduction
+# linkspotter
+
+[![](https://www.r-pkg.org/badges/version/linkspotter)](https://www.r-pkg.org/pkg/linkspotter)
 
 Linkspotter is a package of the R software that mainly allows to calculate and visualize using a graph all the bivariate links of a dataset.
 
