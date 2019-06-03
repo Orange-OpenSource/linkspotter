@@ -28,10 +28,16 @@ Available link coefficients are:
 # Installation
 
 ```{r, echo=TRUE, eval=FALSE}
+install.packages("linkspotter")
+```
+
+Development version:
+
+```{r, echo=TRUE, eval=FALSE}
 library(devtools)
 install_github("sambaala/linkspotter")
 ```
-Behind a proxy:
+Development version behind a proxy:
 
 ```{r, echo=TRUE, eval=FALSE}
 library(devtools)
