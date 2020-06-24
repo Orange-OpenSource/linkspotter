@@ -7,6 +7,7 @@
 linkspotterComplete(
   dataset,
   corMethods = c("pearson", "spearman", "kendall", "mic", "MaxNMI"),
+  maxNbBins = 100,
   defaultMinCor = 0.3,
   defaultCorMethod = corMethods[length(corMethods)],
   clusteringCorMethod = defaultCorMethod,
@@ -21,6 +22,8 @@ linkspotterComplete(
 \item{dataset}{the dataframe which variables bivariate correlations are to be analyzed.}
 
 \item{corMethods}{a vector of correlation coefficients to compute. The available coefficients are the following : \code{c("pearson","spearman","kendall","mic","distCor","MaxNMI")}. It is not case sensitive and still work if only the beginning of the word is put (e.g. \code{pears}).}
+
+\item{maxNbBins}{an integer used if corMethods include 'MaxNMI'. It corresponds to the number of bins limitation (for computation time limitation), maxNbBins=100 by default.}
 
 \item{defaultMinCor}{a double between 0 and 1. It is the minimal correlation absolute value to consider for the first graph plot.}
 

@@ -272,7 +272,8 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
       paste(c(
         paste("nb. observations:",nrow(data.frame(dataset))),
         paste("\nnb. variables:",ncol(data.frame(dataset))),
-        paste("\nnb. couples:",((ncol(data.frame(dataset))*ncol(data.frame(dataset)))-ncol(data.frame(dataset)))/2)
+        paste("\nnb. couples:",((ncol(data.frame(dataset))*ncol(data.frame(dataset)))-ncol(data.frame(dataset)))/2),
+        paste("\nnb. corr. calculated:",length(stats::na.omit(corDF[,input$selectCorMethod])))
       ),collapse = "")
     })
 
