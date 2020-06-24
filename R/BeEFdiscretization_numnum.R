@@ -68,8 +68,8 @@ BeEFdiscretization.numnum<-function(continuousX,continuousY,maxNbBins=100,showPr
   NMIsDF = as.data.frame(matrix(unlist(NMIs), ncol = 3, byrow = T))
   colnames(NMIsDF) <- c("nx", "ny", "MaxNMI")
   best = NMIsDF[which.max(NMIsDF$MaxNMI), ]
-  b_xfact<-EF.discretisation(continuousX,best$nx)
-  b_yfact<-EF.discretisation(continuousY,best$ny)
+  b_xfact<-EF.discretisation(continuousX,best$nx,nbdigitsX)
+  b_yfact<-EF.discretisation(continuousY,best$ny,nbdigitsY)
   return(list(x = b_xfact, y = b_yfact))
 }
 EF.discretisation<-function(continuousX,nx,nbdigitsX){
