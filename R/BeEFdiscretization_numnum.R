@@ -60,8 +60,18 @@ BeEFdiscretization.numnum<-function(continuousX,continuousY,maxNbBins=100,showPr
   egt=eg[,1]*eg[,2]
   eg2=eg[egt<=threshold,]
   NMIs=pbapply::pblapply(as.data.frame(t(eg2)),function(n){
-    xfact=Hmisc::cut2(continuousX,g = n[1], digits = nbdigitsX);
-    yfact=Hmisc::cut2(continuousY,g = n[2], digits = nbdigitsY);
+    breaksX=unique(quantile(continuousX,seq(0,1,1/n[1]), type = 1, na.rm=T))
+    while(length(breaksX)<3){
+      n[1]<-n[1]+1
+      breaksX=unique(quantile(continuousX,seq(0,1,1/n[1]), type = 1, na.rm=T))
+    }
+    xfact=cut(continuousX,breaks = breaksX, include.lowest = T, dig.lab = nbdigitsX)
+    breaksY=unique(quantile(continuousY,seq(0,1,1/n[2]), type = 1, na.rm=T))
+    while(length(breaksY)<3){
+      n[2]<-n[2]+1
+      breaksY=unique(quantile(continuousY,seq(0,1,1/n[2]), type = 1, na.rm=T))
+    }
+    yfact=cut(continuousY,breaks = breaksY, include.lowest = T, dig.lab = nbdigitsY)
     nmi=NormalizedMI(xfact,yfact);
     list(nx=n[1],ny=n[2],NMI=nmi)
   })
