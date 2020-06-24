@@ -59,36 +59,31 @@ BeEFdiscretization.numnum<-function(continuousX,continuousY,maxNbBins=100,showPr
   eg=expand.grid(2:ceiling(threshold/2),2:ceiling(threshold/2))
   egt=eg[,1]*eg[,2]
   eg2=eg[egt<=threshold,]
-  NMIs=pbapply::pblapply(as.data.frame(t(eg2)),function(n){
-    if(length(levels(as.factor(continuousX)))<=n[1]){
-      xfact<-as.factor(continuousX)
-    }else{
-      breaksX=quantile(continuousX,seq(0,1,1/n[1]), type = 1, na.rm=T)
-      isolated=c()
-      while(max(table(breaksX))>1){
-        isolated=c(isolated,unique(breaksX)[which(table(breaksX)>1)])
-        breaksX=quantile(continuousX[!continuousX%in%isolated],seq(0,1,1/(n[1]-length(isolated))), type = 1, na.rm=T)
-      }
-      breaksX<-c(breaksX,isolated)
-      xfact=cut(continuousX,breaks = breaksX, include.lowest = T, dig.lab = nbdigitsX)
-    }
-    if(length(levels(as.factor(continuousY)))<=n[2]){
-      yfact<-as.factor(continuousY)
-    }else{
-      breaksY=quantile(continuousY,seq(0,1,1/n[1]), type = 1, na.rm=T)
-      isolated=c()
-      while(max(table(breaksY))>1){
-        isolated=c(isolated,unique(breaksY)[which(table(breaksY)>1)])
-        breaksY=quantile(continuousY[!continuousY%in%isolated], seq(0,1,1/(n[2]-length(isolated))), type = 1, na.rm=T)
-      }
-      breaksY<-c(breaksY,isolated)
-      yfact=cut(continuousY, breaks = breaksY, include.lowest = T, dig.lab = nbdigitsY)
-    }
-    nmi=NormalizedMI(xfact,yfact);
-    list(nx=n[1],ny=n[2],NMI=nmi)
+  NMIs = pbapply::pblapply(as.data.frame(t(eg2)), function(n) {
+    xfact<-EF.discretisation(continuousX,n[1],nbdigitsX)
+    yfact<-EF.discretisation(continuousY,n[2],nbdigitsY)
+    nmi = NormalizedMI(xfact, yfact)
+    list(nx = n[1], ny = n[2], NMI = nmi)
   })
-  NMIsDF=as.data.frame(matrix(unlist(NMIs),ncol = 3, byrow = T))
-  colnames(NMIsDF)<-c("nx","ny","MaxNMI")
-  best=NMIsDF[which.max(NMIsDF$MaxNMI),]
-  return(list(x=Hmisc::cut2(continuousX,g = best$nx, digits = nbdigitsX),y=Hmisc::cut2(continuousY,g = best$ny, digits = nbdigitsY)))
+  NMIsDF = as.data.frame(matrix(unlist(NMIs), ncol = 3, byrow = T))
+  colnames(NMIsDF) <- c("nx", "ny", "MaxNMI")
+  best = NMIsDF[which.max(NMIsDF$MaxNMI), ]
+  b_xfact<-EF.discretisation(continuousX,best$nx)
+  b_yfact<-EF.discretisation(continuousY,best$ny)
+  return(list(x = b_xfact, y = b_yfact))
+}
+EF.discretisation<-function(continuousX,nx,nbdigitsX){
+  if(length(levels(as.factor(continuousX)))<=nx){
+    xfact<-as.factor(continuousX)
+  }else{
+    breaksX=quantile(continuousX,seq(0,1,1/nx), type = 1, na.rm=T)
+    isolated=c()
+    while(max(table(breaksX))>1){
+      isolated=c(isolated,unique(breaksX)[which(table(breaksX)>1)])
+      breaksX=quantile(continuousX[!continuousX%in%isolated],seq(0,1,1/(nx-length(isolated))), type = 1, na.rm=T)
+    }
+    breaksX<-c(breaksX,isolated)
+    xfact=cut(continuousX,breaks = breaksX, include.lowest = T, dig.lab = nbdigitsX)
+  }
+  return(xfact)
 }

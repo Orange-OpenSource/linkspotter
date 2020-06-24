@@ -61,22 +61,11 @@ BeEFdiscretization.numfact<-function(continuousY,factorX, includeFactorNA=T, sho
   }
   nbdigitsY<-max(nchar(sub('^0+','',sub('\\.','',continuousY)))) #util: number of digits (to avoid bug of cut2)
   NMIs=lapply(nY,function(x){
-    if(length(levels(as.factor(continuousY)))<=n[2]){
-      factorY<-as.factor(continuousY)
-    }else{
-      breaksY=quantile(continuousY,seq(0,1,1/n[1]), type = 1, na.rm=T)
-      isolated=c()
-      while(max(table(breaksY))>1){
-        isolated=c(isolated,unique(breaksY)[which(table(breaksY)>1)])
-        breaksY=quantile(continuousY[!continuousY%in%isolated], seq(0,1,1/(n[2]-length(isolated))), type = 1, na.rm=T)
-      }
-      breaksY<-c(breaksY,isolated)
-      factorY=cut(continuousY, breaks = breaksY, include.lowest = T, dig.lab = nbdigitsY)
-    }
+    factorY<-EF.discretisation(continuousY,x,nbdigitsY)
     list(ny=x,MaxNMI=NormalizedMI(factorY, factorX))
   })
   NMIsDF=as.data.frame(matrix(unlist(NMIs), ncol = 2, byrow = T))
   colnames(NMIsDF)<-c("ny", "MaxNMI")
   best=NMIsDF[which.max(NMIsDF$MaxNMI),]
-  return(Hmisc::cut2(continuousY, g=best$ny, digits = nbdigitsY))
+  return(EF.discretisation(continuousY,best$ny,nbdigitsY))
 }
