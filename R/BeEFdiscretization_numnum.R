@@ -60,18 +60,30 @@ BeEFdiscretization.numnum<-function(continuousX,continuousY,maxNbBins=100,showPr
   egt=eg[,1]*eg[,2]
   eg2=eg[egt<=threshold,]
   NMIs=pbapply::pblapply(as.data.frame(t(eg2)),function(n){
-    breaksX=unique(quantile(continuousX,seq(0,1,1/n[1]), type = 1, na.rm=T))
-    while(length(breaksX)<3){
-      n[1]<-n[1]+1
-      breaksX=unique(quantile(continuousX,seq(0,1,1/n[1]), type = 1, na.rm=T))
+    if(length(levels(as.factor(continuousX)))<=n[1]){
+      xfact<-as.factor(continuousX)
+    }else{
+      breaksX=quantile(continuousX,seq(0,1,1/n[1]), type = 1, na.rm=T)
+      isolated=c()
+      while(max(table(breaksX))>1){
+        isolated=c(isolated,unique(breaksX)[which(table(breaksX)>1)])
+        breaksX=quantile(continuousX[!continuousX%in%isolated],seq(0,1,1/(n[1]-length(isolated))), type = 1, na.rm=T)
+      }
+      breaksX<-c(breaksX,isolated)
+      xfact=cut(continuousX,breaks = breaksX, include.lowest = T, dig.lab = nbdigitsX)
     }
-    xfact=cut(continuousX,breaks = breaksX, include.lowest = T, dig.lab = nbdigitsX)
-    breaksY=unique(quantile(continuousY,seq(0,1,1/n[2]), type = 1, na.rm=T))
-    while(length(breaksY)<3){
-      n[2]<-n[2]+1
-      breaksY=unique(quantile(continuousY,seq(0,1,1/n[2]), type = 1, na.rm=T))
+    if(length(levels(as.factor(continuousY)))<=n[2]){
+      yfact<-as.factor(continuousY)
+    }else{
+      breaksY=quantile(continuousY,seq(0,1,1/n[1]), type = 1, na.rm=T)
+      isolated=c()
+      while(max(table(breaksY))>1){
+        isolated=c(isolated,unique(breaksY)[which(table(breaksY)>1)])
+        breaksY=quantile(continuousY[!continuousY%in%isolated], seq(0,1,1/(n[2]-length(isolated))), type = 1, na.rm=T)
+      }
+      breaksY<-c(breaksY,isolated)
+      yfact=cut(continuousY, breaks = breaksY, include.lowest = T, dig.lab = nbdigitsY)
     }
-    yfact=cut(continuousY,breaks = breaksY, include.lowest = T, dig.lab = nbdigitsY)
     nmi=NormalizedMI(xfact,yfact);
     list(nx=n[1],ny=n[2],NMI=nmi)
   })
