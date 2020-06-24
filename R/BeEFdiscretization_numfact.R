@@ -59,14 +59,15 @@ BeEFdiscretization.numfact<-function(continuousY,factorX, includeFactorNA=T, sho
   }else{
     nY=2
   }
+  nbdigitsY<-max(nchar(sub('^0+','',sub('\\.','',continuousY)))) #util: number of digits (to avoid bug of cut2)
   NMIs=lapply(nY,function(x){
     #breaksY=unique(quantile(continuousY,seq(0,1,1/x), type = 1, na.rm=T)); # EqualFreq binning
     #factorY=cut(continuousY,breaks = breaksY, include.lowest = T);
-    factorY=Hmisc::cut2(continuousY,g=x)
-    list(ny=x,MaxNMI=NormalizedMI(factorY,factorX))
+    factorY=Hmisc::cut2(continuousY, g=x, digits = nbdigitsY)
+    list(ny=x,MaxNMI=NormalizedMI(factorY, factorX))
   })
-  NMIsDF=as.data.frame(matrix(unlist(NMIs),ncol = 2, byrow = T))
-  colnames(NMIsDF)<-c("ny","MaxNMI")
+  NMIsDF=as.data.frame(matrix(unlist(NMIs), ncol = 2, byrow = T))
+  colnames(NMIsDF)<-c("ny", "MaxNMI")
   best=NMIsDF[which.max(NMIsDF$MaxNMI),]
-  return(Hmisc::cut2(continuousY,g=best$ny))
+  return(Hmisc::cut2(continuousY, g=best$ny, digits = nbdigitsY))
 }
