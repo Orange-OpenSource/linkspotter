@@ -8,6 +8,7 @@
 #' @description  Computation of correlation matrices, variable clustering and the customizable user inferface to visualize them using a graph together with variables distributions and cross plots.
 #'
 #' @param dataset the dataframe which variables bivariate correlations are to be analyzed.
+#' @param targetVar a vector of character strings corresponding to the names of the target variables. If not NULL, correlation coefficients are computed only with that target variables.
 #' @param corMethods a vector of correlation coefficients to compute. The available coefficients are the following : \code{c("pearson","spearman","kendall","mic","distCor","MaxNMI")}. It is not case sensitive and still work if only the beginning of the word is put (e.g. \code{pears}).
 #' @param maxNbBins an integer used if corMethods include 'MaxNMI'. It corresponds to the number of bins limitation (for computation time limitation), maxNbBins=100 by default.
 #' @param defaultMinCor a double between 0 and 1. It is the minimal correlation absolute value to consider for the first graph plot.
@@ -43,19 +44,24 @@
 #' }
 #'
 #' @export
-linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendall","mic","MaxNMI"), maxNbBins=100, defaultMinCor=0.3, defaultCorMethod=corMethods[length(corMethods)], clusteringCorMethod=defaultCorMethod, nbCluster=1:9, printInfo=T, appTitle="Linkspotter", htmlTop="", htmlBottom=""){
+linkspotterComplete<-function(dataset, targetVar=NULL, corMethods=c("pearson","spearman","kendall","mic","MaxNMI"), maxNbBins=100, defaultMinCor=0.3, defaultCorMethod=corMethods[length(corMethods)], clusteringCorMethod=defaultCorMethod, nbCluster=1:9, printInfo=T, appTitle="Linkspotter", htmlTop="", htmlBottom=""){
   startTime<-Sys.time()
   #complete abbreviations
   corMethods=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")[pmatch(tolower(corMethods),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")))]
   defaultCorMethod=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")[pmatch(tolower(defaultCorMethod),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")))]
   clusteringCorMethod=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")[pmatch(tolower(clusteringCorMethod),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")))]
   #compute corDF
-  corDF=multiBivariateCorrelation(dataset = dataset, corMethods = corMethods, showProgress=printInfo, maxNbBins = maxNbBins)
-  #corr matrix for clustering
-  corMatrix=corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',clusteringCorMethod)])# prefer MaxNMI or distCor for the clustering because they hilights different types of correlation (not only linear and monotonic ones) and because prefer MaxNMI because it is always available/computable (whatever the type of variable)
-  #perform clustering
-  corGroups=clusterVariables(corMatrix = corMatrix, nbCluster = nbCluster)
-  if(printInfo) cat(paste("Clustering computation finished:",Sys.time()));cat("\n")
+  corDF=multiBivariateCorrelation(dataset = dataset, targetVar=targetVar, corMethods = corMethods, maxNbBins = maxNbBins, showProgress=printInfo)
+  if(is.null(targetVar)){
+    #corr matrix for clustering
+    corMatrix=corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',clusteringCorMethod)])# prefer MaxNMI or distCor for the clustering because they hilights different types of correlation (not only linear and monotonic ones) and because prefer MaxNMI because it is always available/computable (whatever the type of variable)
+    #perform clustering
+    corGroups=clusterVariables(corMatrix = corMatrix, nbCluster = nbCluster)
+    if(printInfo) cat(paste("Clustering computation finished:",Sys.time()));cat("\n")
+  }else{
+    corGroups=NULL
+    clusteringCorMethod=NULL
+  }
   endTime<-Sys.time()
   #compute corr matrices
   corMatrices=lapply(corMethods,function(x){corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',x)])})
@@ -65,6 +71,6 @@ linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendal
   launchShiny=function(...){linkspotterUI(dataset,corDF,corGroups, defaultMinCor = defaultMinCor, appTitle=appTitle, htmlTop=htmlTop, htmlBottom=htmlBottom, ...)}
   if(printInfo) cat(paste(c("Total Computation time: ", computationTime),collapse=""));cat("\n")
   #finish
-  return(list(computationTime=computationTime,launchShiny=launchShiny,dataset=dataset,corDF=corDF,corMatrices=corMatrices,corGroups=corGroups,clusteringCorMethod=clusteringCorMethod,defaultMinCor=defaultMinCor,defaultCorMethod=defaultCorMethod,corMethods=corMethods))
+  return(list(computationTime=computationTime, launchShiny=launchShiny, dataset=dataset, targetVar=targetVar, corDF=corDF, corMatrices=corMatrices, corGroups=corGroups, clusteringCorMethod=clusteringCorMethod, defaultMinCor=defaultMinCor, defaultCorMethod=defaultCorMethod, corMethods=corMethods))
 }
 ###

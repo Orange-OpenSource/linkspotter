@@ -6,6 +6,7 @@
 \usage{
 linkspotterComplete(
   dataset,
+  targetVar = NULL,
   corMethods = c("pearson", "spearman", "kendall", "mic", "MaxNMI"),
   maxNbBins = 100,
   defaultMinCor = 0.3,
@@ -20,6 +21,8 @@ linkspotterComplete(
 }
 \arguments{
 \item{dataset}{the dataframe which variables bivariate correlations are to be analyzed.}
+
+\item{targetVar}{a vector of character strings corresponding to the names of the target variables. If not NULL, correlation coefficients are computed only with that target variables.}
 
 \item{corMethods}{a vector of correlation coefficients to compute. The available coefficients are the following : \code{c("pearson","spearman","kendall","mic","distCor","MaxNMI")}. It is not case sensitive and still work if only the beginning of the word is put (e.g. \code{pears}).}
 

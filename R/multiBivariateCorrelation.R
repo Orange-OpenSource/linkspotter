@@ -8,7 +8,7 @@
 #' @description  Computation of a correlation dataframe.
 #'
 #' @param dataset the dataframe which variables bivariate correlations are to be analyzed.
-#' @param targetVar a character string corresponding to the name of the target variable. If not NULL, correlation coefficients are computed only with that target variable.
+#' @param targetVar a vector of character strings corresponding to the names of the target variables. If not NULL, correlation coefficients are computed only with that target variables.
 #' @param corMethods a vector of correlation coefficients to compute. The available coefficients are the following : \code{c("pearson","spearman","kendall","mic","distCor","MaxNMI")}. It is not case sensitive and still work if only the beginning of the word is put (e.g. \code{pears}).
 #' @param maxNbBins an integer used if corMethods include 'MaxNMI'. It corresponds to the number of bins limitation (for computation time limitation), maxNbBins=100 by default.
 #' @param showProgress a boolean to decide whether to show the progress bar.
