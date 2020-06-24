@@ -29,6 +29,25 @@
 #'
 multiBivariateCorrelation<-function(dataset, corMethods=c("pearson","spearman","kendall","mic","MaxNMI"), maxNbBins=100, showProgress=T){
 
+  # print info
+  if(showProgress){
+    startTime<-Sys.time()
+    p=ncol(dataset)
+    nbCouples=((p*p)-p)/2
+    nbObs=nrow(dataset)
+    cat("\n")
+    cat(paste(c("Number of variables: ", p), collapse=""))
+    cat("\n")
+    cat(paste(c("Number of couples: ", nbCouples), collapse=""))
+    cat("\n")
+    cat(paste(c("Number of observations: ", nbObs), collapse=""))
+    cat("\n")
+    cat(paste0("Coefs: ", paste0(corMethods, collapse=", ")))
+    cat("\n")
+    cat(paste("Start time:",startTime))
+    cat("\n")
+  }
+
   #progress bar
   if(!showProgress){
     pbo <- pboptions(type = "none")
@@ -134,5 +153,9 @@ multiBivariateCorrelation<-function(dataset, corMethods=c("pearson","spearman","
 
   # return result formatted
   dfcmb=data.frame(id=as.character(1:nrow(dfcmb)),dfcmb)
+  if(showProgress){
+    cat(paste("Finished:",Sys.time()))
+    cat("\n")
+  }
   return(dfcmb)
 }
