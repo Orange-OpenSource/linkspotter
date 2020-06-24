@@ -42,7 +42,8 @@ multiBivariateCorrelation<-function(dataset, targetVar=NULL, corMethods=c("pears
       }else{
         nbCouples<-p*nt-nt*(nt+1)/2
         cat(paste(c("Target variable(s): ", paste0(targetVar, collapse=", ")), collapse=""), "\n")
-        cat(paste(c("Number of couples: ", nbCouples), collapse=""), "\n")
+        cat(paste(c("Number of covariates: ", p), collapse=""), "\n")
+        cat(paste(c("Number of couples to compute: ", nbCouples), collapse=""), "\n")
       }
     }else{
       nt=p
