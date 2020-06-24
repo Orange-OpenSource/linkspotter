@@ -4,15 +4,19 @@
 \alias{BeEFdiscretization.numnum}
 \title{BeEF: Best Equal-Frequency discretization (for a couple of quantitative variables)}
 \usage{
-BeEFdiscretization.numnum(continuousX, continuousY, maxNbBins = 100,
-  showProgress = F)
+BeEFdiscretization.numnum(
+  continuousX,
+  continuousY,
+  maxNbBins = 100,
+  showProgress = F
+)
 }
 \arguments{
 \item{continuousX}{a vector of numeric.}
 
 \item{continuousY}{a vector of numeric.}
 
-\item{maxNbBins}{an integer corresponding to the number of bin limitation (for computation time limitation), maxNbBins=100 by default.}
+\item{maxNbBins}{an integer corresponding to the number of bins limitation (for computation time limitation), maxNbBins=100 by default.}
 
 \item{showProgress}{a boolean to decide whether to show the progress bar.}
 }

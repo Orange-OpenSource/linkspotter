@@ -4,8 +4,12 @@
 \alias{BeEFdiscretization.numfact}
 \title{BeEF: Best Equal-Frequency discretization}
 \usage{
-BeEFdiscretization.numfact(continuousY, factorX, includeFactorNA = T,
-  showProgress = F)
+BeEFdiscretization.numfact(
+  continuousY,
+  factorX,
+  includeFactorNA = T,
+  showProgress = F
+)
 }
 \arguments{
 \item{continuousY}{a vector of numeric.}

@@ -11,7 +11,7 @@ maxNMI(x, y, maxNbBins = 100, showProgress = F)
 
 \item{y}{a vector of numeric or factor.}
 
-\item{maxNbBins}{an integer corresponding to the number of bin limitation (for computation time limitation), maxNbBins=100 by default.}
+\item{maxNbBins}{an integer corresponding to the number of bins limitation (for computation time limitation), maxNbBins=100 by default.}
 
 \item{showProgress}{a boolean to decide whether to show the progress bar.}
 }

@@ -4,9 +4,16 @@
 \alias{linkspotterGraphOnMatrix}
 \title{Linspotter graph on matrix}
 \usage{
-linkspotterGraphOnMatrix(corMatrix, cluster = FALSE,
-  variablesClustering = NULL, minCor = 0.3, corMethod = "Coef.",
-  smoothEdges = T, dynamicNodes = F, colorEdgesByCorDirection = F)
+linkspotterGraphOnMatrix(
+  corMatrix,
+  cluster = FALSE,
+  variablesClustering = NULL,
+  minCor = 0.3,
+  corMethod = "Coef.",
+  smoothEdges = T,
+  dynamicNodes = F,
+  colorEdgesByCorDirection = F
+)
 }
 \arguments{
 \item{corMatrix}{a dataframe corresponding to a matrix of correlation or distance.}

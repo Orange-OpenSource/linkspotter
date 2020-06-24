@@ -4,10 +4,10 @@
 \alias{createShinyAppFolder}
 \title{Ready-for-deployment shiny app folder creation}
 \usage{
-createShinyAppFolder(linkspotterShinyAppObject, folderName)
+createShinyAppFolder(linkspotterObject, folderName)
 }
 \arguments{
-\item{linkspotterShinyAppObject}{a shiny.appobj object, resulting from linkspotterUI(), linkspotterComplete()$run_it or linkspotterOnFile()$run_it functions.}
+\item{linkspotterObject}{a linkspotter object, resulting from linkspotterComplete() or linkspotterOnFile() functions.}
 
 \item{folderName}{a character string corresponding to the name of the shiny app folder to create.}
 }
@@ -17,9 +17,8 @@ This function creates a shiny app folder containing a shiny app object directly 
 \examples{
 data(iris)
 lsOutputIris<-linkspotterComplete(iris)
-lsShinyObject<-lsOutputIris$launchShiny()
 tmpShinyFolder<-tempdir()
-createShinyAppFolder(lsShinyObject,
+createShinyAppFolder(lsOutputIris,
 folderName=file.path(tmpShinyFolder,"myIrisLinkspotterShinyApp1")
 )
 \dontrun{

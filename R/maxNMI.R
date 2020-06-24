@@ -9,7 +9,7 @@
 #'
 #' @param x a vector of numeric or factor.
 #' @param y a vector of numeric or factor.
-#' @param maxNbBins an integer corresponding to the number of bin limitation (for computation time limitation), maxNbBins=100 by default.
+#' @param maxNbBins an integer corresponding to the number of bins limitation (for computation time limitation), maxNbBins=100 by default.
 #' @param showProgress a boolean to decide whether to show the progress bar.
 #' @return a double between 0 and 1 corresponding to the MaxNMI.
 #'

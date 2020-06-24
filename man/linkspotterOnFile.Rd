@@ -4,12 +4,19 @@
 \alias{linkspotterOnFile}
 \title{Proccess Linkspotter on an external file}
 \usage{
-linkspotterOnFile(file, corMethods = c("pearson", "spearman", "kendall",
-  "mic", "MaxNMI"), defaultMinCor = 0.3,
+linkspotterOnFile(
+  file,
+  corMethods = c("pearson", "spearman", "kendall", "mic", "MaxNMI"),
+  defaultMinCor = 0.3,
   defaultCorMethod = corMethods[length(corMethods)],
-  clusteringCorMethod = corMethods[length(corMethods)], nbCluster = 1:9,
-  printInfo = T, appTitle = "Linkspotter", htmlTop = "",
-  htmlBottom = "", ...)
+  clusteringCorMethod = corMethods[length(corMethods)],
+  nbCluster = 1:9,
+  printInfo = T,
+  appTitle = "Linkspotter",
+  htmlTop = "",
+  htmlBottom = "",
+  ...
+)
 }
 \arguments{
 \item{file}{the file containing a structured dataset which the bivariate correlations are to be analyzed.}
