@@ -1,7 +1,7 @@
 Package: linkspotter
 Type: Package
 Title: Bivariate Correlations Calculation and Visualization
-Version: 1.2.0
+Version: 1.2.1
 Date: 2018-07-18
 Authors@R: c(
   person("Alassane", "Samba", role = c("aut", "cre"),email = "alassane.samba@orange.com"), 
