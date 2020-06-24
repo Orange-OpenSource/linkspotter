@@ -44,40 +44,17 @@
 #' @export
 linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendall","mic","MaxNMI"), defaultMinCor=0.3, defaultCorMethod=corMethods[length(corMethods)], clusteringCorMethod=defaultCorMethod, nbCluster=1:9, printInfo=T, appTitle="Linkspotter", htmlTop="", htmlBottom=""){
   startTime<-Sys.time()
-  p=ncol(dataset)
-  nbCouples=((p*p)-p)/2
-  nbObs=nrow(dataset)
-  #unitDuration=0.050 # in seconds
-  #durationEstim=nbObs/100*nbCouples*unitDuration
-
-  # puseless=length(uselessVar(dataset))
-  # pempty=length(emptyVar(dataset))
-  # pnum=sum(unlist(lapply(dataset[,colnames(dataset)%in%c(emptyVar(dataset),uselessVar(dataset))],is.numeric)))
-  # pfact=p-pempty-puseless-pnum
-  # nbMixCouples=pfact*pnum
-  # nbFactCouples=((pfact*pfact)-pfact)/2
-  # nbNumCouples=((pnum*pnum)-pnum)/2
-  # nbUsefulCouples=nbMixCouples+nbFactCouples+nbNumCouples
-
-  if(printInfo){
-    print(paste(c("Number of variables: ", p), collapse=""))
-    print(paste(c("Number of couples: ", nbCouples), collapse=""))
-    print(paste(c("Number of observations: ", nbObs), collapse=""))
-    #print(paste(c("Duration estimation: ",format(as.POSIXct(durationEstim, origin = "1970-01-01", tz = "UTC"), "%T")), collapse=""))
-    print(paste("Start time:",startTime))
-  }
   #complete abbreviations
   corMethods=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")[pmatch(tolower(corMethods),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")))]
   defaultCorMethod=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")[pmatch(tolower(defaultCorMethod),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")))]
   clusteringCorMethod=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")[pmatch(tolower(clusteringCorMethod),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")))]
   #compute corDF
   corDF=multiBivariateCorrelation(dataset = dataset, corMethods = corMethods, showProgress=printInfo)
-  if(printInfo) print(paste("Correlations computation finished:",Sys.time()))
   #corr matrix for clustering
   corMatrix=corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',clusteringCorMethod)])# prefer MaxNMI or distCor for the clustering because they hilights different types of correlation (not only linear and monotonic ones) and because prefer MaxNMI because it is always available/computable (whatever the type of variable)
   #perform clustering
   corGroups=clusterVariables(corMatrix = corMatrix, nbCluster = nbCluster)
-  if(printInfo) print(paste("Clustering computation finished:",Sys.time()))
+  if(printInfo) cat(paste("Clustering computation finished:",Sys.time()));cat("\n")
   endTime<-Sys.time()
   #compute corr matrices
   corMatrices=lapply(corMethods,function(x){corCouplesToMatrix(x1_x2_val = corDF[,c('X1','X2',x)])})
@@ -85,7 +62,7 @@ linkspotterComplete<-function(dataset, corMethods=c("pearson","spearman","kendal
   computationTime=format(round(endTime-startTime,3),nsmall = 3)
   #compute UI
   launchShiny=function(...){linkspotterUI(dataset,corDF,corGroups, defaultMinCor = defaultMinCor, appTitle=appTitle, htmlTop=htmlTop, htmlBottom=htmlBottom, ...)}
-  if(printInfo) print(paste(c("Total Computation time: ", computationTime),collapse=""))
+  if(printInfo) cat(paste(c("Total Computation time: ", computationTime),collapse=""));cat("\n")
   #finish
   return(list(computationTime=computationTime,launchShiny=launchShiny,dataset=dataset,corDF=corDF,corMatrices=corMatrices,corGroups=corGroups,clusteringCorMethod=clusteringCorMethod,defaultMinCor=defaultMinCor,defaultCorMethod=defaultCorMethod,corMethods=corMethods))
 }

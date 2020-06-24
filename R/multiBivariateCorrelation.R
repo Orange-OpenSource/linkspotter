@@ -42,7 +42,7 @@ multiBivariateCorrelation<-function(dataset, corMethods=c("pearson","spearman","
     cat("\n")
     cat(paste(c("Number of observations: ", nbObs), collapse=""))
     cat("\n")
-    cat(paste0("Coefs: ", paste0(corMethods, collapse=", ")))
+    cat(paste0("Coef.: ", paste0(corMethods, collapse=", ")))
     cat("\n")
     cat(paste("Start time:",startTime))
     cat("\n")
@@ -154,7 +154,7 @@ multiBivariateCorrelation<-function(dataset, corMethods=c("pearson","spearman","
   # return result formatted
   dfcmb=data.frame(id=as.character(1:nrow(dfcmb)),dfcmb)
   if(showProgress){
-    cat(paste("Finished:",Sys.time()))
+    cat(paste("Correlation coef. computation finished:",Sys.time()))
     cat("\n")
   }
   return(dfcmb)
