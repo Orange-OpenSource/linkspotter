@@ -5,7 +5,7 @@
 # Copyright (c) 2020 Alassane Samba, Orange
 # ---------------------------------------------------------------------------------
 #' @title EF: Equal-Frequency discretization
-#' @description  Discretize a quantitative variable with equal frequency binning
+#' @description  Discretize a quantitative variable with equal frequency binning if possible
 #'
 #' @param continuousX a vector of numeric.
 #' @param nx an integer corresponding to the desired number of intervals.
