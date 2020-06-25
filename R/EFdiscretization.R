@@ -1,6 +1,6 @@
 # --------------------------------------------------------------------------------
 # title: Linkspotter/EFdiscretization
-# description: Discretize a quantitative variable with equal frequency binning
+# description: Discretize a quantitative variable with equal frequency binning if possible
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2020 Alassane Samba, Orange
 # ---------------------------------------------------------------------------------
