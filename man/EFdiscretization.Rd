@@ -17,7 +17,7 @@ EFdiscretization(continuousX, nx, nbdigitsX = 3)
 a factor.
 }
 \description{
-Discretize a quantitative variable with equal frequency binning
+Discretize a quantitative variable with equal frequency binning if possible
 }
 \examples{
 data(iris)
