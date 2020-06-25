@@ -43,14 +43,14 @@ BeEFdiscretization.numfact<-function(continuousY,factorX, includeNA=T, showProgr
   factorX=droplevels(as.factor(factorX))
 
   # Algo
-  N=length(continuousY)
+  N=length(na.omit(continuousY))
   nX=length(levels(droplevels(as.factor(factorX))))
   if(nX<(N^0.6)){
     nY=2:ceiling((N^0.6)/nX) # (The maximal grid size) see section 2.2.1 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3325791/bin/NIHMS358982-supplement-Supplemental_Figures_and_Tables.pdf
   }else{
     nY=2
   }
-  nbdigitsY<-max(nchar(sub('^0+','',sub('\\.','',continuousY)))) #util: number of digits (to avoid bug of cut2)
+  nbdigitsY<-max(nchar(sub('^0+','',sub('\\.','',na.omit(continuousY))))) #util: number of digits (to avoid bug of cut2)
   NMIs=lapply(nY,function(x){
     factorY<-EFdiscretization(continuousY,x,nbdigitsY)
     list(ny=x,MaxNMI=NormalizedMI(factorY, factorX, includeNA = includeNA))
