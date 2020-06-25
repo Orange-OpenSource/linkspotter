@@ -8,6 +8,7 @@ BeEFdiscretization.numnum(
   continuousX,
   continuousY,
   maxNbBins = 100,
+  includeNA = T,
   showProgress = F
 )
 }
@@ -18,10 +19,12 @@ BeEFdiscretization.numnum(
 
 \item{maxNbBins}{an integer corresponding to the number of bins limitation (for computation time limitation), maxNbBins=100 by default.}
 
+\item{includeNA}{a boolean. TRUE to include NA value as a factor level.}
+
 \item{showProgress}{a boolean to decide whether to show the progress bar.}
 }
 \value{
-a double between 0 and 1 corresponding to the MaxNMI.
+a list of two factors.
 }
 \description{
 Discretize two quantitative variables by optimizing the obtained the Normalized Mutual Information

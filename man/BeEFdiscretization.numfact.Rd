@@ -7,7 +7,7 @@
 BeEFdiscretization.numfact(
   continuousY,
   factorX,
-  includeFactorNA = T,
+  includeNA = T,
   showProgress = F
 )
 }
@@ -16,12 +16,12 @@ BeEFdiscretization.numfact(
 
 \item{factorX}{a vector of factor.}
 
-\item{includeFactorNA}{a boolean. TRUE to include NA value as a factor level.}
+\item{includeNA}{a boolean. TRUE to include NA value as a factor level.}
 
 \item{showProgress}{a boolean to decide whether to show the progress bar.}
 }
 \value{
-a double between 0 and 1 corresponding to the MaxNMI.
+a factor.
 }
 \description{
 Discretize a quantitative variable by optimizing the obtained the Normalized Mutual Information with a target qualitative variable

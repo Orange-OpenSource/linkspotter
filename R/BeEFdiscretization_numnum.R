@@ -9,9 +9,10 @@
 #'
 #' @param continuousX a vector of numeric.
 #' @param continuousY a vector of numeric.
+#' @param includeNA a boolean. TRUE to include NA value as a factor level.
 #' @param maxNbBins an integer corresponding to the number of bins limitation (for computation time limitation), maxNbBins=100 by default.
 #' @param showProgress a boolean to decide whether to show the progress bar.
-#' @return a double between 0 and 1 corresponding to the MaxNMI.
+#' @return a list of two factors.
 #'
 #' @examples
 #' # calculate a correlation dataframe
@@ -26,7 +27,7 @@
 #'
 #' @export
 #'
-BeEFdiscretization.numnum<-function(continuousX,continuousY,maxNbBins=100,showProgress=F){
+BeEFdiscretization.numnum<-function(continuousX,continuousY,maxNbBins=100, includeNA=T, showProgress=F){
 
   #progress bar
   if(!showProgress){
@@ -37,11 +38,8 @@ BeEFdiscretization.numnum<-function(continuousX,continuousY,maxNbBins=100,showPr
     on.exit(pbapply::pboptions(pbo), add = TRUE)
   }
 
-  # Only on complete obs
+  #identifier complete obs
   cc=complete.cases(data.frame(continuousX,continuousY))
-  continuousX=continuousX[cc]
-  continuousY=continuousY[cc]
-
   N=sum(cc)
 
   #if no variability
@@ -49,8 +47,8 @@ BeEFdiscretization.numnum<-function(continuousX,continuousY,maxNbBins=100,showPr
     return(list(nx=NA,ny=NA,MaxNMI=NA))
 
   #util: number of digits (to avoid bug of cut2)
-  nbdigitsX<-max(nchar(sub('^0+','',sub('\\.','',continuousX))))
-  nbdigitsY<-max(nchar(sub('^0+','',sub('\\.','',continuousY))))
+  nbdigitsX<-max(nchar(sub('^0+','',sub('\\.','',continuousX[cc]))))
+  nbdigitsY<-max(nchar(sub('^0+','',sub('\\.','',continuousY[cc]))))
 
   #threshold
   threshold=min(c((N^0.6),maxNbBins,length(unique(continuousX))*length(unique(continuousY))),na.rm=T)
@@ -60,30 +58,15 @@ BeEFdiscretization.numnum<-function(continuousX,continuousY,maxNbBins=100,showPr
   egt=eg[,1]*eg[,2]
   eg2=eg[egt<=threshold,]
   NMIs = pbapply::pblapply(as.data.frame(t(eg2)), function(n) {
-    xfact<-EF.discretisation(continuousX,n[1],nbdigitsX)
-    yfact<-EF.discretisation(continuousY,n[2],nbdigitsY)
-    nmi = NormalizedMI(xfact, yfact)
+    xfact<-EFdiscretization(continuousX,n[1],nbdigitsX)
+    yfact<-EFdiscretization(continuousY,n[2],nbdigitsY)
+    nmi = NormalizedMI(xfact, yfact, includeNA = includeNA)
     list(nx = n[1], ny = n[2], NMI = nmi)
   })
   NMIsDF = as.data.frame(matrix(unlist(NMIs), ncol = 3, byrow = T))
   colnames(NMIsDF) <- c("nx", "ny", "MaxNMI")
   best = NMIsDF[which.max(NMIsDF$MaxNMI), ]
-  b_xfact<-EF.discretisation(continuousX,best$nx,nbdigitsX)
-  b_yfact<-EF.discretisation(continuousY,best$ny,nbdigitsY)
+  b_xfact<-EFdiscretization(continuousX,best$nx,nbdigitsX)
+  b_yfact<-EFdiscretization(continuousY,best$ny,nbdigitsY)
   return(list(x = b_xfact, y = b_yfact))
-}
-EF.discretisation<-function(continuousX,nx,nbdigitsX){
-  if(length(levels(as.factor(continuousX)))<=nx){
-    xfact<-as.factor(continuousX)
-  }else{
-    breaksX=quantile(continuousX,seq(0,1,1/nx), type = 1, na.rm=T)
-    isolated=c()
-    while(max(table(breaksX))>1){
-      isolated=c(isolated,unique(breaksX)[which(table(breaksX)>1)])
-      breaksX=quantile(continuousX[!continuousX%in%isolated],seq(0,1,1/(nx-length(isolated))), type = 1, na.rm=T)
-    }
-    breaksX<-c(breaksX,isolated)
-    xfact=cut(continuousX,breaks = breaksX, include.lowest = T, dig.lab = nbdigitsX)
-  }
-  return(xfact)
 }

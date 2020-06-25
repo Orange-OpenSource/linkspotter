@@ -9,9 +9,9 @@
 #'
 #' @param continuousY a vector of numeric.
 #' @param factorX a vector of factor.
-#' @param includeFactorNA a boolean. TRUE to include NA value as a factor level.
+#' @param includeNA a boolean. TRUE to include NA value as a factor level.
 #' @param showProgress a boolean to decide whether to show the progress bar.
-#' @return a double between 0 and 1 corresponding to the MaxNMI.
+#' @return a factor.
 #'
 #' @examples
 #' # calculate a correlation dataframe
@@ -24,7 +24,7 @@
 #'
 #' @export
 #'
-BeEFdiscretization.numfact<-function(continuousY,factorX, includeFactorNA=T, showProgress=F){
+BeEFdiscretization.numfact<-function(continuousY,factorX, includeNA=T, showProgress=F){
 
   #progress bar
   if(!showProgress){
@@ -35,21 +35,12 @@ BeEFdiscretization.numfact<-function(continuousY,factorX, includeFactorNA=T, sho
     on.exit(pboptions(pbo), add = TRUE)
   }
 
-  #if includeFactorNA
-  if(includeFactorNA&(sum(is.na(factorX))>0)){
-    factorX=as.character(factorX)
-    factorX[is.na(factorX)] <- c("NA")
-    factorX=as.factor(factorX)
-  }
-
   #if no variability
   if((length(levels(droplevels(as.factor(factorX))))<2))
     return(list(ny=NA,MaxNMI=NA))
 
-  # Adapt for pair.wise.complete.obs computation
-  cc=stats::complete.cases(cbind(continuousY,factorX))
-  continuousY=continuousY[cc]
-  factorX=droplevels(as.factor(factorX[cc]))
+  # format
+  factorX=droplevels(as.factor(factorX))
 
   # Algo
   N=length(continuousY)
@@ -61,11 +52,11 @@ BeEFdiscretization.numfact<-function(continuousY,factorX, includeFactorNA=T, sho
   }
   nbdigitsY<-max(nchar(sub('^0+','',sub('\\.','',continuousY)))) #util: number of digits (to avoid bug of cut2)
   NMIs=lapply(nY,function(x){
-    factorY<-EF.discretisation(continuousY,x,nbdigitsY)
-    list(ny=x,MaxNMI=NormalizedMI(factorY, factorX))
+    factorY<-EFdiscretization(continuousY,x,nbdigitsY)
+    list(ny=x,MaxNMI=NormalizedMI(factorY, factorX, includeNA = includeNA))
   })
   NMIsDF=as.data.frame(matrix(unlist(NMIs), ncol = 2, byrow = T))
   colnames(NMIsDF)<-c("ny", "MaxNMI")
   best=NMIsDF[which.max(NMIsDF$MaxNMI),]
-  return(EF.discretisation(continuousY,best$ny,nbdigitsY))
+  return(EFdiscretization(continuousY,best$ny,nbdigitsY))
 }

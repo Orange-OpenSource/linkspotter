@@ -1,6 +1,6 @@
 # --------------------------------------------------------------------------------
 # title: Linkspotter/NormalizedMI
-# description: calculate the normalized mutual information between 2 categorical variables
+# description: Calculate the normalized mutual information between 2 categorical variables
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Alassane Samba, Orange
 # ---------------------------------------------------------------------------------
