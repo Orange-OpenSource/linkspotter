@@ -1,8 +1,8 @@
 # --------------------------------------------------------------------------------
-# title: Linkspotter/is_not_informative_variable
-# description: Computes the MaxNMI between the two variables whatever their types, by discretizing using Best Equal-Frequency-based discretization (BeEF) if necessary.
+# title: Linkspotter/is.not.informative.variable
+# description: This function determines if a given vector of numeric or factor is a non informative variable or not.
 # author: Alassane Samba (alassane.samba@orange.com)
-# Copyright (c) 2017 Alassane Samba, Orange
+# Copyright (c) 2020 Alassane Samba, Orange
 # ---------------------------------------------------------------------------------
 #' @title Is a vector an non informative variable
 #' @description This function determines if a given vector of numeric or factor is a non informative variable or not.
@@ -32,4 +32,11 @@ is.not.informative.variable<-function(x, includeNA=T){
   !(is.numeric(x)&&(var(x, na.rm=T)%in%c(0,NA))) && # not a single numeric value
   !(!is.numeric(x)&&(length(levels(factor(x)))<2)) # not a single level
   )
+}
+# empty vars
+emptyVar<-function(dataset){
+  names(dataset)[unlist(lapply(dataset,function(x){sum(!is.na(x))==0}))]
+}
+uselessVar<-function(dataset){
+  names(dataset)[lapply(dataset,function(x){length(levels(as.factor(x)))})==1]
 }
