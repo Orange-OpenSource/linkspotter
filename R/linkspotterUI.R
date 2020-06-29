@@ -248,18 +248,19 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
         variab2=as.character(corDF$X2[corDF$id%in%c(edgeid)])
         tab0=as.data.frame(table(x=dataset[,variab1],y=dataset[,variab2]))
         tab1=tab0[tab0$Freq>0,]
+        tab1$x<-as.numeric(tab1$x)
+        tab1$y<-as.numeric(tab1$y)
         edges=corDF
         if((edges$typeOfCouple[edges$id%in%c(edgeid)])%in%c("num.num")){
           ggplot(tab1, aes_string("x", "y", size = "Freq")) +
-            geom_point(alpha=0.5) +
-            scale_size(range = c(4, 10), name="Freq") +
+            geom_point(alpha=0.7) +
             labs(x = variab1, y = variab2)
         }else if((edges$typeOfCouple[edges$id%in%c(edgeid)])%in%c("num.fact")){
-          ggplot(dataset, aes_string(variab1, variab2)) +
+          ggplot(dataset, aes_string(variab2, variab1)) +
             geom_boxplot() +
             stat_summary(fun.y=mean, geom="point", shape=23, size=4)
         }else if((edges$typeOfCouple[edges$id%in%c(edgeid)])%in%c("fact.num")){
-          ggplot(dataset, aes_string(variab2, variab1)) +
+          ggplot(dataset, aes_string(variab1, variab2)) +
             geom_boxplot() +
             stat_summary(fun.y=mean, geom="point", shape=23, size=4)
         }else if((edges$typeOfCouple[edges$id%in%c(edgeid)])%in%c("fact.fact")){
