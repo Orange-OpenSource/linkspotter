@@ -22,17 +22,20 @@
 #' corCouples<-matrixToCorCouples(matrix = corMatrix,coefName="pearson")
 #' print(corCouples)
 #'
-#' @import dplyr
-#' @import tidyr
+#' @importFrom dplyr mutate arrange desc
+#' @importFrom tidyr pivot_longer
 #'
 #' @export
 matrixToCorCouples<-function(matrix, coefName="Coef.", sortByDescAbs=F){
   matrix<-as.data.frame(matrix)
   vars<-rownames(matrix)
-  resfull<-matrix %>% mutate_(X1=quote(vars)) %>% gather_(key_col = 'X2', value_col = coefName, gather_cols=vars)
+  resfull<-matrix %>%
+    mutate(X1=vars) %>%
+    pivot_longer(cols=vars, names_to = "X2", values_to = coefName)
   res<-resfull[paste0(resfull$X1,resfull$X2)%in%apply(combn(vars,m = 2),2,paste,collapse=""),]
-  if(sortByDescAbs) res<-res %>% arrange(desc(abs(eval(parse(text=coefName)))))
+  if(sortByDescAbs){
+    res<-res %>%
+      arrange(desc(abs(eval(parse(text=coefName)))))
+  }
   res
 }
-
-
