@@ -25,8 +25,7 @@
 #' @export
 #'
 BeEFdiscretization.numfact<-function(continuousY,factorX, includeNA=T, showProgress=F){
-
-  #progress bar
+  # progress bar
   if(!showProgress){
     pbo <- pboptions(type = "none")
     on.exit(pboptions(pbo), add = TRUE)
@@ -34,14 +33,17 @@ BeEFdiscretization.numfact<-function(continuousY,factorX, includeNA=T, showProgr
     pbo <- pboptions(type = "timer")
     on.exit(pboptions(pbo), add = TRUE)
   }
-
-  #if no variability
-  if((length(levels(droplevels(as.factor(factorX))))<2))
-    return(list(ny=NA,MaxNMI=NA))
-
+  # handle non informative var case
+  if(is.not.informative.variable(continuousY)){
+    message("continuousY is not an informative variable")
+    return(NA)
+  }
+  if(is.not.informative.variable(factorX)){
+    message("factorX is not an informative variable")
+    return(NA)
+  }
   # format
   factorX=droplevels(as.factor(factorX))
-
   # Algo
   N=length(na.omit(continuousY))
   nX=length(levels(droplevels(as.factor(factorX))))

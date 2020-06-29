@@ -22,8 +22,19 @@
 #'
 #' @export
 maxNMI<-function(x, y, includeNA=T, maxNbBins=100, showProgress = F){
+  # handle non informative var case
+  if(is.not.informative.variable(x)){
+    message("x is not an informative variable")
+    return(NA)
+  }
+  if(is.not.informative.variable(y)){
+    message("y is not an informative variable")
+    return(NA)
+  }
+  # determine the type of couple
   typeOfCouple=2*is.numeric(x)+is.numeric(y)# 3->(num,num), 2->(num,fact), 1->(fact,num), 0->(fact,fact)
   typeOfCouple=factor(as.factor(typeOfCouple),levels = c("0","1","2","3"),labels =c("fact.fact","fact.num","num.fact","num.num"))
+  # perform the needed computation according to the type of couple
   switch(as.character(typeOfCouple),
          fact.fact={
            NormalizedMI(x,y,includeNA = includeNA)

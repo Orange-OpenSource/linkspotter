@@ -50,6 +50,7 @@ Collate:
   'uselessVar.R'
   'createShinyAppFolder.R'
   'EFdiscretization.R'
+  'non_informative_var.R'
 RoxygenNote: 7.1.0
 Suggests: knitr,
     rmarkdown

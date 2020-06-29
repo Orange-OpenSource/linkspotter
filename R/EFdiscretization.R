@@ -8,7 +8,7 @@
 #' @description  Discretize a quantitative variable with equal frequency binning if possible
 #'
 #' @param continuousX a vector of numeric.
-#' @param nx an integer corresponding to the desired number of intervals.
+#' @param nX an integer corresponding to the desired number of intervals.
 #' @param nbdigitsX number of significant digits to use in constructing levels. Default is 3.
 #' @return a factor.
 #'
@@ -21,15 +21,21 @@
 #'
 #' @export
 #'
-EFdiscretization<-function(continuousX,nx,nbdigitsX=3){
-  if(length(levels(as.factor(continuousX)))<=nx){
+EFdiscretization<-function(continuousX,nX,nbdigitsX=3){
+  # handle non informative var case
+  if(is.not.informative.variable(continuousX)){
+    message("continuousX is not an informative variable")
+    return(NA)
+  }
+  # algo
+  if(length(levels(as.factor(continuousX)))<=nX){
     xfact<-as.factor(continuousX)
   }else{
-    breaksX=quantile(continuousX,seq(0,1,1/nx), type = 1, na.rm=T)
+    breaksX=quantile(continuousX,seq(0,1,1/nX), type = 1, na.rm=T)
     isolated=c()
     while(max(table(breaksX))>1){
       isolated=c(isolated,unique(breaksX)[which(table(breaksX)>1)])
-      breaksX=quantile(continuousX[!continuousX%in%isolated],seq(0,1,1/(nx-length(isolated))), type = 1, na.rm=T)
+      breaksX=quantile(continuousX[!continuousX%in%isolated],seq(0,1,1/(nX-length(isolated))), type = 1, na.rm=T)
     }
     breaksX<-c(breaksX,isolated)
     xfact=cut(continuousX,breaks = breaksX, include.lowest = T, dig.lab = nbdigitsX)

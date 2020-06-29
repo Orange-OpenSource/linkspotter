@@ -28,8 +28,7 @@
 #' @export
 #'
 BeEFdiscretization.numnum<-function(continuousX,continuousY,maxNbBins=100, includeNA=T, showProgress=F){
-
-  #progress bar
+  # progress bar
   if(!showProgress){
     pbo <- pbapply::pboptions(type = "none")
     on.exit(pbapply::pboptions(pbo), add = TRUE)
@@ -37,20 +36,23 @@ BeEFdiscretization.numnum<-function(continuousX,continuousY,maxNbBins=100, inclu
     pbo <- pbapply::pboptions(type = "timer")
     on.exit(pbapply::pboptions(pbo), add = TRUE)
   }
-
-  #identifier complete obs
+  # identify complete obs
   cc=complete.cases(data.frame(continuousX,continuousY))
   N=sum(cc)
 
-  #if no variability
-  if((length(levels(droplevels(as.factor(continuousX))))<2)|(length(levels(droplevels(as.factor(continuousY))))<2))
-    return(list(nx=NA,ny=NA,MaxNMI=NA))
-
-  #util: number of digits (to avoid bug of cut2)
+  # handle non informative var case
+  if(is.not.informative.variable(continuousY)){
+    message("continuousY is not an informative variable")
+    return(NA)
+  }
+  if(is.not.informative.variable(continuousY)){
+    message("continuousY is not an informative variable")
+    return(NA)
+  }
+  # util: number of digits (to avoid bug of cut2)
   nbdigitsX<-max(nchar(sub('^0+','',sub('\\.','',continuousX[cc]))))
   nbdigitsY<-max(nchar(sub('^0+','',sub('\\.','',continuousY[cc]))))
-
-  #threshold
+  # threshold
   threshold=min(c((N^0.6),maxNbBins,length(unique(continuousX))*length(unique(continuousY))),na.rm=T)
   if(threshold<4) threshold<-4 #(2*2)
   # Algo

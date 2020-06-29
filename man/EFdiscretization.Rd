@@ -4,12 +4,12 @@
 \alias{EFdiscretization}
 \title{EF: Equal-Frequency discretization}
 \usage{
-EFdiscretization(continuousX, nx, nbdigitsX = 3)
+EFdiscretization(continuousX, nX, nbdigitsX = 3)
 }
 \arguments{
 \item{continuousX}{a vector of numeric.}
 
-\item{nx}{an integer corresponding to the desired number of intervals.}
+\item{nX}{an integer corresponding to the desired number of intervals.}
 
 \item{nbdigitsX}{number of significant digits to use in constructing levels. Default is 3.}
 }
