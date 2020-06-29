@@ -19,7 +19,6 @@
 #' discreteSepalLength=BeEFdiscretization.numfact(continuousY=iris$Sepal.Length,factorX=iris$Species)
 #' summary(discreteSepalLength)
 #'
-#' @importFrom Hmisc cut2
 #' @importFrom stats complete.cases
 #'
 #' @export

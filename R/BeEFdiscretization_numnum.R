@@ -21,7 +21,6 @@
 #' summary(disc$x)
 #' summary(disc$y)
 #'
-#' @importFrom Hmisc cut2
 #' @importFrom stats complete.cases
 #' @importFrom pbapply pblapply pboptions
 #'

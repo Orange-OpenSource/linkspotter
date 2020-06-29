@@ -25,14 +25,12 @@ Imports:
     energy,
     mclust,
     rAmCharts,
-    Hmisc,
     pbapply,
     ggplot2,
     dplyr,
     tidyr
 Collate:
   'linkspotterComplete.R'
-  'boostedBoxplot.R'
   'clusterVariables.R'
   'emptyVar.R'
   'linkspotterDurationEstimator.R'

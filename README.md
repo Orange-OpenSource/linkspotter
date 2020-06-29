@@ -233,4 +233,4 @@ The **Correlation coefficient** option allows you to choose the coefficient of c
 
 # Sources
 
-Linkspotter uses and combine features coming from several other R packages, namely infotheo, minerva, energy, mclust, shiny, visNetwork, rAmCharts, ggplot2 and Hmisc.
+Linkspotter uses and combine features coming from several other R packages, namely infotheo, minerva, energy, mclust, shiny, visNetwork, rAmCharts and ggplot2.
