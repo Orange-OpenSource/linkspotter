@@ -246,18 +246,26 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
         edgeid=input$edgeid
         variab1=as.character(corDF$X1[corDF$id%in%c(edgeid)])
         variab2=as.character(corDF$X2[corDF$id%in%c(edgeid)])
-        dataset=dataset
+        tab0=as.data.frame(table(x=dataset[,variab1],y=dataset[,variab2]))
+        tab1=tab0[tab0$Freq>0,]
         edges=corDF
         if((edges$typeOfCouple[edges$id%in%c(edgeid)])%in%c("num.num")){
-          plot(x = as.numeric(dataset[,variab1]), y = as.numeric(dataset[,variab2]), xlab = variab1, ylab=variab2, main=paste(paste(variab1,"vs"),variab2))
+          ggplot(tab1, aes_string("x", "y", size = "Freq")) +
+            geom_point(alpha=0.5) +
+            scale_size(range = c(4, 10), name="Freq") +
+            labs(x = variab1, y = variab2)
         }else if((edges$typeOfCouple[edges$id%in%c(edgeid)])%in%c("num.fact")){
-          boostedBoxplot(y=as.numeric(dataset[,variab1]),x=as.factor(dataset[,variab2]), laby = variab1, labx=variab2, main=paste(paste(variab1,"vs"),variab2))
+          ggplot(dataset, aes_string(variab1, variab2)) +
+            geom_boxplot() +
+            stat_summary(fun.y=mean, geom="point", shape=23, size=4)
         }else if((edges$typeOfCouple[edges$id%in%c(edgeid)])%in%c("fact.num")){
-          plot(as.numeric(dataset[,variab2])~as.factor(dataset[,variab1]), ylab = variab2, xlab=variab1, main=paste(paste(variab1,"vs"),variab2))
+          ggplot(dataset, aes_string(variab2, variab1)) +
+            geom_boxplot() +
+            stat_summary(fun.y=mean, geom="point", shape=23, size=4)
         }else if((edges$typeOfCouple[edges$id%in%c(edgeid)])%in%c("fact.fact")){
-          ggplot(as.data.frame(table(x=dataset[,variab1],y=dataset[,variab2])), aes_string('x', 'y')) +
-            geom_tile(aes_string(fill = 'Freq')) +
-            geom_text(aes_string(label = 'Freq'), color="white") +
+          ggplot(tab0, aes_string("x", "y")) +
+            geom_tile(aes_string(fill = "Freq")) +
+            geom_text(aes_string(label = "Freq"), color="white") +
             scale_x_discrete(expand = c(0,0)) +
             scale_y_discrete(expand = c(0,0)) +
             scale_fill_gradient("Freq", low = "lightblue", high = "blue") +
