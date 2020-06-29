@@ -32,7 +32,6 @@ Imports:
 Collate:
   'linkspotterComplete.R'
   'clusterVariables.R'
-  'emptyVar.R'
   'linkspotterDurationEstimator.R'
   'linkspotterGraph.R'
   'linkspotterGraphOnMatrix.R'
@@ -45,7 +44,6 @@ Collate:
   'BeEFdiscretization_numnum.R'
   'multiBivariateCorrelation.R'
   'NormalizedMI.R'
-  'uselessVar.R'
   'createShinyAppFolder.R'
   'EFdiscretization.R'
   'non_informative_var.R'
