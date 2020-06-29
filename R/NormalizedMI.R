@@ -51,10 +51,9 @@ NormalizedMI<-function(x,y, includeNA=T){#-> ratio d'incertitude/entropie expliq
   if(sum(cc)==0){
     message("no value available at the same time between x and y")
     return(NA)
-  }else{
-    x2=droplevels(as.factor(x[cc]))
-    y2=droplevels(as.factor(y[cc]))
   }
+  x2=droplevels(as.factor(x[cc]))
+  y2=droplevels(as.factor(y[cc]))
   # calculate the normalized mutual information
   infotheo::mutinformation(x2,y2)/log(min(c(length(levels(x2)),length(levels(y2))))) # (normalization) see section 2.2.2 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3325791/bin/NIHMS358982-supplement-Supplemental_Figures_and_Tables.pdf
 }

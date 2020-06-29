@@ -50,8 +50,8 @@ BeEFdiscretization.numnum<-function(continuousX,continuousY,maxNbBins=100, inclu
     return(NA)
   }
   # util: number of digits (to avoid bug of cut2)
-  nbdigitsX<-max(nchar(sub('^0+','',sub('\\.','',continuousX[cc]))))
-  nbdigitsY<-max(nchar(sub('^0+','',sub('\\.','',continuousY[cc]))))
+  nbdigitsX<-max(nchar(sub('^0+','',sub('\\.','', na.omit(continuousX)))))
+  nbdigitsY<-max(nchar(sub('^0+','',sub('\\.','', na.omit(continuousY)))))
   # threshold
   threshold=min(c((N^0.6),maxNbBins,length(unique(continuousX))*length(unique(continuousY))),na.rm=T)
   if(threshold<4) threshold<-4 #(2*2)
