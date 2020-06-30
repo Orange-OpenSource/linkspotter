@@ -272,8 +272,8 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
         variab2=as.character(corDF$X2[corDF$id%in%c(edgeid)])
         tab0=as.data.frame(table(x=dataset[,variab1],y=dataset[,variab2]))
         tab1=tab0[tab0$Freq>0,]
-        tab1$x<-as.numeric(tab1$x)
-        tab1$y<-as.numeric(tab1$y)
+        tab1$x<-as.numeric(as.character(tab1$x))
+        tab1$y<-as.numeric(as.character(tab1$y))
         edges=corDF
         if((edges$typeOfCouple[edges$id%in%c(edgeid)])%in%c("num.num")){
           ggplot(tab1, aes_string("x", "y", size = "Freq")) +
