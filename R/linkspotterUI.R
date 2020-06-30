@@ -76,6 +76,11 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
       edges=data.frame(edges,value=abs(edges[,defaultCorMethod]),title=unlist(lapply(edges[,defaultCorMethod], function(x){paste(c(defaultCorMethod, ': ', format(round(x, digits = 2), nsmall = 2)),collapse="")})))
       edges=edges[!is.na(edges$value)&edges$value>=defaultMinCor,]
 
+      # isolated nodes
+      if(input$hideIsolatedNodes){
+        nodes<-nodes[nodes$id%in%unique(c(as.character(edges$from),as.character(edges$to))),]
+      }
+
       #plot
       visNetwork(nodes,edges, selectConnectedEdges=F, width = '500px', height = '500px') %>%
         visInteraction(selectConnectedEdges=F, hover=T)%>%
@@ -145,9 +150,28 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
         if("colorDisabled"%in%colnames(edges)) colnames(edges)[colnames(edges)%in%'colorDisabled']<-"color"
       }
 
+      # isoloated Nodes
+      nodes<-nodes_raw
+      if(input$hideIsolatedNodes){
+        nodes_not_isolated<-unique(c(as.character(edges$from),as.character(edges$to)))
+        nodes_id_to_rm<-nodes$id[!nodes$id%in%nodes_not_isolated]
+        nodes<-nodes[nodes$id%in%nodes_not_isolated,]
+        visNetworkProxy("network") %>%
+          visUpdateNodes(nodes = nodes) %>%
+          visRemoveNodes(id = nodes_id_to_rm)
+      }else{
+        visNetworkProxy("network") %>%
+          visUpdateNodes(nodes = nodes)
+      }
+
       #show number of edges
       output$shiny_text_currentNbLinks<-renderText({
-        paste0("nb. current edges: ",length(stats::na.omit(edges$value)))
+        nodes_not_isolated<-unique(c(as.character(edges$from),as.character(edges$to)))
+        nodes_isolated<-nodes_raw$id[!nodes_raw$id%in%nodes_not_isolated]
+        paste0("nb. current edges: ",length(stats::na.omit(edges$value)), "\n",
+               "nb. current linked nodes: ",length(nodes_not_isolated), "\n",
+               "nb. current ", paste(c("","hidden ")[input$hideIsolatedNodes], collapse = ""), "isolated nodes: ",length(nodes_isolated)
+        )
       })
 
       # plot network
@@ -159,7 +183,6 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
         visOptions(highlightNearest = highlightInterestVarChoice, nodesIdSelection = highlightInterestVarChoice)
 
       # showClustering
-      nodes=nodes_raw
       if(!input$showClustering){
         nodes$group<-rep(1,nrow(nodes))
         visNetworkProxy("network") %>%
@@ -392,6 +415,7 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
                             #uiOutput("colorEdges_ui"),
                             checkboxInput("smoothEdges","Smooth edges",FALSE),
                             checkboxInput("dynamicNodes","Dynamic nodes stabilization",FALSE),
+                            checkboxInput("hideIsolatedNodes","Hide isolated nodes",length(unique(unlist(corDF[,1:2])))>50),
                             uiOutput("corDirectionSelect_ui"),
                             actionButton(inputId = "buttonStalilize", label = "Re-stabilize"),
                             hr(),
