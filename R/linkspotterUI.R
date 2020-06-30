@@ -37,6 +37,7 @@
 #' @import ggplot2
 #' @importFrom utils capture.output head
 #' @importFrom stats na.omit
+#' @importFrom shinybusy add_busy_spinner
 #'
 #' @export
 #'
@@ -428,7 +429,8 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
                           ),
                           mainPanel(
                             fluidRow(
-                              visNetworkOutput("network")
+                              visNetworkOutput("network"),
+                              shinybusy::add_busy_spinner(spin = "fading-circle", margins = c("40%", "47%"), height = "6%", width = "6%")
                             ),
                             fluidRow(
                               column(6,

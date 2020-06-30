@@ -28,7 +28,8 @@ Imports:
     pbapply,
     ggplot2,
     dplyr,
-    tidyr
+    tidyr,
+    shinybusy
 Collate:
   'linkspotterComplete.R'
   'clusterVariables.R'
