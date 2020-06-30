@@ -266,29 +266,36 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
 
     # scatterplots & boxplots
     output$shiny_edges_plot<-renderPlot({
+      flip=as.logical(input$flipGraph%%2)
       if((!is.null(input$edgeid))){
         edgeid=input$edgeid
         variab1=as.character(corDF$X1[corDF$id%in%c(edgeid)])
         variab2=as.character(corDF$X2[corDF$id%in%c(edgeid)])
         tab0=as.data.frame(table(x=dataset[,variab1],y=dataset[,variab2]))
-        tab1=tab0[tab0$Freq>0,]
-        tab1$x<-as.numeric(as.character(tab1$x))
-        tab1$y<-as.numeric(as.character(tab1$y))
         edges=corDF
         if((edges$typeOfCouple[edges$id%in%c(edgeid)])%in%c("num.num")){
-          ggplot(tab1, aes_string("x", "y", size = "Freq")) +
+          tab1=tab0[tab0$Freq>0,]
+          tab1$x<-as.numeric(as.character(tab1$x))
+          tab1$y<-as.numeric(as.character(tab1$y))
+          g<-ggplot(tab1, aes_string("x", "y", size = "Freq")) +
             geom_point(alpha=0.7) +
             labs(x = variab1, y = variab2)
+          if(flip) g<-g+coord_flip()
+          g
         }else if((edges$typeOfCouple[edges$id%in%c(edgeid)])%in%c("num.fact")){
-          ggplot(dataset, aes_string(variab2, variab1)) +
+          g<-ggplot(dataset, aes_string(variab2, variab1)) +
             geom_boxplot() +
             stat_summary(fun.y=mean, geom="point", shape=23, size=4)
+          if(flip) g<-g+coord_flip()
+          g
         }else if((edges$typeOfCouple[edges$id%in%c(edgeid)])%in%c("fact.num")){
-          ggplot(dataset, aes_string(variab1, variab2)) +
+          g<-ggplot(dataset, aes_string(variab1, variab2)) +
             geom_boxplot() +
             stat_summary(fun.y=mean, geom="point", shape=23, size=4)
+          if(flip) g<-g+coord_flip()
+          g
         }else if((edges$typeOfCouple[edges$id%in%c(edgeid)])%in%c("fact.fact")){
-          ggplot(tab0, aes_string("x", "y")) +
+          g<-ggplot(tab0, aes_string("x", "y")) +
             geom_tile(aes_string(fill = "Freq")) +
             geom_text(aes_string(label = "Freq"), color="white") +
             scale_x_discrete(expand = c(0,0)) +
@@ -296,6 +303,8 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
             scale_fill_gradient("Freq", low = "lightblue", high = "blue") +
             theme_bw() +
             labs(x = variab1, y = variab2)
+          if(flip) g<-g+coord_flip()
+          g
         }
       }
     })
@@ -424,13 +433,16 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
                             verbatimTextOutput("shiny_comments"),
                             verbatimTextOutput("shiny_text_currentNbLinks"),
                             HTML("<strong>Select edge/node:</strong>"),
+                            br(),br(),
+                            actionButton("flipGraph","Flip the bivariate plot"),
+                            br(),br(),
                             verbatimTextOutput("shiny_edge_summary"),
                             verbatimTextOutput("shiny_node_summary")
                           ),
                           mainPanel(
                             fluidRow(
                               visNetworkOutput("network"),
-                              shinybusy::add_busy_spinner(spin = "fading-circle", margins = c("40%", "47%"), height = "6%", width = "6%")
+                              shinybusy::add_busy_spinner(spin = "fading-circle", margins = c("40%", "30%"), height = "6%", width = "6%")
                             ),
                             fluidRow(
                               column(6,
