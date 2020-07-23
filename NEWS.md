@@ -1,4 +1,4 @@
-# linkspotter (development version)
+# linkspotter
 
 # linkspotter 1.3.0
 
