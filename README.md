@@ -31,20 +31,10 @@ Available link coefficients are:
 install.packages("linkspotter")
 ```
 
-Development version:
+current development version from Github:
 
 ```{r, echo=TRUE, eval=FALSE}
 library(devtools)
-install_github("sambaala/linkspotter")
-```
-Development version behind a proxy:
-
-```{r, echo=TRUE, eval=FALSE}
-library(devtools)
-library(httr)
-set_config(
-  use_proxy(url="<my_proxy>", port=<my_proxy_port>)
-)
 install_github("sambaala/linkspotter")
 ```
 
@@ -56,13 +46,13 @@ Load the package:
 library(linkspotter)
 ```
 
-Take a look at the documentation:
+Have a look at the documentation:
 
 ```{r, echo=TRUE, eval=FALSE}
 help(package="linkspotter")
 ```
 
-The examples are carried out using "iris" data.
+The examples are carried out using 'iris' data.
 
 ## Calculate the MaxNMI between two variables
 
@@ -231,6 +221,6 @@ This tab displays 2 tables:
 The **Correlation coefficient** option allows you to choose the coefficient of correlation to be considered among those calculated initially.
 
 
-# Sources
+# Importations
 
-Linkspotter uses and combine features coming from several other R packages, namely infotheo, minerva, energy, mclust, shiny, visNetwork, rAmCharts and ggplot2.
+Linkspotter uses and combine features coming from several other R packages, namely 'infotheo', 'minerva', 'energy', 'mclust', 'shiny', 'shinybusy', 'visNetwork', 'rAmCharts' and 'ggplot2'.
