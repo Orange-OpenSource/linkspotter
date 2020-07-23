@@ -146,8 +146,6 @@ help(linkspotterComplete)
 
 # User interface guide
 
-[Linkspotter UI example on 'iris' data](http://linkspotteririsexample.sigmant.net)
-
 ## 'Graphs' tab
 
 ### The graph
