@@ -2,7 +2,7 @@
 % Please edit documentation in R/linkspotterUI.R
 \name{linkspotterUI}
 \alias{linkspotterUI}
-\title{Linspotter user interface runner}
+\title{Linkspotter user interface runner}
 \usage{
 linkspotterUI(
   dataset,
@@ -36,7 +36,7 @@ linkspotterUI(
 a 'shiny.appobj' object enable to deploy instantly the user interface for a customizable visualization.
 }
 \description{
-Run the linkSpotter user interface
+Build the Linkspotter user interface
 }
 \examples{
 # calculate a correlation dataframe

@@ -9,7 +9,7 @@ clusterVariables(corMatrix, nbCluster = 1:9)
 \arguments{
 \item{corMatrix}{a dataframe corresponding to a correlation matrix}
 
-\item{nbCluster}{an intyeger or a vector of integers corresponding to the prefered number of cluster for the unsupervised learning.}
+\item{nbCluster}{an integer or a vector of integers corresponding to the preferred number of cluster for the unsupervised learning.}
 }
 \value{
 a dataframe: the first column contains the variable names, the second column the index of the cluster they are affected to.

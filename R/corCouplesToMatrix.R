@@ -8,7 +8,8 @@
 #' @title Couples to matrix
 #' @description  Transform a 2 column correlation dataframe into a correlation matrix
 #'
-#' @param x1_x2_val a specific dataframe containing correlations values resulting from the function multiBivariateCorrelation() and containing only one coeffecient type.
+#' @param x1_x2_val a specific dataframe containing correlations values resulting from
+#' the function multiBivariateCorrelation() and containing only one coefficient type.
 #' @return a dataframe corresponding to a correlation matrix.
 #'
 #' @examples

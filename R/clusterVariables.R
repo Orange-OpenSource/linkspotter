@@ -8,7 +8,7 @@
 #' @description  Computation of a variable clustering on a correlation matrix.
 #'
 #' @param corMatrix a dataframe corresponding to a correlation matrix
-#' @param nbCluster an intyeger or a vector of integers corresponding to the prefered number of cluster for the unsupervised learning.
+#' @param nbCluster an integer or a vector of integers corresponding to the preferred number of cluster for the unsupervised learning.
 #' @return a dataframe: the first column contains the variable names, the second column the index of the cluster they are affected to.
 #'
 #' @examples

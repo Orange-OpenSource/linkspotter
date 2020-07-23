@@ -4,25 +4,37 @@
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Alassane Samba, Orange
 # ---------------------------------------------------------------------------------
-#' @title Linspotter complete runner
-#' @description  Computation of correlation matrices, variable clustering and the customizable user inferface to visualize them using a graph together with variables distributions and cross plots.
+#' @title Linkspotter complete runner
+#' @description  Computation of correlation matrices, variable clustering and the customizable user
+#' interface to visualize them using a graph together with variables distributions and cross plots.
 #'
 #' @param dataset the dataframe which variables bivariate correlations are to be analyzed.
-#' @param targetVar a vector of character strings corresponding to the names of the target variables. If not NULL, correlation coefficients are computed only with that target variables.
-#' @param corMethods a vector of correlation coefficients to compute. The available coefficients are the following : \code{c("pearson","spearman","kendall","mic","distCor","MaxNMI")}. It is not case sensitive and still work if only the beginning of the word is put (e.g. \code{pears}).
-#' @param maxNbBins an integer used if corMethods include 'MaxNMI'. It corresponds to the number of bins limitation (for computation time limitation), maxNbBins=100 by default.
-#' @param defaultMinCor a double between 0 and 1. It is the minimal correlation absolute value to consider for the first graph plot.
-#' @param defaultCorMethod a string. One of "pearson","spearman","kendall","mic", "distCor" or "MaxNMI". It is the correlation coefficient to consider for the first graph plot.
-#' @param clusteringCorMethod a string. One of "pearson","spearman","kendall","mic", "distCor" or "MaxNMI". It is the correlation coefficient to consider for the variables clustering.
+#' @param targetVar a vector of character strings corresponding to the names of the target variables.
+#' If not NULL, correlation coefficients are computed only with that target variables.
+#' @param corMethods a vector of correlation coefficients to compute. The available coefficients are
+#' the following : \code{c("pearson","spearman","kendall","mic","distCor","MaxNMI")}. It is not case
+#' sensitive and still work if only the beginning of the word is put (e.g. \code{pears}).
+#' @param maxNbBins an integer used if corMethods include 'MaxNMI'. It corresponds to the number of
+#' bins limitation (for computation time limitation), maxNbBins=100 by default.
+#' @param defaultMinCor a double between 0 and 1. It is the minimal correlation absolute value to
+#' consider for the first graph plot.
+#' @param defaultCorMethod a string. One of "pearson","spearman","kendall","mic", "distCor" or
+#' "MaxNMI". It is the correlation coefficient to consider for the first graph plot.
+#' @param clusteringCorMethod a string. One of "pearson","spearman","kendall","mic", "distCor" or
+#' "MaxNMI". It is the correlation coefficient to consider for the variables clustering.
 #' @param nbCluster an integer. It is the number of clusters to compute.
-#' @param printInfo a boolean indicating whether to print on the console some information about the dataset and the estimated computation time.
+#' @param printInfo a boolean indicating whether to print on the console some information about
+#' the dataset and the estimated computation time.
 #' @param appTitle a string taken as the title of the user interface.
-#' @param htmlTop a character string that enable to customize your shiny app by adding an HTML code in the HEAD tag.
-#' @param htmlBottom a character string that enable to customize your shiny app by adding an HTML code at the end of the BODY tag.
+#' @param htmlTop a character string that enable to customize your shiny app by adding an
+#' HTML code in the HEAD tag.
+#' @param htmlBottom a character string that enable to customize your shiny app by adding an
+#' HTML code at the end of the BODY tag.
 #' @return a list containing all the material enabling to analyze correlations:
 #' \itemize{
 #'   \item{\code{computationTime}: a string}
-#'   \item{\code{run_it}: a shiny.appobj object enable to deploy instantly the user interface for a customizable visualization.}
+#'   \item{\code{run_it}: a shiny.appobj object enable to deploy instantly the user interface for a
+#'   customizable visualization.}
 #'   \item{\code{dataset}: the initial dataset}
 #'   \item{\code{corDF}: a the correlation data.frame including values for all coefficients}
 #'   \item{\code{corMatrices}: a list of correlation matrices}
@@ -44,7 +56,11 @@
 #' }
 #'
 #' @export
-linkspotterComplete<-function(dataset, targetVar=NULL, corMethods=c("pearson","spearman","kendall","mic","MaxNMI"), maxNbBins=100, defaultMinCor=0.3, defaultCorMethod=corMethods[length(corMethods)], clusteringCorMethod=defaultCorMethod, nbCluster=1:9, printInfo=T, appTitle="Linkspotter", htmlTop="", htmlBottom=""){
+linkspotterComplete<-function(dataset, targetVar=NULL,
+                              corMethods=c("pearson","spearman","kendall","mic","MaxNMI"),
+                              maxNbBins=100, defaultMinCor=0.3, defaultCorMethod=corMethods[length(corMethods)],
+                              clusteringCorMethod=defaultCorMethod, nbCluster=1:9, printInfo=T, appTitle="Linkspotter",
+                              htmlTop="", htmlBottom=""){
   startTime<-Sys.time()
   #complete abbreviations
   corMethods=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")[pmatch(tolower(corMethods),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")))]

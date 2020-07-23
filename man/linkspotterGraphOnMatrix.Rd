@@ -2,7 +2,7 @@
 % Please edit documentation in R/linkspotterGraphOnMatrix.R
 \name{linkspotterGraphOnMatrix}
 \alias{linkspotterGraphOnMatrix}
-\title{Linspotter graph on matrix}
+\title{Linkspotter graph on matrix}
 \usage{
 linkspotterGraphOnMatrix(
   corMatrix,
@@ -36,7 +36,7 @@ linkspotterGraphOnMatrix(
 a visNetwork object corresponding to a dynamic graph for the correlation matrix visualization.
 }
 \description{
-Run the linkSpotter graph on a correlation matrix.
+Plot the Linkspotter graph from a correlation matrix.
 }
 \examples{
 # calculate a correlation dataframe

@@ -7,7 +7,8 @@
 corCouplesToMatrix(x1_x2_val)
 }
 \arguments{
-\item{x1_x2_val}{a specific dataframe containing correlations values resulting from the function multiBivariateCorrelation() and containing only one coeffecient type.}
+\item{x1_x2_val}{a specific dataframe containing correlations values resulting from
+the function multiBivariateCorrelation() and containing only one coefficient type.}
 }
 \value{
 a dataframe corresponding to a correlation matrix.

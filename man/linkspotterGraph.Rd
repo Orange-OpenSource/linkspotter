@@ -2,7 +2,7 @@
 % Please edit documentation in R/linkspotterGraph.R
 \name{linkspotterGraph}
 \alias{linkspotterGraph}
-\title{Linspotter graph runner}
+\title{Linkspotter graph runner}
 \usage{
 linkspotterGraph(
   corDF,
@@ -34,7 +34,7 @@ linkspotterGraph(
 a visNetwork object corresponding to a dynamic graph for the correlation matrix visualization.
 }
 \description{
-Run the linkSpotter graph
+plot the Linkspotter graph
 }
 \examples{
 # calculate a correlation dataframe

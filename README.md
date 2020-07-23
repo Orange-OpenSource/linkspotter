@@ -12,7 +12,7 @@ Its main features are:
 
 It also offers a customizable user interface, allowing to:
 
-* visualize the links using a graph (the variables corresdond to the nodes and the links correspond to the edges)
+* visualize the links using a graph (the variables correspond to the nodes and the links correspond to the edges)
 * show the distribution of each variable using its histogram or barplot
 * visualize a link between a couple of variables using scatter plots, box plots, etc.
 
@@ -31,7 +31,7 @@ Available link coefficients are:
 install.packages("linkspotter")
 ```
 
-current development version from Github:
+current development version from GitHub:
 
 ```{r, echo=TRUE, eval=FALSE}
 library(devtools)
@@ -106,7 +106,7 @@ linkspotterGraph(corDF = corCouples, variablesClustering = cl,
   dynamicNodes = TRUE)
 ```
 
-## Launch the costumizable user interface
+## Launch the customizable user interface
 
 ```{r, echo=TRUE, eval=FALSE}
 linkspotterUI(dataset = iris, corDF = corCouples, 
@@ -146,13 +146,13 @@ help(linkspotterComplete)
 
 # User interface guide
 
-[Linskpotter UI example on 'iris' data](http://linkspotteririsexample.sigmant.net)
+[Linkspotter UI example on 'iris' data](http://linkspotteririsexample.sigmant.net)
 
 ## 'Graphs' tab
 
 ### The graph
-The variables corresdond to the nodes and their links correspond to the edges.
-Node color depends on the clustering. Edge color depends on the correlation direction quantitative couples (blue: positive correlatuion, red: negative correlation).
+The variables correspond to the nodes and their links correspond to the edges.
+Node color depends on the clustering. Edge color depends on the correlation direction quantitative couples (blue: positive correlation, red: negative correlation).
 
 ### First features
 
@@ -174,7 +174,7 @@ Node color depends on the clustering. Edge color depends on the correlation dire
 * **nb. observations**: the number of entries in the dataset
 * **nb. variables**: the number of variables in the dataset
 * **nb. couples**: the number of couples
-* **nb. current edges**: the current number of edges plotted according to the chosen thresolds
+* **nb. current edges**: the current number of edges plotted according to the chosen thresholds
 
 ### Click on a graph link
 

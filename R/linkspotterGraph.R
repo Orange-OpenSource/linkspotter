@@ -1,11 +1,11 @@
 # --------------------------------------------------------------------------------
 # title: Linkspotter/linkspotterGraph
-# description: compute the linkspotter graph
+# description: plot the Linkspotter graph
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Alassane Samba, Orange
 # ---------------------------------------------------------------------------------
-#' @title Linspotter graph runner
-#' @description  Run the linkSpotter graph
+#' @title Linkspotter graph runner
+#' @description  plot the Linkspotter graph
 #'
 #' @param corDF a specific dataframe containing correlations values resulting from the function multiBivariateCorrelation()
 #' @param variablesClustering a specific dataframe containing the output of the variable clustering resulting from the function clusterVariables()

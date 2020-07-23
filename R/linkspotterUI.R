@@ -1,11 +1,11 @@
 # --------------------------------------------------------------------------------
 # title: Linkspotter/linkspotterUI
-# description: run the linkSpotter user interface
+# description: build the Linkspotter user interface
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Alassane Samba, Orange
 # ---------------------------------------------------------------------------------
-#' @title Linspotter user interface runner
-#' @description  Run the linkSpotter user interface
+#' @title Linkspotter user interface runner
+#' @description  Build the Linkspotter user interface
 #'
 #' @param dataset the dataframe which variables bivariate correlations are contained in corDF
 #' @param corDF a specific dataframe containing correlations values resulting from the function multiBivariateCorrelation()

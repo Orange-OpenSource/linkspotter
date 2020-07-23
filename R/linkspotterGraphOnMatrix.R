@@ -1,11 +1,11 @@
 # --------------------------------------------------------------------------------
 # title: Linkspotter/linkspotterGraphOnMatrix
-# description: compute the linkspotter graph
+# description: Plot the Linkspotter graph from a correlation matrix
 # author: Alassane Samba (alassane.samba@orange.com)
 # Copyright (c) 2017 Alassane Samba, Orange
 # ---------------------------------------------------------------------------------
-#' @title Linspotter graph on matrix
-#' @description  Run the linkSpotter graph on a correlation matrix.
+#' @title Linkspotter graph on matrix
+#' @description  Plot the Linkspotter graph from a correlation matrix.
 #'
 #' @param corMatrix a dataframe corresponding to a matrix of correlation or distance.
 #' @param cluster a boolean to decide if to cluster variables or an integer corresponding directly to the number of clusters to consider. If variablesClustering is filled, "cluster" parameter is ignored.

@@ -30,6 +30,6 @@
 
 ## Visualization
 
-* Visualize the links using a graph (the variables corresdond to the nodes and the links correspond to the edges)
+* Visualize the links using a graph (the variables correspond to the nodes and the links correspond to the edges)
 * Show the distribution of each variable using its histogram or barplot
 * Visualize a link between a couple of variables using scatter plots, box plots, etc.
