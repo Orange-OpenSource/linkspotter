@@ -13,6 +13,7 @@ Description: Compute and visualize using the 'visNetwork' package all the bivari
   equal-freq discretization-based maximal normalized mutual information) are used according to 
   the variable couple type (quantitative vs categorical, quantitative vs quantitative, categorical vs categorical).
 License: MIT + file LICENSE
+URL: https://github.com/sambaala/linkspotter
 Encoding: UTF-8
 LazyData: true
 Depends:
