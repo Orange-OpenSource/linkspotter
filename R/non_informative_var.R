@@ -1,9 +1,11 @@
-# --------------------------------------------------------------------------------
-# title: Linkspotter/is.not.informative.variable
-# description: This function determines if a given vector of numeric or factor is a non informative variable or not.
-# author: Alassane Samba (alassane.samba@orange.com)
-# Copyright (c) 2020 Alassane Samba, Orange
-# ---------------------------------------------------------------------------------
+# Software Name: Linkspotter
+# SPDX-FileCopyrightText: Copyright (c) 2017 Orange
+# SPDX-License-Identifier: MIT License
+#
+# This software is distributed under the MIT license.
+#
+# Author: Alassane SAMBA <alassane.samba(at)orange(dot)com>
+#
 #' @title Is a vector an non informative variable
 #' @description This function determines if a given vector of numeric or factor is a non informative variable or not.
 #'

@@ -1,9 +1,11 @@
-# --------------------------------------------------------------------------------
-# title: Linkspotter/EFdiscretization
-# description: Discretize a quantitative variable with equal frequency binning if possible
-# author: Alassane Samba (alassane.samba@orange.com)
-# Copyright (c) 2020 Alassane Samba, Orange
-# ---------------------------------------------------------------------------------
+# Software Name: Linkspotter
+# SPDX-FileCopyrightText: Copyright (c) 2017 Orange
+# SPDX-License-Identifier: MIT License
+#
+# This software is distributed under the MIT license.
+#
+# Author: Alassane SAMBA <alassane.samba(at)orange(dot)com>
+#
 #' @title EF: Equal-Frequency discretization
 #' @description  Discretize a quantitative variable with equal frequency binning if possible
 #'

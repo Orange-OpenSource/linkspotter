@@ -1,9 +1,11 @@
-# --------------------------------------------------------------------------------
-# title: Linkspotter/NormalizedMI
-# description: Calculate the normalized mutual information between 2 categorical variables
-# author: Alassane Samba (alassane.samba@orange.com)
-# Copyright (c) 2017 Alassane Samba, Orange
-# ---------------------------------------------------------------------------------
+# Software Name: Linkspotter
+# SPDX-FileCopyrightText: Copyright (c) 2017 Orange
+# SPDX-License-Identifier: MIT License
+#
+# This software is distributed under the MIT license.
+#
+# Author: Alassane SAMBA <alassane.samba(at)orange(dot)com>
+#
 #' @title Maximal Normalized Mutual Information (MaxNMI) function for 2 categorical variables
 #' @description  Calculate the MaxNMI relationship measurement for 2 categorical variables
 #'

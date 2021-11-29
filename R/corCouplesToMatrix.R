@@ -1,9 +1,10 @@
-# --------------------------------------------------------------------------------
-# title: Linkspotter/corCouplesToMatrix
-# description: transform a 2 column correlation dataframe into a correlation matrix
-# author: Alassane Samba (alassane.samba@orange.com)
-# Copyright (c) 2017 Alassane Samba, Orange
-# ---------------------------------------------------------------------------------
+# Software Name: Linkspotter
+# SPDX-FileCopyrightText: Copyright (c) 2017 Orange
+# SPDX-License-Identifier: MIT License
+#
+# This software is distributed under the MIT license.
+#
+# Author: Alassane SAMBA <alassane.samba(at)orange(dot)com>
 #
 #' @title Couples to matrix
 #' @description  Transform a 2 column correlation dataframe into a correlation matrix

@@ -1,9 +1,10 @@
-# --------------------------------------------------------------------------------
-# title: Linkspotter/linkspotterOnFile
-# description: function to load and properly process a file
-# author: Alassane Samba (alassane.samba@orange.com)
-# Copyright (c) 2017 Alassane Samba, Orange
-# ---------------------------------------------------------------------------------
+# Software Name: Linkspotter
+# SPDX-FileCopyrightText: Copyright (c) 2017 Orange
+# SPDX-License-Identifier: MIT License
+#
+# This software is distributed under the MIT license.
+#
+# Author: Alassane SAMBA <alassane.samba(at)orange(dot)com>
 #
 #' @title Process Linkspotter on an external file
 #' @description  This function imports an external dataset, computes its correlation matrices,

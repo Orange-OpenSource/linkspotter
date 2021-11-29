@@ -1,9 +1,11 @@
-# --------------------------------------------------------------------------------
-# title: Linkspotter/linkspotterGraphOnMatrix
-# description: Plot the Linkspotter graph from a correlation matrix
-# author: Alassane Samba (alassane.samba@orange.com)
-# Copyright (c) 2017 Alassane Samba, Orange
-# ---------------------------------------------------------------------------------
+# Software Name: Linkspotter
+# SPDX-FileCopyrightText: Copyright (c) 2017 Orange
+# SPDX-License-Identifier: MIT License
+#
+# This software is distributed under the MIT license.
+#
+# Author: Alassane SAMBA <alassane.samba(at)orange(dot)com>
+#
 #' @title Linkspotter graph on matrix
 #' @description  Plot the Linkspotter graph from a correlation matrix.
 #'

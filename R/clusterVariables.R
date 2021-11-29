@@ -1,9 +1,11 @@
-# --------------------------------------------------------------------------------
-# title: Linkspotter/clusterVariables
-# description: clustering variables (using Normal Mixture Modeling for Model-Based Clustering : mclust)
-# author: Alassane Samba (alassane.samba@orange.com)
-# Copyright (c) 2017 Alassane Samba, Orange
-# ---------------------------------------------------------------------------------
+# Software Name: Linkspotter
+# SPDX-FileCopyrightText: Copyright (c) 2017 Orange
+# SPDX-License-Identifier: MIT License
+#
+# This software is distributed under the MIT license.
+#
+# Author: Alassane SAMBA <alassane.samba(at)orange(dot)com>
+#
 #' @title Variable clustering (using Normal Mixture Modeling for Model-Based Clustering : mclust)
 #' @description  Computation of a variable clustering on a correlation matrix.
 #'

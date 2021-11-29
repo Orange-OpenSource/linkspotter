@@ -1,9 +1,10 @@
-# --------------------------------------------------------------------------------
-# title: Linkspotter/createShinyAppFolder
-# description: function to load and properly proccess a file
-# author: Alassane Samba (alassane.samba@orange.com)
-# Copyright (c) 2017 Alassane Samba, Orange
-# ---------------------------------------------------------------------------------
+# Software Name: Linkspotter
+# SPDX-FileCopyrightText: Copyright (c) 2017 Orange
+# SPDX-License-Identifier: MIT License
+#
+# This software is distributed under the MIT license.
+#
+# Author: Alassane SAMBA <alassane.samba(at)orange(dot)com>
 #
 #' @title Ready-for-deployment shiny app folder creation
 #' @description  This function creates a shiny app folder containing a shiny app object directly readable by a shiny-server.
