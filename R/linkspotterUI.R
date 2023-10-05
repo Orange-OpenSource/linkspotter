@@ -46,7 +46,7 @@
 linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=0.3, appTitle="Linkspotter", htmlTop="", htmlBottom="", ...){
 
   # small formats and checks
-  dataset=data.frame(droplevels.data.frame(dataset))
+  dataset=droplevels.data.frame(data.frame(dataset, check.names = FALSE))
 
   # useful variables
   availableCorMethods=colnames(corDF)[-c(1:3,ncol(corDF))]
@@ -260,7 +260,7 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
         }else{
           tab=data.frame(Var1=as.vector(utils::head(names(sort(table(dataset[,variab]),decreasing = T)),n=20)),Freq=as.vector(utils::head(sort(table(dataset[,variab]),decreasing = T),n=20)))#plot at max the 20 most frequent categories
           tab=data.frame(tab, description=apply(tab,1,paste,collapse=": "))
-          amBarplot(x = "Var1", y = "Freq", data = tab, xlab = variab, ylab='Frequency', labelRotation = -45, depth = 15) %>%
+          amBarplot(x = "Var1", y = "Freq", data = tab, xlab = variab, ylab='Frequency', labelRotation = -45, depth = 15, ylim = c(0,max(tab$Freq))) %>%
             amOptions(export = TRUE, main = variab)
         }
       }
@@ -299,10 +299,10 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
         }else if((edges$typeOfCouple[edges$id%in%c(edgeid)])%in%c("fact.fact")){
           g<-ggplot(tab0, aes_string("x", "y")) +
             geom_tile(aes_string(fill = "Freq")) +
-            geom_text(aes_string(label = "Freq"), color="white") +
+            geom_text(aes_string(label = "Freq"), color="black") +
             scale_x_discrete(expand = c(0,0)) +
             scale_y_discrete(expand = c(0,0)) +
-            scale_fill_gradient("Freq", low = "lightblue", high = "blue") +
+            scale_fill_gradient("Freq", low = "white", high = "#67b7dc") +
             theme_bw() +
             labs(x = variab1, y = variab2)
           if(flip) g<-g+coord_flip()

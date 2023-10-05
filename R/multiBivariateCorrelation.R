@@ -68,7 +68,7 @@ multiBivariateCorrelation<-function(dataset, targetVar=NULL, corMethods=c("pears
   }
 
   # small formats
-  dataset=droplevels.data.frame(data.frame(dataset))
+  dataset=droplevels.data.frame(data.frame(dataset, check.names = FALSE))
   ## complete abbreviations
   corMethods=c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")[pmatch(tolower(corMethods),tolower(c("pearson", "spearman", "kendall", "distCor", "mic", "MaxNMI")))]
   ## reorder
