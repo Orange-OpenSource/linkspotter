@@ -49,7 +49,14 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
   dataset=droplevels.data.frame(data.frame(dataset, check.names = FALSE))
 
   # useful variables
-  availableCorMethods=colnames(corDF)[-c(1:3,ncol(corDF))]
+  availableCorMethods <- colnames(corDF)[!colnames(corDF)%in%c("id", "X1", "X2", "typeOfCouple", "correlationType")]
+  availableCorMethods <- unique(as.array(c(c("Max Normalized Mutual Information"="MaxNMI",
+                                             "Pearson's r [numeric variables only]"="pearson",
+                                             "Spearman's rho [numeric variables only]"="spearman",
+                                             "Kendall's tau [numeric variables only]"="kendall",
+                                             "Distance correlation [numeric variables only]"="distCor",
+                                             "Maximal Information Coefficient (MIC) [numeric variables only]"="mic"
+  )[c("MaxNMI","pearson", "spearman", "kendall", "distCor", "mic")%in%availableCorMethods], availableCorMethods)))
   defaultCorMethod=availableCorMethods[length(availableCorMethods)] # correlation coefficient to use in the graph
 
   # shiny server
@@ -354,13 +361,7 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
       tagList(
         selectInput(inputId = "selectCorTableMethod",
                     label = "Correlation coefficient:",
-                    choices = c("Max Normalized Mutual Information"="MaxNMI",
-                                "Pearson's r [numeric variables only]"="pearson",
-                                "Spearman's rho [numeric variables only]"="spearman",
-                                "Kendall's tau [numeric variables only]"="kendall",
-                                "Distance correlation [numeric variables only]"="distCor",
-                                "Maximal Information Coefficient (MIC) [numeric variables only]"="mic"
-                    )[c("MaxNMI","pearson", "spearman", "kendall", "distCor", "mic")%in%availableCorMethods],
+                    choices = availableCorMethods,
                     multiple = FALSE,
                     selected = c(input$selectCorMethod))
       )
@@ -401,18 +402,12 @@ linkspotterUI<-function(dataset, corDF, variablesClustering=NULL, defaultMinCor=
                           sidebarPanel(
                             selectInput(inputId = "selectCorMethod",
                                         label = "Correlation coefficient:",
-                                        choices = c("Max Normalized Mutual Information"="MaxNMI",
-                                                    "Pearson's r [numeric variables only]"="pearson",
-                                                    "Spearman's rho [numeric variables only]"="spearman",
-                                                    "Kendall's tau [numeric variables only]"="kendall",
-                                                    "Distance correlation [numeric variables only]"="distCor",
-                                                    "Maximal Information Coefficient (MIC) [numeric variables only]"="mic"
-                                        )[c("MaxNMI","pearson", "spearman", "kendall", "distCor", "mic")%in%availableCorMethods],
+                                        choices = availableCorMethods,
                                         multiple = FALSE,
                                         selected = c(defaultCorMethod)),
                             sliderInput("minCor",
                                         "Minimum Correlation:",
-                                        min = 0,  max = 1, value = defaultMinCor),
+                                        min = 0,  max = max(c(1,max(corDF[,availableCorMethods], na.rm = TRUE))), value = defaultMinCor),
                             selectInput(inputId = "selectInterestVar",
                                         label = "Interest variable:",
                                         choices = c("(NONE)",colnames(dataset)),
